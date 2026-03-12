@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoMdEyeOff,IoIosEye } from "react-icons/io";
+import { MdOutlineEmail } from "react-icons/md";
+
 
 const Login = () => {
 
@@ -8,15 +11,26 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword,setShowPassword] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
     e.preventDefault();
-    
-        if (email !== "admin@gmail.com" || password !== "123456") {
+    setLoading(true);
+
+    setTimeout(() => {
+      if (email === "admin@gmail.com" && password === "admin123") {
+        navigate("/admin-Dashboard");
+      } else {
         setError("Invalid email or password. Please try again.");
-        }
-        navigate("/admin-Dashboard")
-    }
+      }
+      setLoading(false);
+    }, 1500); 
+  };
+
+  const togglePassword =()=>{
+    setShowPassword(!showPassword)
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
@@ -39,7 +53,8 @@ const Login = () => {
               Email
             </label>
 
-            <input
+            <div className="relative">
+              <input
               type="email"
               placeholder="Enter your email"
               value={email}
@@ -47,22 +62,37 @@ const Login = () => {
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-red-400"
               required
             />
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
+              <MdOutlineEmail/>
+            </div>
+            </div>
+            
           </div>
 
           {/* Password */}
-          <div>
+          <div >
             <label className="block text-gray-700 font-medium mb-2">
               Password
             </label>
 
-            <input
-              type="password"
+            <div className="relative">
+              <input
+              type={showPassword? "text":"password"}
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-red-400"
               required
             />
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl">
+              {
+                showPassword ? 
+                <button type="button" onClick={togglePassword}><IoMdEyeOff /></button> : 
+                <button type="button" onClick={togglePassword}><IoIosEye /></button>
+              }
+            </div>
+            </div>
+            
           </div>
           {error && (
             <div className="bg-red-100 text-red-600 text-sm p-3 rounded-lg">
@@ -75,8 +105,17 @@ const Login = () => {
             <button
               type="submit"
               className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg shadow-md transition"
+              disabled={loading}
+              
             >
-              Submit
+              {loading ? (
+                <div className="flex items-center gap-2">
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Signing in...
+                </div>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
 
