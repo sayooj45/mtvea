@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoMdEyeOff,IoIosEye } from "react-icons/io";
 import { MdOutlineEmail } from "react-icons/md";
-
+import axios from 'axios'
 
 const Login = () => {
 
@@ -14,19 +14,43 @@ const Login = () => {
   const [showPassword,setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
 
-    setTimeout(() => {
-      if (email === "admin@gmail.com" && password === "admin123") {
-        navigate("/admin-Dashboard");
-      } else {
-        setError("Invalid email or password. Please try again.");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await axios.post(
+      
+      "http://10.10.45.94:5000/api/auth/login",
+      {
+        email: email,
+        password: password,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-      setLoading(false);
-    }, 1500); 
-  };
+    );
+
+    console.log(response.data);
+
+    localStorage.setItem("token", response.data.token);
+    navigate("/adminDashboard");
+
+  } catch (error) {
+    console.error(error);
+
+    setError(
+      error.response?.data?.message ||
+      "Invalid email or password. Please try again."
+    );
+    
+  }
+  finally {
+    setLoading(false);
+  }
+};
 
   const togglePassword =()=>{
     setShowPassword(!showPassword)

@@ -1,19 +1,27 @@
 
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AdminDashboard from './pages/AdminDashboard';
-import Login from './pages/Login';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import AdminDashboard from './page/AdminDashboard';
+import Login from './page/Login';
+import HomePage from "./page/Home";
+import RegistrationPage from "./page/Registration";
 function App() {
-
 
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Login/>}/>
-        <Route path='/admin-dashboard' element={<AdminDashboard/>}/>
+        {/* redirect root */}
+        <Route path="/" element={<Navigate to="/home" replace />} />
+
+        {/* pages */}
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/adminDashboard' element={<AdminDashboard/>}/>
       </Routes>
     </Router>
   )
+
 }
 
-export default App
+export default App;

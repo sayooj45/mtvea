@@ -6,12 +6,78 @@ import { saveAs } from "file-saver";
 
 const Table = () => {
 
-  const data = [
-    { firstName: "John", lastName: "Mathew", age: 28, gender: "Male", address: "Kochi", phone: "9876543210", email: "john@email.com", parish: "St. Mary's", shirt: "L", diet: "Veg", sponsor: "Yes", hotel: "No", transport: "Yes" },
-    { firstName: "Anna", lastName: "Jose", age: 24, gender: "Female", address: "Trivandrum", phone: "9999999999", email: "anna@email.com", parish: "St. George", shirt: "M", diet: "Non Veg", sponsor: "No", hotel: "Yes", transport: "No" },
-    { firstName: "Paul", lastName: "Thomas", age: 32, gender: "Male", address: "Kottayam", phone: "8888888888", email: "paul@email.com", parish: "St. Peter", shirt: "XL", diet: "Veg", sponsor: "Yes", hotel: "Yes", transport: "Yes" },
-    { firstName: "Mary", lastName: "Joseph", age: 27, gender: "Female", address: "Kochi", phone: "7777777777", email: "mary@email.com", parish: "St. Mary's", shirt: "S", diet: "Veg", sponsor: "No", hotel: "No", transport: "Yes" },
-  ];
+ const data = [
+
+{
+firstName: "John",
+lastName: "Mathew",
+age: "Above 18",
+gender: "Male",
+address: "Kochi",
+phone: "9876543210",
+email: "john@email.com",
+parish: "St Mary's",
+shirtSize: "Adult L",
+dietaryRestrictions: "None",
+sponsorSouvenir: "Yes",
+bookedHotel: "Yes",
+needsTransport: "Yes",
+needAssistance: "No",
+needShuttle: "Arrival Only",
+flightNumber: "Indigo 6E234",
+busDetails: "",
+arrivalDate: "2026-04-02",
+arrivalTime: "10:30",
+paymentMethod: "Online"
+},
+
+{
+firstName: "Anna",
+lastName: "Jose",
+age: "Above 18",
+gender: "Female",
+address: "Trivandrum",
+phone: "9999999999",
+email: "anna@email.com",
+parish: "St George Church",
+shirtSize: "Adult M",
+dietaryRestrictions: "Veg",
+sponsorSouvenir: "No",
+bookedHotel: "Yes",
+needsTransport: "No",
+needAssistance: "No",
+needShuttle: "No – I will arrange my own transportation",
+flightNumber: "",
+busDetails: "KSRTC Super Fast",
+arrivalDate: "2026-04-02",
+arrivalTime: "09:00",
+paymentMethod: "Online"
+},
+
+{
+firstName: "Paul",
+lastName: "Thomas",
+age: "Above 18",
+gender: "Male",
+address: "Kottayam",
+phone: "8888888888",
+email: "paul@email.com",
+parish: "St Peter Parish",
+shirtSize: "Adult XL",
+dietaryRestrictions: "Non Veg",
+sponsorSouvenir: "Yes",
+bookedHotel: "No",
+needsTransport: "Yes",
+needAssistance: "Yes",
+needShuttle: "Yes – Both arrival and departure",
+flightNumber: "Air India AI532",
+busDetails: "",
+arrivalDate: "2026-04-01",
+arrivalTime: "18:45",
+paymentMethod: "During Participation"
+}
+
+];
 
    const [search, setSearch] = useState("");
 
@@ -126,84 +192,79 @@ const Table = () => {
             {/* Header */}
             <thead className="bg-gray-900 text-white uppercase text-xs sticky top-0">
               <tr>
-                <th className="px-4 py-3 font-semibold tracking-wide">First Name</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Last Name</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Age</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Gender</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Address</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Phone</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Email</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Parish</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Shirt</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Diet</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Sponsor</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Hotel</th>
-                <th className="px-4 py-3 font-semibold tracking-wide">Transport</th>
+                <th className="px-4 py-3">First Name</th>
+                <th className="px-4 py-3">Last Name</th>
+                <th className="px-4 py-3">Age</th>
+                <th className="px-4 py-3">Gender</th>
+                <th className="px-4 py-3">Address</th>
+                <th className="px-4 py-3">Phone</th>
+                <th className="px-4 py-3">Email</th>
+                <th className="px-4 py-3">Parish</th>
+                <th className="px-4 py-3">Shirt Size</th> 
+                <th className="px-4 py-3">Dietary</th>
+                <th className="px-4 py-3">Sponsor</th>
+
+                <th className="px-4 py-3">Hotel</th>
+                <th className="px-4 py-3">Transport</th>
+                <th className="px-4 py-3">Assistance</th>
+
+                <th className="px-4 py-3">Shuttle</th>
+                <th className="px-4 py-3">Flight</th>
+                <th className="px-4 py-3">Bus</th>
+                <th className="px-4 py-3">Arrival Date</th>
+                <th className="px-4 py-3">Arrival Time</th>
+
+                <th className="px-4 py-3">Payment</th>
+
               </tr>
             </thead>
 
             {/* Body */}
-            <tbody className="divide-y">
+        <tbody className="divide-y">
 
-              {currentData.map((item, index) => (
-                <tr key={index} className="hover:bg-gray-50 transition">
+          {currentData.map((item,index)=>(
+          <tr key={index} className="hover:bg-gray-50">
 
-                  <td className="px-4 py-3 font-medium text-gray-800">{item.firstName}</td>
-                  <td className="px-4 py-3">{item.lastName}</td>
-                  <td className="px-4 py-3">{item.age}</td>
-                  <td className="px-4 py-3">{item.gender}</td>
-                  <td className="px-4 py-3">{item.address}</td>
-                  <td className="px-4 py-3">{item.phone}</td>
-                  <td className="px-4 py-3 text-blue-600">{item.email}</td>
-                  <td className="px-4 py-3">{item.parish}</td>
-                  <td className="px-4 py-3">{item.shirt}</td>
-                  <td className="px-4 py-3">{item.diet}</td>
+            <td className="px-4 py-3">{item.firstName}</td>
+            <td className="px-4 py-3">{item.lastName}</td>
+            <td className="px-4 py-3">{item.age}</td>
+            <td className="px-4 py-3">{item.gender}</td>
+            <td className="px-4 py-3">{item.address}</td>
+            <td className="px-4 py-3">{item.phone}</td>
+            <td className="px-4 py-3 text-blue-600">{item.email}</td>
+            <td className="px-4 py-3">{item.parish}</td>
 
-                  {/* Status badges */}
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      item.sponsor === "Yes"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-600"
-                    }`}>
-                      {item.sponsor}
-                    </span>
-                  </td>
+            <td className="px-4 py-3">{item.shirtSize}</td>
+            <td className="px-4 py-3">{item.dietaryRestrictions}</td>
+            <td className="px-4 py-3">{item.sponsorSouvenir}</td>
 
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      item.hotel === "Yes"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-gray-100 text-gray-600"
-                    }`}>
-                      {item.hotel}
-                    </span>
-                  </td>
+            <td className="px-4 py-3">{item.bookedHotel}</td>
+            <td className="px-4 py-3">{item.needsTransport}</td>
+            <td className="px-4 py-3">{item.needAssistance}</td>
 
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 text-xs rounded-full ${
-                      item.transport === "Yes"
-                        ? "bg-blue-100 text-blue-700"
-                        : "bg-gray-100 text-gray-600"
-                    }`}>
-                      {item.transport}
-                    </span>
-                  </td>
+            <td className="px-4 py-3">{item.needShuttle}</td>
+            <td className="px-4 py-3">{item.flightNumber}</td>
+            <td className="px-4 py-3">{item.busDetails}</td>
+            <td className="px-4 py-3">{item.arrivalDate}</td>
+            <td className="px-4 py-3">{item.arrivalTime}</td>
 
-                </tr>
-              ))}
+            <td className="px-4 py-3 font-semibold">{item.paymentMethod}</td>
 
-              {currentData.length === 0 && (
+          </tr>
+          ))}
+          {currentData.length === 0 && (
                 <tr>
                     <td colSpan="13" className="text-center py-6 text-gray-500">
                     No results found
                     </td>
                 </tr>
-                )}
+          )}
 
-            </tbody>
+        </tbody>
 
-          </table>
+      </table>
+
+
 
         </div>
 
