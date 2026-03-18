@@ -5,8 +5,9 @@ import banner3 from "../../assets/banners/banner3.jpg";
 import speaker1 from "../../assets/speaker1.png";
 import speaker2 from "../../assets/speaker2.jpg";
 import { useNavigate } from "react-router-dom";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
-const BannerSlider = ({ setActive }) => {
+const BannerSlider = () => {
   const [slide, setSlide] = useState(0);
   const [lastInteraction, setLastInteraction] = useState(Date.now());
 
@@ -18,16 +19,26 @@ const BannerSlider = ({ setActive }) => {
     const interval = setInterval(() => {
       const now = Date.now();
 
-      if (now - lastInteraction >= 5000) {
+      if (now - lastInteraction >= 15000) {
         setSlide((prev) => (prev + 1) % slides.length);
       }
-    }, 5000);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, [lastInteraction, slides.length]);
 
+  const nextSlide = () => {
+  setSlide((prev) => (prev + 1) % slides.length);
+  setLastInteraction(Date.now());
+};
+
+const prevSlide = () => {
+  setSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  setLastInteraction(Date.now());
+};
+
   return (
-    <div className="relative h-[calc(100vh-70px)] min-h-[600px] overflow-hidden">
+    <div className="relative h-[calc(100vh-100px)] overflow-hidden">
 
       {/* Background Slider */}
       {slides.map((img, i) => (
@@ -44,18 +55,18 @@ const BannerSlider = ({ setActive }) => {
       <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/50 to-[#1B2B4B]/90"></div>
 
       {/* Content */}
-      <div className="absolute inset-0 text-white overflow-y-auto">
+      <div className="absolute inset-0 text-white overflow-y-auto flex items-center justify-center">
 
         {/* ---------------- SLIDE 1 ---------------- */}
         {slide === 0 && (
           <div className="flex flex-col justify-center items-center text-center h-full px-4">
 
             <p className="uppercase tracking-widest text-yellow-400 text-xs mb-3">
-              Mar Thoma Voluntary Evangelists' Association
+              XVIII Mar Thoma Voluntary Evangelists' Association
             </p>
 
             <h1 className="text-4xl md:text-5xl font-serif mb-3">
-              National Conference <br />
+              Diocesan Conference <br />
               <span className="italic text-yellow-300">2026</span>
             </h1>
 
@@ -158,12 +169,12 @@ const BannerSlider = ({ setActive }) => {
 
         {/* ---------------- SLIDE 3 ---------------- */}
         {slide === 2 && (
-          <div className="flex flex-col justify-center items-center h-full text-center px-4 min-h-full">
+          <div className="flex flex-col justify-center items-center text-center px-4 py-10 w-full">
 
             <h2 className="text-3xl md:text-5xl font-serif mb-3">
               Come and See:
               <br />
-              <span className="italic text-yellow-300">The Divine Invite</span>
+              <span className=" text-yellow-300">The Divine Invite</span>
             </h2>
 
             <p className="text-white/70 max-w-xl mb-6 text-sm md:text-base">
@@ -178,14 +189,19 @@ const BannerSlider = ({ setActive }) => {
               Learn More
             </button>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-md sm:max-w-xl w-full">
 
-              <div className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 shadow-lg hover:scale-105 transition duration-300">
-                <img
-                  src={speaker1}
-                  alt="Speaker 1"
-                  className="w-full h-48 object-fit"
-                />
+              <div className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
+border border-white/20 shadow-lg 
+transition duration-300 hover:scale-105
+max-w-[280px] sm:max-w-none mx-auto">
+ <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
+  <img
+    src={speaker1}
+    alt="Speaker 1"
+    className="w-full h-full object-cover"
+  />
+</div>
                 <div className="p-3 text-center">
                   <h4 className="text-lg font-semibold">
                     Rt. Rev. Dr. Abraam Mar Paulos Episcopa
@@ -193,12 +209,17 @@ const BannerSlider = ({ setActive }) => {
                 </div>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 shadow-lg hover:scale-105 transition duration-300">
-                <img
-                  src={speaker2}
-                  alt="Speaker 2"
-                  className="w-full h-48 object-fit"
-                />
+              <div className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
+border border-white/20 shadow-lg 
+transition duration-300 hover:scale-105
+max-w-[280px] sm:max-w-none mx-auto">
+ <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
+  <img
+    src={speaker2}
+    alt="Speaker 2"
+    className="w-full h-full object-cover"
+  />
+</div>
                 <div className="p-3 text-center">
                   <h4 className="text-lg font-semibold">
                     Rev. Mothy Varkey
@@ -213,21 +234,25 @@ const BannerSlider = ({ setActive }) => {
 
       </div>
 
-      {/* Dots */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
-        {slides.map((_, i) => (
-          <div
-            key={i}
-            onClick={() => {
-              setSlide(i);
-              setLastInteraction(Date.now());
-            }}
-            className={`w-2 h-2 rounded-full cursor-pointer ${
-              slide === i ? "bg-yellow-400" : "bg-white/50"
-            }`}
-          />
-        ))}
-      </div>
+      {/* Left Arrow */}
+<button
+  onClick={prevSlide}
+  className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-50 
+  bg-white/20 hover:bg-white/40 backdrop-blur-md 
+  text-white p-2 md:p-3 rounded-full transition duration-300"
+>
+  <IoChevronBack size={24} />
+</button>
+
+{/* Right Arrow */}
+<button
+  onClick={nextSlide}
+  className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-50 
+  bg-white/20 hover:bg-white/40 backdrop-blur-md 
+  text-white p-2 md:p-3 rounded-full transition duration-300"
+>
+  <IoChevronForward size={24} />
+</button>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 import AdminDashboard from './page/AdminDashboard';
 import Login from './page/Login';
 import HomePage from "./page/Home";
-import RegistrationPage from "./page/Registration";
+import RegistrationPage from "./page/RegistrationPage";
 import ResetPassword from './component/forgotPassword/ResetPassword';
 import ForgotPassword from './component/forgotPassword/ForgotPassword';
 import PaymentPage from './component/payment/PaymentPage';

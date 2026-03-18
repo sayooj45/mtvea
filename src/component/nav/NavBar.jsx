@@ -9,15 +9,15 @@ const Navbar = () => {
     { name: "about", path: "/about" },
     { name: "speakers", path: "/speakers" },
     { name: "register", path: "/registration" },
-    { name: "contact", path: "/contact" },
+    // { name: "contact", path: "/contact" },
   ];
 
   return (
-    <nav className="bg-[#1B2B4B] text-white h-20 flex items-center justify-between px-6 shadow-md relative z-50">
+    <nav className="bg-[#1B2B4B] text-white h-[80px] md:h-[100px] flex items-center justify-between px-6 shadow-md relative z-50">
 
       {/* Logo */}
       <NavLink to="/">
-        <img src="/logo.png" alt="logo" className="h-16 cursor-pointer" />
+        <img src="/logo.png" alt="logo" className="h-20 cursor-pointer" />
       </NavLink>
 
       {/* Desktop */}
@@ -51,7 +51,7 @@ const Navbar = () => {
 
       {/* Mobile Drawer */}
       {open && (
-        <div className="absolute top-14 left-0 w-full bg-[#1B2B4B] flex flex-col p-4 gap-4 md:hidden z-50">
+        <div className="absolute top-[80px] md:top-[100px] left-0 w-full bg-[#1B2B4B] flex flex-col p-4 gap-4 md:hidden z-50">
           {navItems.map((item) => (
             <NavLink
               key={item.name}
