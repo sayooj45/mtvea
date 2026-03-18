@@ -12,16 +12,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword,setShowPassword] = useState(false)
+
   const [loading, setLoading] = useState(false);
 
 
 const handleSubmit = async (e) => {
   e.preventDefault();
 
+  setLoading(true);
+
   try {
     const response = await axios.post(
       
-      "http://10.10.45.94:5000/api/auth/login",
+      "https://mtveanationalconference-backend.vercel.app/api/auth/login",
       {
         email: email,
         password: password,
@@ -118,6 +121,15 @@ const handleSubmit = async (e) => {
             </div>
             
           </div>
+          <div className="flex justify-end">
+            <button
+            type="button"
+            onClick={() => navigate("/forgot-password")}
+            className="text-sm text-blue-600 hover:underline"
+            >
+            Forgot Password ?
+            </button>
+          </div>
           {error && (
             <div className="bg-red-100 text-red-600 text-sm p-3 rounded-lg">
                 {error}
@@ -128,7 +140,7 @@ const handleSubmit = async (e) => {
           <div className="flex justify-center pt-2">
             <button
               type="submit"
-              className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg shadow-md transition"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg shadow-md transition"
               disabled={loading}
               
             >

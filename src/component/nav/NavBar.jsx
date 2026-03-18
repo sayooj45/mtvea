@@ -1,134 +1,77 @@
 import React, { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
+  const [open, setOpen] = useState(false);
 
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const scrollToSection = (id) => {
-    setMenuOpen(false);
-
-    const section = document.getElementById(id);
-
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
-  };
+  const navItems = [
+    { name: "home", path: "/" },
+    { name: "about", path: "/about" },
+    { name: "speakers", path: "/speakers" },
+    { name: "register", path: "/registration" },
+    { name: "contact", path: "/contact" },
+  ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-gray-100 shadow-md z-50">
+    <nav className="bg-[#1B2B4B] text-white h-20 flex items-center justify-between px-6 shadow-md relative z-50">
 
-      <div className="max-w-7xl  px-6 py-4 flex items-center justify-between">
+      {/* Logo */}
+      <NavLink to="/">
+        <img src="/logo.png" alt="logo" className="h-16 cursor-pointer" />
+      </NavLink>
 
-        {/* Logo */}
-        <div className="flex ">
-          <img src={logo} alt="Logo" className="h-16 md:h-20 w-auto" />
-        </div>
-
-        {/* Desktop Menu */}
-        <ul className="hidden 
-            md:flex space-x-12 text-gray-700 font-medium absolute left-1/2 -translate-x-1/2">
-
-          <li>
-            <Link
-              to="/registration"
-              className="hover:text-blue-600 transition"
-            >
-              Registration
-            </Link>
-          </li>
-
-           <li>
-            <Link
-              to="/"
-              className="hover:text-blue-600 transition"
-            >
-              Speakers
-            </Link>
-          </li>
-
-          <li
-            onClick={() => scrollToSection("accommodation")}
-            className="cursor-pointer hover:text-blue-600 transition"
+      {/* Desktop */}
+      <div className="hidden md:flex gap-6">
+        {navItems.map((item) => (
+          <NavLink
+            key={item.name}
+            to={item.path}
+            className={({ isActive }) =>
+              `uppercase text-xs tracking-wider relative pb-1 
+              ${isActive ? "text-yellow-400" : "text-white"}
+              
+              after:content-[''] after:absolute after:left-0 after:bottom-0 
+              after:h-[2px] after:w-0 after:bg-yellow-400 
+              after:transition-all after:duration-300
+              
+              hover:after:w-full
+              
+              ${isActive ? "after:w-full" : ""}`
+            }
           >
-            Accommodation
-          </li>
-
-          <li
-            onClick={() => scrollToSection("logistics")}
-            className="cursor-pointer hover:text-blue-600 transition"
-          >
-            Logistics
-          </li>
-
-        </ul>
-
-        {/* Mobile menu button */}
-        <div
-          className="md:hidden text-2xl cursor-pointer"
-          onClick={() => setMenuOpen(true)}
-        >
-          <GiHamburgerMenu />
-        </div>
-
+            {item.name}
+          </NavLink>
+        ))}
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`fixed top-0 right-0 h-full w-72 bg-white shadow-lg transform transition-transform duration-300 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-
-        <div className="flex justify-end p-6 text-3xl cursor-pointer">
-          <IoClose onClick={() => setMenuOpen(false)} />
-        </div>
-
-        <ul className="flex flex-col items-center space-y-8 text-lg font-medium text-gray-700 mt-10">
-
-          <li>
-            <Link
-              to="/registration"
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-blue-600 transition"
-            >
-              Registration
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              to="/"
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-blue-600 transition"
-            >
-              Speakers
-            </Link>
-          </li>
-
-          <li
-            onClick={() => scrollToSection("accommodation")}
-            className="cursor-pointer hover:text-blue-600"
-          >
-            Accommodation
-          </li>
-
-          <li
-            onClick={() => scrollToSection("logistics")}
-            className="cursor-pointer hover:text-blue-600"
-          >
-            Logistics
-          </li>
-
-        </ul>
-
+      {/* Mobile Menu Button */}
+      <div className="md:hidden">
+        <button onClick={() => setOpen(!open)}>☰</button>
       </div>
 
+      {/* Mobile Drawer */}
+      {open && (
+        <div className="absolute top-14 left-0 w-full bg-[#1B2B4B] flex flex-col p-4 gap-4 md:hidden z-50">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              onClick={() => setOpen(false)}
+              className={({ isActive }) =>
+  `uppercase text-sm pb-2 relative transition-all duration-200
+  ${isActive ? "text-yellow-400" : "text-white"}
+  
+  after:content-[''] after:block after:h-[2px] after:bg-yellow-400 
+  ${isActive ? "after:w-full" : "after:w-0"}
+  
+  active:scale-95 active:text-yellow-300`
+}
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };

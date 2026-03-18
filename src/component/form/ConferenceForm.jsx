@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo.png'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+
 const ConferenceForm = () => {
   const [isReviewing, setIsReviewing] = useState(false);
   const [participants, setParticipants] = useState([]);
 
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
-    firstName: '', lastName: '', age: '', gender: '', address: '',
-    phone: '', email: '', parish: '', shirtSize: '', dietaryRestrictions: '',
-    sponsorSouvenir: '', bookedHotel: '', needsTransport: '',needAssistance:'',
-    needShuttle:'',flightNumber:'',busDetails:'',arrivalDate:'',arrivalTime:'', paymentMethod: '',
-  });
+  firstName: '', lastName: '', age: '', gender: '', address: '',
+  phone: '', email: '', parish: '', shirtSize: '', dietaryRestrictions: '',
+  sponsorSouvenir: '', bookedHotel: '', needAssistance:'',
+  needShuttle:'', flightNumber:'', busDetails:'', arrivalDate:'', arrivalTime:'',
+  paymentType:'',        
+  paymentMethod:''       
+});
 
   const emptyForm = {
   firstName: '', lastName: '', age: '', gender: '', address: '',
   phone: '', email: '', parish: '', shirtSize: '', dietaryRestrictions: '',
-  sponsorSouvenir: '', bookedHotel: '', needsTransport: '',
-  paymentMethod: '', needAssistance:'',needShuttle:'',flightNumber:'',busDetails:'',arrivalDate:'',arrivalTime:'',
+  sponsorSouvenir: '', bookedHotel: '', 
+   needAssistance:'',needShuttle:'',flightNumber:'',busDetails:'',arrivalDate:'',arrivalTime:'',
+  paymentType:'',
+  paymentMethod:'',
   
 };
 
@@ -39,48 +48,76 @@ const handleAddParticipant = () => {
   window.scrollTo(0, 0);
 };
 
-//   const handleSubmit = async (e) => {
-//   e.preventDefault();
 
-//   try {
 
-//     const response = await axios.post(
-//       "http://:5000/api/registration",
-//       {
-//         participants: participants
-//       },
-//       {
-//         headers: {
-//           "Content-Type": "application/json"
-//         }
-//       }
-//     );
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-//     alert("Registration Submitted Successfully!");
-//     console.log("Server Response:", response.data);
+  console.log("Sending participants:", participants); 
 
-//   } catch (error) {
+  const hasStripePayment = participants.some(
+    (p) =>
+    p.paymentType === "Online" &&
+    p.paymentMethod === "Credit Card (Stripe)"
+    );
 
-//     console.error("Submission Error:", error);
+    const hasZellePayment = participants.some(
+    (p) =>
+    p.paymentType === "Online" &&
+    p.paymentMethod === "Zelle"
+    );
 
-//     alert(
-//       error.response?.data?.message ||
-//       "Something went wrong while submitting."
-//     );
+    if (hasStripePayment) {
+      navigate("/payment-page", {
+        state: { participants }
+      });
+      return;
+    }
+    if (hasZellePayment) {
+      navigate("/zelle-payment", {
+        state: { participants }
+      });
+      return;
+    }
 
-//   }
-// };
+  try {
 
-  const handleSubmit = (e) => { 
-    e.preventDefault(); alert("Registration Submitted Successfully!");
-     console.log("Final Registration Data:", formData); 
-  };
+    const response = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/registration`,
+      {
+        participants: participants
+      },
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    alert("Registration Submitted Successfully!");
+    console.log("Server Response:", response.data);
+    navigate('/')
+
+  } catch (error) {
+
+    console.error("Submission Error:", error);
+
+    alert(
+      error.response?.data?.message ||
+      "Something went wrong while submitting."
+    );
+
+  }
+
+};
+
+
 
   const labelClass = "block text-base font-bold text-gray-700 mb-1";
   const inputClass = "w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2.5 text-base border bg-white";
   const radioLabel = "flex items-center space-x-2 text-base cursor-pointer";
 
-  // Helper component for the review summary rows
+
   const ReviewRow = ({ label, value }) => (
     <div className="flex justify-between border-b py-2 text-sm md:text-base">
       <span className="font-bold text-gray-600">{label}:</span>
@@ -102,7 +139,7 @@ const handleAddParticipant = () => {
         </div>
 
         {!isReviewing ? (
-          /* --- EDITING MODE --- */
+
           <form onSubmit={handleReview} className="p-8 space-y-8">
             
             {/* 1. Personal Info */}
@@ -112,11 +149,11 @@ const handleAddParticipant = () => {
                 <div><label className={labelClass}>First Name *</label><input required name="firstName" value={formData.firstName} onChange={handleChange} className={inputClass} /></div>
                 <div><label className={labelClass}>Last Name *</label><input required name="lastName" value={formData.lastName} onChange={handleChange} className={inputClass} /></div>
                 <div>
-                  <label className={labelClass}>Gender *</label>
+                  <label className={labelClass}>Age *</label>
                   <select required name="age" value={formData.age} onChange={handleChange} className={inputClass}>
                     <option value="">Select</option>
-                    <option value="under-12">Under 12</option>
-                    <option value="12-18">12-18</option>
+                    <option value="under-12">Under 10</option>
+                    <option value="12-18">10-18</option>
                     <option value="above-18">Above 18</option>
                   </select>
                 </div>
@@ -183,17 +220,7 @@ const handleAddParticipant = () => {
                     ))}
                   </div>
                 </div>
-                <div>
-                  <label className={labelClass}>Need transport to Airport?</label>
-                  <div className="flex space-x-4 mt-1">
-                    {['Yes', 'No'].map(opt => (
-                      <label key={opt} className={radioLabel}>
-                        <input type="radio" name="needsTransport" value={opt} checked={formData.needsTransport === opt} onChange={handleChange} className="w-4 h-4" />
-                        <span>{opt}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+ 
                 <div>
                   <label className={labelClass}>Assistance Required?</label>
                   <div className="flex space-x-4 mt-1">
@@ -210,10 +237,10 @@ const handleAddParticipant = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
 
                     {[
-                      "Yes – Arrival only",
-                      "Yes – Departure only",
-                      "Yes – Both arrival and departure",
-                      "No – I will arrange my own transportation",
+                      "Yes - Arrival only",
+                      "Yes - Departure only",
+                      "Yes - Both arrival and departure",
+                      "No - I will arrange my own transportation",
                     ].map((opt) => (
                     <label key={opt} className={radioLabel}>
                       <input type="radio" name="needShuttle" value={opt} checked={formData.needShuttle === opt} onChange={handleChange} className="w-4 h-4"/>
@@ -225,9 +252,8 @@ const handleAddParticipant = () => {
                 </div>
               </div>
               {
-                (formData.needShuttle === "Yes – Arrival only" ||
-                formData.needShuttle === "Yes – Departure only" ||
-                formData.needShuttle === "Yes – Both arrival and departure") && (
+                formData.needShuttle &&
+                formData.needShuttle !== "No - I will arrange my own transportation" && (
 
               <div className="mt-6 border rounded-lg p-5 bg-gray-50">
 
@@ -291,15 +317,58 @@ const handleAddParticipant = () => {
             {/* 4. Payment */}
             <section>
               <h2 className="text-xl font-bold text-blue-800 border-b pb-2 mb-5">Payment Method</h2>
-              <div className="flex flex-col sm:flex-row gap-6">
-                {['Online', 'During Participation'].map(method => (
-                  <label key={method} className={radioLabel}>
-                    <input required type="radio" name="paymentMethod" value={method} checked={formData.paymentMethod === method} onChange={handleChange} className="w-5 h-5 text-blue-600" />
-                    <span className="font-medium text-lg">{method}</span>
-                  </label>
-                ))}
-              </div>
-            </section>
+
+            {/* Payment Type */}
+            <div className="mb-5">
+              <label className={labelClass}>Payment Type *</label>
+              <select
+              required
+              name="paymentType"
+              value={formData.paymentType}
+              onChange={handleChange}
+              className={inputClass}
+              >
+                <option value="">Select Payment Type</option>
+                <option value="Online">Online</option>
+                <option value="During Participation">During Participation</option>
+              </select>
+            </div>
+
+            {/* Conditional Payment Method */}
+            {formData.paymentType === "Online" && (
+            <div>
+              <label className={labelClass}>Online Payment Method *</label>
+              <select
+              required
+              name="paymentMethod"
+              value={formData.paymentMethod}
+              onChange={handleChange}
+              className={inputClass}
+              >
+                <option value="">Select Method</option>
+                <option value="Zelle">Zelle</option>
+                <option value="Credit Card (Stripe)">Credit Card (via Stripe)</option>
+              </select>
+            </div>
+            )}
+
+            {formData.paymentType === "During Participation" && (
+            <div>
+              <label className={labelClass}>Payment Method *</label>
+              <select
+              required
+              name="paymentMethod"
+              value={formData.paymentMethod}
+              onChange={handleChange}
+              className={inputClass}
+              >
+                <option value="">Select Method</option>
+                <option value="Cheque">Cheque</option>
+                <option value="Cash">Cash</option>
+              </select>
+            </div>
+            )}
+          </section>
 
             <div className="flex gap-4">
               <button
@@ -323,7 +392,7 @@ const handleAddParticipant = () => {
           /* --- REVIEW MODE (Cross-checked Summary) --- */
           <div className="p-8 space-y-8">
             {participants.map((participant,index)=>(
-              <div>
+              <div key={index}>
             <div>
               <h3 className="text-lg font-bold text-blue-800 border-b pb-2 mb-3">Personal & Contact</h3>
               <ReviewRow label="Full Name" value={`${participant.firstName} ${participant.lastName}`} />
@@ -344,7 +413,6 @@ const handleAddParticipant = () => {
             <div>
               <h3 className="text-lg font-bold text-blue-800 border-b pb-2 mb-3">Logistics & Flight Info</h3>
               <ReviewRow label="Hotel Booked" value={participant.bookedHotel} />
-              <ReviewRow label="Needs Transport" value={participant.needsTransport} />
               <ReviewRow label="Needs Assistance" value={participant.needAssistance} />
               <ReviewRow label="Needs Shuttle" value={participant.needShuttle} />
               <ReviewRow label="Flight Number" value={participant.flightNumber} />
@@ -355,6 +423,7 @@ const handleAddParticipant = () => {
 
             <div>
               <h3 className="text-lg font-bold text-blue-800 border-b pb-2 mb-3">Final Selection</h3>
+              <ReviewRow label="Payment Type" value={participant.paymentType} />
               <ReviewRow label="Payment Method" value={participant.paymentMethod} />
             </div>
             </div>

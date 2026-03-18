@@ -1,83 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoIosLogOut } from "react-icons/io";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import axios from 'axios'
 
 const Table = () => {
 
- const data = [
+  const [data, setData] = useState([]);
 
-{
-firstName: "John",
-lastName: "Mathew",
-age: "Above 18",
-gender: "Male",
-address: "Kochi",
-phone: "9876543210",
-email: "john@email.com",
-parish: "St Mary's",
-shirtSize: "Adult L",
-dietaryRestrictions: "None",
-sponsorSouvenir: "Yes",
-bookedHotel: "Yes",
-needsTransport: "Yes",
-needAssistance: "No",
-needShuttle: "Arrival Only",
-flightNumber: "Indigo 6E234",
-busDetails: "",
-arrivalDate: "2026-04-02",
-arrivalTime: "10:30",
-paymentMethod: "Online"
-},
-
-{
-firstName: "Anna",
-lastName: "Jose",
-age: "Above 18",
-gender: "Female",
-address: "Trivandrum",
-phone: "9999999999",
-email: "anna@email.com",
-parish: "St George Church",
-shirtSize: "Adult M",
-dietaryRestrictions: "Veg",
-sponsorSouvenir: "No",
-bookedHotel: "Yes",
-needsTransport: "No",
-needAssistance: "No",
-needShuttle: "No – I will arrange my own transportation",
-flightNumber: "",
-busDetails: "KSRTC Super Fast",
-arrivalDate: "2026-04-02",
-arrivalTime: "09:00",
-paymentMethod: "Online"
-},
-
-{
-firstName: "Paul",
-lastName: "Thomas",
-age: "Above 18",
-gender: "Male",
-address: "Kottayam",
-phone: "8888888888",
-email: "paul@email.com",
-parish: "St Peter Parish",
-shirtSize: "Adult XL",
-dietaryRestrictions: "Non Veg",
-sponsorSouvenir: "Yes",
-bookedHotel: "No",
-needsTransport: "Yes",
-needAssistance: "Yes",
-needShuttle: "Yes – Both arrival and departure",
-flightNumber: "Air India AI532",
-busDetails: "",
-arrivalDate: "2026-04-01",
-arrivalTime: "18:45",
-paymentMethod: "During Participation"
-}
-
-];
 
    const [search, setSearch] = useState("");
 
@@ -86,7 +17,7 @@ paymentMethod: "During Participation"
   item.lastName.toLowerCase().includes(search.toLowerCase())
 );
 
-  const rowsPerPage = 2;
+  const rowsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
@@ -105,11 +36,18 @@ paymentMethod: "During Participation"
     "Phone Number": item.phone,
     "Email Address": item.email,
     "Parish Name": item.parish,
-    "Shirt Size": item.shirt,
-    "Dietary Restrictions": item.diet,
-    "Sponsor a souvenir page": item.sponsor,
-    "Hotel booked": item.hotel,
-    "Need airport transport": item.transport,
+    "Shirt Size": item.shirtSize,
+    "Dietary Restrictions": item.dietaryRestrictions,
+    "Sponsor a souvenir page": item.sponsorSouvenir,
+    "Hotel booked": item.bookedHotel,
+    "NeedAssistance":item.needAssistance,
+    "NeedShuttle":item.needShuttle,
+    "FlightNumber":item.flightNumber,
+    "BusDetails":item.busDetails,
+    "ArrivalDate":item.arrivalDate,
+    "ArrivalTime":item.arrivalTime,
+    "PaymentMethod":item.paymentMethod
+
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(exportData);
@@ -128,6 +66,34 @@ paymentMethod: "During Participation"
 
   saveAs(dataFile, "Applications.xlsx");
 };
+
+
+useEffect(() => {
+    const fetchParticipants = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        console.log("Token:", token); 
+
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/registrations`,
+          {
+            headers: {
+            Authorization: token
+            }
+          }
+        );
+        
+        console.log(response.data);
+        setData(response.data.data);
+
+      } catch (error) {
+        console.error("Error fetching data:", error.response?.data || error);
+      }
+    };
+
+    fetchParticipants();
+  }, []);
 
  
 
@@ -185,7 +151,7 @@ paymentMethod: "During Participation"
       {/* Table */}
       <div className="bg-white rounded-2xl shadow-lg border border-gray-200">
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-auto max-h-[calc(100vh-200px)]">
 
           <table className="min-w-[1200px] w-full text-sm text-left">
 
@@ -239,7 +205,6 @@ paymentMethod: "During Participation"
             <td className="px-4 py-3">{item.sponsorSouvenir}</td>
 
             <td className="px-4 py-3">{item.bookedHotel}</td>
-            <td className="px-4 py-3">{item.needsTransport}</td>
             <td className="px-4 py-3">{item.needAssistance}</td>
 
             <td className="px-4 py-3">{item.needShuttle}</td>
