@@ -27,7 +27,7 @@ const BannerSlider = ({ setActive }) => {
   }, [lastInteraction, slides.length]);
 
   return (
-    <div className="relative h-[calc(100vh-56px)] min-h-[600px] overflow-hidden">
+    <div className="relative h-[calc(100vh-70px)] min-h-[600px] overflow-hidden">
 
       {/* Background Slider */}
       {slides.map((img, i) => (
