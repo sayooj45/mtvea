@@ -19,7 +19,7 @@ const RegistrationPage = () => {
       </div>
       {/* PRICING BAR */}
 <div className="bg-[#8C7420] text-white  overflow-hidden ">
-  <div className="grid grid-cols-2 md:grid-cols-4 text-center">
+  <div className="grid grid-cols-2 md:grid-cols-3 text-center">
 
     {/* Adults */}
     <div className="py-5 border-r border-white/20">
@@ -45,13 +45,6 @@ const RegistrationPage = () => {
       </p>
     </div>
 
-    {/* Deadline */}
-    <div className="py-5">
-      <p className="text-xl font-serif">Aug 1</p>
-      <p className="text-xs uppercase tracking-wide text-white/70">
-        Deadline
-      </p>
-    </div>
 
   </div>
 </div>

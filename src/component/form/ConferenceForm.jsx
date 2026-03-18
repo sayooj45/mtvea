@@ -231,7 +231,7 @@ const handleAddParticipant = () => {
                 <option value="During Participation">During Participation</option>
               </select>
 
-              {formData.paymentType && (
+              {formData.paymentType === "Online" && (
                 <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange} className={inputClass}>
                   <option value="">Select Method</option>
                   <option value="Zelle">Zelle</option>

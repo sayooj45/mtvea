@@ -159,11 +159,6 @@ const prevSlide = () => {
               Register Now →
             </button>
 
-            <p className="text-xs text-white/50 mt-3">
-              Registration deadline:{" "}
-              <span className="text-yellow-400">March 9, 2026</span>
-            </p>
-
           </div>
         )}
 
@@ -171,10 +166,8 @@ const prevSlide = () => {
         {slide === 2 && (
           <div className="flex flex-col justify-center items-center text-center px-4 py-10 w-full">
 
-            <h2 className="text-3xl md:text-5xl font-serif mb-3">
-              Come and See:
-              <br />
-              <span className=" text-yellow-300">The Divine Invite</span>
+            <h2 className="text-3xl md:text-4xl font-serif mb-3 text-yellow-400">
+              Come and See : The Divine Invite
             </h2>
 
             <p className="text-white/70 max-w-xl mb-6 text-sm md:text-base">
@@ -182,50 +175,63 @@ const prevSlide = () => {
               with inspiring messages from our honored guest speakers.
             </p>
 
-            <button
+            {/* <button
               onClick={() => navigate("/about")}
               className="mb-10 border border-white px-6 py-2 rounded text-sm transition-all duration-300 hover:bg-white hover:text-[#1B2B4B] hover:scale-105 hover:shadow-lg"
             >
               Learn More
-            </button>
+            </button> */}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-md sm:max-w-xl w-full">
 
               <div className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
-border border-white/20 shadow-lg 
-transition duration-300 hover:scale-105
-max-w-[280px] sm:max-w-none mx-auto">
- <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
-  <img
-    src={speaker1}
-    alt="Speaker 1"
-    className="w-full h-full object-cover"
-  />
-</div>
-                <div className="p-3 text-center">
-                  <h4 className="text-lg font-semibold">
-                    Rt. Rev. Dr. Abraam Mar Paulos Episcopa
-                  </h4>
-                </div>
-              </div>
+  border border-white/20 shadow-lg 
+  transition duration-300 hover:scale-105
+  max-w-[280px] sm:max-w-none mx-auto group cursor-pointer"
+  onClick={() => navigate("/speakers")}
+>
+  <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
+    <img
+      src={speaker1}
+      alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
+      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+    />
+  </div>
 
-              <div className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
-border border-white/20 shadow-lg 
-transition duration-300 hover:scale-105
-max-w-[280px] sm:max-w-none mx-auto">
- <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
-  <img
-    src={speaker2}
-    alt="Speaker 2"
-    className="w-full h-full object-cover"
-  />
+  <div className="p-3 text-center">
+    <h4 className="text-lg font-semibold hover:text-yellow-400 transition-colors duration-200 underline-offset-4 hover:underline decoration-yellow-400/50">
+      Rt. Rev. Dr. Abraham Mar Paulos Episcopa
+    </h4>
+    <p className="text-[10px] uppercase tracking-widest opacity-50 mt-1 group-hover:opacity-100 transition-opacity">
+      View Profile
+    </p>
+  </div>
 </div>
-                <div className="p-3 text-center">
-                  <h4 className="text-lg font-semibold">
-                    Rev. Mothy Varkey
-                  </h4>
-                </div>
-              </div>
+
+<div className="bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
+  border border-white/20 shadow-lg 
+  transition duration-300 hover:scale-105
+  max-w-[280px] sm:max-w-none mx-auto group"> {/* Added 'group' for child hover effects */}
+  
+  <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
+    <img
+      src={speaker2}
+      alt="Rev. Mothy Varkey"
+      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+    />
+  </div>
+
+  <div className="p-3 text-center">
+    <button
+      onClick={() => navigate("/speakers")}
+      className="text-lg font-semibold hover:text-yellow-400 transition-colors duration-200 underline-offset-4 hover:underline decoration-yellow-400/50"
+    >
+      Rev. Mothy Varkey
+    </button>
+
+    <p className="text-[10px] uppercase tracking-tighter opacity-50 mt-1">View Profile</p>
+  </div>
+</div>
 
             </div>
 
