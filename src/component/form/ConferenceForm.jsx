@@ -4,6 +4,9 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 const ConferenceForm = () => {
+
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [isReviewing, setIsReviewing] = useState(false);
   const [participants, setParticipants] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -43,7 +46,7 @@ const handleChange = (e) => {
   const { name, value } = e.target;
 
   setFormData(prev => ({ ...prev, [name]: value }));
-  setIsFormSaved(false); // user is editing new data
+
 
   if (name === "needShuttle" && value === "No - I will arrange my own transportation") {
   setFormData(prev => ({
@@ -73,7 +76,7 @@ const handleReview = (e) => {
     setFormData(emptyForm);
   }
 
-  setIsReviewing(true); // ✅ THIS WAS MISSING
+  setIsReviewing(true); 
 
   window.scrollTo(0, 0);
 };
@@ -83,7 +86,7 @@ const handleReview = (e) => {
   const handleSubmit = async (e) => {
   e.preventDefault();
 
-  console.log("Sending participants:", participants); 
+
 
   const hasStripePayment = participants.some(
     (p) =>
@@ -113,7 +116,7 @@ const handleReview = (e) => {
   try {
 
     const response = await axios.post(
-      `${import.meta.env.VITE_API_URL}/api/registration`,
+      `${API_URL}api/registration`,
       {
         participants: participants
       },

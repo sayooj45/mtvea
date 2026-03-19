@@ -7,6 +7,8 @@ import axios from 'axios'
 
 const Table = () => {
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
   const [data, setData] = useState([]);
 
 
@@ -76,7 +78,7 @@ useEffect(() => {
         console.log("Token:", token); 
 
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/registrations`,
+          `${API_URL}api/registrations`,
           {
             headers: {
             Authorization: token

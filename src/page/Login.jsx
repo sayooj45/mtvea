@@ -15,6 +15,8 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -24,7 +26,7 @@ const handleSubmit = async (e) => {
   try {
     const response = await axios.post(
       
-      "https://mtveanationalconference-backend.vercel.app/api/auth/login",
+      `${API_URL}api/auth/login`,
       {
         email: email,
         password: password,
