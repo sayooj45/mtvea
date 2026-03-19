@@ -17,7 +17,7 @@ const Navbar = () => {
 
       {/* Logo */}
       <NavLink to="/">
-        <img src="/logo.png" alt="logo" className="h-[150px] cursor-pointer fixed" />
+        <img src="/logo.png" alt="logo" className="md:h-[150px] h-[80px] cursor-pointer fixed" />
       </NavLink>
 
       {/* Desktop */}

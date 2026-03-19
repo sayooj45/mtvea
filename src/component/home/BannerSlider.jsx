@@ -13,7 +13,9 @@ const BannerSlider = () => {
 
   const navigate = useNavigate()
 
-  const slides = [banner1, banner2, banner3];
+  const slides = ['https://statetechmagazine.com/sites/statetechmagazine.com/files/styles/cdw_hero/public/articles/%5Bcdw_tech_site%3Afield_site_shortname%5D/202206/GettyImages-923519778.jpg?itok=I42-SlnW', 
+    'https://vastphotos.com/files/uploads/photos/10736/dallas-skyline-panorama-photo-l.jpg?v=20220712043521', 
+  'https://content.r9cdn.net/rimg/dimg/46/26/6d65bf8d-city-16406-16422b4e573.jpg?width=1200&height=630&crop=true'];
 
   useEffect(() => {
     const interval = setInterval(() => {

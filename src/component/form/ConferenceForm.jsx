@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 const ConferenceForm = () => {
   const [isReviewing, setIsReviewing] = useState(false);
   const [participants, setParticipants] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+
 
   const navigate = useNavigate()
 
@@ -29,22 +32,49 @@ const ConferenceForm = () => {
 };
 
 const handleAddParticipant = () => {
+  if (!formData.firstName || !formData.lastName) return;
+
   setParticipants(prev => [...prev, formData]);
-  setFormData(emptyForm);
+  setFormData(emptyForm); 
+
 };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+const handleChange = (e) => {
+  const { name, value } = e.target;
 
- const handleReview = (e) => {
+  setFormData(prev => ({ ...prev, [name]: value }));
+  setIsFormSaved(false); // user is editing new data
+
+  if (name === "needShuttle" && value === "No - I will arrange my own transportation") {
+  setFormData(prev => ({
+    ...prev,
+    needShuttle: value,
+    flightNumber: "",
+    arrivalTime: "",
+    busDetails: ""
+  }));
+  return;
+}
+};
+
+const handleReview = (e) => {
   e.preventDefault();
 
-  const allParticipants = [...participants, formData];
-  setParticipants(allParticipants);
+  // Check if the current form has data that isn't in the list yet
+  const isFormEmpty = !formData.firstName && !formData.lastName;
+  
+  // Check if this specific person is already the last person in our array
+  // (This prevents duplicating the last person if they click Review -> Back -> Review)
+  const lastParticipant = participants[participants.length - 1];
+  const isDuplicate = lastParticipant && 
+                     lastParticipant.firstName === formData.firstName && 
+                     lastParticipant.lastName === formData.lastName;
 
-  setIsReviewing(true);
+  if (!isFormEmpty && !isDuplicate) {
+    setParticipants(prev => [...prev, formData]);
+    setFormData(emptyForm); // Clear form so 'Back' shows an empty form for a NEW person
+  }
+
   window.scrollTo(0, 0);
 };
 
@@ -95,6 +125,7 @@ const handleAddParticipant = () => {
     );
 
     alert("Registration Submitted Successfully!");
+    setIsSubmitted(true);
     console.log("Server Response:", response.data);
     navigate('/')
 
@@ -125,6 +156,15 @@ const handleAddParticipant = () => {
     </div>
   );
 
+
+    const steps = [
+    { id: 1, label: "DETAILS" },
+    { id: 2, label: "REVIEW" },
+    { id: 3, label: "DONE" },
+  ];
+
+  const step = isSubmitted ? 3 : isReviewing ? 2 : 1;
+
   return (
   <div className="min-h-screen bg-[#FBF8F2] py-10 px-4">
     
@@ -141,6 +181,62 @@ const handleAddParticipant = () => {
           MTVEA XVIIIth National Conference 2026
         </p>
       </div> */}
+
+<div className="flex justify-center mb-10 px-4">
+  <div className="w-full max-w-3xl grid grid-cols-3 items-center">
+    
+    {steps.map((s, index) => (
+      <div key={s.id} className="flex items-center justify-center relative">
+        
+        {/* Line LEFT */}
+        {index !== 0 && (
+          <div className="absolute left-0 top-1/2 w-1/2 h-[2px] bg-gray-300">
+            <div
+              className={`h-[2px] ${
+                step > s.id - 1 ? "bg-[#C49A3C] w-full" : "w-0"
+              }`}
+            />
+          </div>
+        )}
+
+        {/* Line RIGHT */}
+        {index !== steps.length - 1 && (
+          <div className="absolute right-0 top-1/2 w-1/2 h-[2px] bg-gray-300">
+            <div
+              className={`h-[2px] ${
+                step > s.id ? "bg-[#C49A3C] w-full" : "w-0"
+              }`}
+            />
+          </div>
+        )}
+
+        {/* Step Content */}
+        <div className="z-10 flex flex-col items-center">
+          
+          {/* Circle */}
+          <div
+            className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full text-xs md:text-sm font-semibold
+            ${
+              step === s.id
+                ? "bg-[#1B2B4B] text-white"
+                : step > s.id
+                ? "bg-[#C49A3C] text-white"
+                : "border border-gray-300 text-gray-400 bg-white"
+            }`}
+          >
+            {s.id}
+          </div>
+
+          {/* Label */}
+          <span className="mt-2 text-xs md:text-sm text-gray-600 text-center">
+            {s.label}
+          </span>
+        </div>
+      </div>
+    ))}
+
+  </div>
+</div>
 
       {/* FORM CARD */}
       <div className="bg-white rounded-b-xl shadow-md p-6 md:p-8">
@@ -212,12 +308,146 @@ const handleAddParticipant = () => {
                   name="dietaryRestrictions"
                   value={formData.dietaryRestrictions}
                   onChange={handleChange}
-                  placeholder="Dietary Restrictions"
+                  placeholder="Dietary Restrictions (If not put N/A)"
                   className={inputClass}
                 />
 
+                <div>
+  <label className={labelClass}>Sponsor a Souvenir?</label>
+
+  <div className="flex gap-6 mt-2">
+    {["Yes", "No"].map((option) => (
+      <label
+        key={option}
+        className="flex items-center gap-2 cursor-pointer"
+      >
+        <input
+          type="radio"
+          name="sponsorSouvenir"
+          value={option}
+          checked={formData.sponsorSouvenir === option}
+          onChange={handleChange}
+          className="accent-[#1B2B4B]"
+        />
+        {option}
+      </label>
+    ))}
+  </div>
+</div>
+
               </div>
             </section>
+
+          {/* Accommodation + Transportation */}
+            <section>
+  <h2 className="text-lg font-semibold text-[#1B2B4B] border-b pb-2 mb-4">
+    Accommodation + Transportation
+  </h2>
+
+  <div className="space-y-6 grid grid-cols-2">
+
+    {/* Hotel Booked */}
+    <div>
+      <label className={labelClass}>Hotel Booked?</label>
+      <div className="flex flex-wrap gap-4 mt-2">
+        {["Yes", "No"].map((option) => (
+          <label key={option} className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="bookedHotel"
+              value={option}
+              checked={formData.bookedHotel === option}
+              onChange={handleChange}
+              className="accent-[#1B2B4B]"
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+    </div>
+
+    
+
+    {/* Assistance Required */}
+    <div>
+      <label className={labelClass}>Assistance Required?</label>
+      <div className="flex gap-4 mt-2">
+        {["Yes", "No"].map((option) => (
+          <label key={option} className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="needAssistance"
+              value={option}
+              checked={formData.needAssistance === option}
+              onChange={handleChange}
+              className="accent-[#1B2B4B]"
+            />
+            {option}
+          </label>
+        ))}
+      </div>
+    </div>
+
+    {/* Shuttle Service */}
+    <div>
+      <label className={labelClass}>
+        Do you need airport/bus station shuttle service?
+      </label>
+      <div className="flex flex-col gap-2 mt-2">
+        {[
+          "Yes - Arrival only",
+          "Yes - Departure only",
+          "Yes - Both arrival and departure",
+          "No - I will arrange my own transportation",
+        ].map((option) => (
+          <label key={option} className="flex items-start gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="needShuttle"
+              value={option}
+              checked={formData.needShuttle === option}
+              onChange={handleChange}
+              className="accent-[#1B2B4B] mt-1"
+            />
+            <span>{option}</span>
+          </label>
+        ))}
+      </div>
+    </div>
+
+  </div>
+      {formData.needShuttle!= "No - I will arrange my own transportation" && (
+  <div className="grid md:grid-cols-2 gap-4 mt-4 p-4 border rounded-lg bg-gray-50">
+    
+    <input
+      type="text"
+      name="flightNumber"
+      value={formData.flightNumber}
+      onChange={handleChange}
+      placeholder="Flight Number"
+      className={inputClass}
+    />
+
+    <input
+      type="time"
+      name="arrivalTime"
+      value={formData.arrivalTime}
+      onChange={handleChange}
+      className={inputClass}
+    />
+
+    <input
+      type="text"
+      name="busDetails"
+      value={formData.busDetails}
+      onChange={handleChange}
+      placeholder="Bus Details"
+      className="md:col-span-2 border p-3 rounded"
+    />
+
+  </div>
+)}
+</section>
 
             {/* PAYMENT */}
             <section>
@@ -251,11 +481,12 @@ const handleAddParticipant = () => {
               </button>
 
               <button
-                type="submit"
-                className="flex-1 bg-[#C49A3C] text-white py-3 rounded hover:opacity-90"
-              >
-                Review →
-              </button>
+  type="submit"
+  disabled={!formData.firstName}
+  className="flex-1 bg-[#C49A3C] text-white py-3 rounded disabled:opacity-50"
+>
+  Review →
+</button>
             </div>
 
           </form>
@@ -263,35 +494,93 @@ const handleAddParticipant = () => {
 
           /* REVIEW SCREEN */
           <div className="space-y-6">
-            {participants.map((p, i) => (
-              <div key={i} className="border rounded-lg p-5">
-                <h3 className="font-semibold text-[#1B2B4B] mb-3">
-                  Participant {i + 1}
-                </h3>
+  {participants.map((p, i) => (
+    <div key={i} className="border rounded-xl p-6 shadow-sm bg-gray-50">
+      
+      <h3 className="text-lg font-semibold text-[#1B2B4B] mb-4 border-b pb-2">
+        Participant {i + 1}
+      </h3>
 
-                <ReviewRow label="Name" value={`${p.firstName} ${p.lastName}`} />
-                <ReviewRow label="Email" value={p.email} />
-                <ReviewRow label="Phone" value={p.phone} />
-                <ReviewRow label="Payment" value={`${p.paymentType} - ${p.paymentMethod}`} />
-              </div>
-            ))}
+      {/* PERSONAL */}
+      <div className="grid md:grid-cols-2 gap-3 mb-4">
+        <ReviewRow label="First Name" value={p.firstName} />
+        <ReviewRow label="Last Name" value={p.lastName} />
+        <ReviewRow label="Age" value={p.age} />
+        <ReviewRow label="Gender" value={p.gender} />
+        <ReviewRow label="Phone" value={p.phone} />
+        <ReviewRow label="Email" value={p.email} />
+        <ReviewRow label="Parish" value={p.parish} />
+        <ReviewRow label="Address" value={p.address} />
+      </div>
 
-            <div className="flex gap-4">
-              <button
-                onClick={() => setIsReviewing(false)}
-                className="flex-1 bg-gray-200 py-3 rounded"
-              >
-                Back
-              </button>
+      {/* PREFERENCES */}
+{/* PREFERENCES */}
+<div className="mb-4">
+  <h4 className="font-semibold text-gray-700 mb-2">Preferences</h4>
+  <div className="grid md:grid-cols-2 gap-3">
+    <ReviewRow label="Shirt Size" value={p.shirtSize} />
+    <ReviewRow label="Dietary" value={p.dietaryRestrictions} />
+    <ReviewRow label="Sponsor Souvenir" value={p.sponsorSouvenir} />
+  </div>
+</div>
 
-              <button
-                onClick={handleSubmit}
-                className="flex-1 bg-green-600 text-white py-3 rounded"
-              >
-                Confirm & Submit
-              </button>
-            </div>
-          </div>
+      {/* TRAVEL */}
+      <div className="mb-4">
+  <h4 className="font-semibold text-gray-700 mb-2">Travel & Accommodation</h4>
+  
+  <div className="grid md:grid-cols-2 gap-3">
+
+    <ReviewRow label="Hotel Booked" value={p.bookedHotel} />
+
+    <ReviewRow label="Need Assistance" value={p.needAssistance} />
+
+    <ReviewRow label="Shuttle Service" value={p.needShuttle} />
+
+    {/* Show only if shuttle is NOT "No..." */}
+    {p.needShuttle !== "No - I will arrange my own transportation" && (
+      <>
+        <ReviewRow label="Flight Number" value={p.flightNumber} />
+        <ReviewRow label="Arrival Time" value={p.arrivalTime} />
+        <ReviewRow label="Bus Details" value={p.busDetails} />
+      </>
+    )}
+
+  </div>
+</div>
+
+      {/* PAYMENT */}
+      <div>
+        <h4 className="font-semibold text-gray-700 mb-2">Payment</h4>
+        <div className="grid md:grid-cols-2 gap-3">
+          <ReviewRow label="Type" value={p.paymentType} />
+          <ReviewRow label="Method" value={p.paymentMethod} />
+        </div>
+      </div>
+
+    </div>
+  ))}
+
+  {/* ACTION BUTTONS */}
+  <div className="flex gap-4 pt-4">
+   <button
+  onClick={() => {
+    setIsReviewing(false);
+    // Optional: if you want the form to be empty when they go back
+    setFormData(emptyForm); 
+  }}
+  className="flex-1 bg-gray-200 py-3 rounded-lg hover:bg-gray-300 transition"
+>
+  Back / Add More
+</button>
+
+    <button
+      onClick={handleSubmit}
+      className="flex-1 bg-[#C49A3C] text-white py-3 rounded-lg hover:opacity-90 transition"
+    >
+      Confirm & Submit
+    </button>
+  </div>
+</div>
 
         )}
       </div>

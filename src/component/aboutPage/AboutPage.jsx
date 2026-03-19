@@ -6,7 +6,7 @@ const About = () => {
   return (
     <div className="bg-[#FBF8F2] text-[#1a1a1a]">
       <Navbar />
-      <div className="w-full h-px bg-gray-300"></div>
+<div className="w-full h-px bg-gray-300"></div>
       {/* Header */}
       <div className="bg-[#1B2B4B] text-center px-6 py-12">
         <p className="text-white/40 text-xs mb-2">Home › About</p>
