@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import banner1 from "../../assets/banners/banner1.webp";
-import banner2 from "../../assets/banners/banner2.jpeg";
+import banner1 from "../../assets/banners/banner1.jpg";
+import banner2 from "../../assets/banners/banner2.jpg";
 import banner3 from "../../assets/banners/banner3.jpg";
 import speaker1 from "../../assets/speaker1.png";
 import speaker2 from "../../assets/speaker2.jpg";
@@ -13,9 +13,7 @@ const BannerSlider = () => {
 
   const navigate = useNavigate()
 
-  const slides = ['https://statetechmagazine.com/sites/statetechmagazine.com/files/styles/cdw_hero/public/articles/%5Bcdw_tech_site%3Afield_site_shortname%5D/202206/GettyImages-923519778.jpg?itok=I42-SlnW', 
-    'https://vastphotos.com/files/uploads/photos/10736/dallas-skyline-panorama-photo-l.jpg?v=20220712043521', 
-  'https://content.r9cdn.net/rimg/dimg/46/26/6d65bf8d-city-16406-16422b4e573.jpg?width=1200&height=630&crop=true'];
+  const slides = [banner1,banner2,banner3];
 
   useEffect(() => {
     const interval = setInterval(() => {
