@@ -60,20 +60,20 @@ const handleChange = (e) => {
 const handleReview = (e) => {
   e.preventDefault();
 
-  // Check if the current form has data that isn't in the list yet
   const isFormEmpty = !formData.firstName && !formData.lastName;
-  
-  // Check if this specific person is already the last person in our array
-  // (This prevents duplicating the last person if they click Review -> Back -> Review)
+
   const lastParticipant = participants[participants.length - 1];
-  const isDuplicate = lastParticipant && 
-                     lastParticipant.firstName === formData.firstName && 
-                     lastParticipant.lastName === formData.lastName;
+  const isDuplicate =
+    lastParticipant &&
+    lastParticipant.firstName === formData.firstName &&
+    lastParticipant.lastName === formData.lastName;
 
   if (!isFormEmpty && !isDuplicate) {
-    setParticipants(prev => [...prev, formData]);
-    setFormData(emptyForm); // Clear form so 'Back' shows an empty form for a NEW person
+    setParticipants((prev) => [...prev, formData]);
+    setFormData(emptyForm);
   }
+
+  setIsReviewing(true); // ✅ THIS WAS MISSING
 
   window.scrollTo(0, 0);
 };
@@ -416,7 +416,9 @@ const handleReview = (e) => {
     </div>
 
   </div>
-      {formData.needShuttle!= "No - I will arrange my own transportation" && (
+      {(formData.needShuttle === "Yes - Arrival only" || 
+      formData.needShuttle === "Yes - Departure only" || 
+      formData.needShuttle === "Yes - Both arrival and departure" ) && (
   <div className="grid md:grid-cols-2 gap-4 mt-4 p-4 border rounded-lg bg-gray-50">
     
     <input
