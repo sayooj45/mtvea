@@ -7,7 +7,7 @@ const RegistrationPage = () => {
     <div className="flex flex-col min-h-screen">
 
       <Navbar />
-      <div className="w-full h-px bg-gray-300"></div>
+    <div className="w-full h-px bg-gray-300"></div>
       {/* Header */}
       <div className="bg-[#1B2B4B] text-white text-center py-10">
         <h1 className="text-3xl font-serif">
