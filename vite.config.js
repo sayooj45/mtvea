@@ -3,12 +3,12 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: '/', // ensures all routes resolve correctly on refresh
+  base: '/', // ensures all routes resolve correctly
   plugins: [
     react(),
     tailwindcss(),
   ],
   build: {
-    outDir: 'dist', // default is dist, make sure matches Vercel settings
+    outDir: 'dist',
   }
 })
