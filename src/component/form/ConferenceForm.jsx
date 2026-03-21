@@ -9,6 +9,7 @@ const ConferenceForm = () => {
   const [isReviewing, setIsReviewing] = useState(false);
   const [participants, setParticipants] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
 
 
@@ -83,32 +84,47 @@ const handleReview = (e) => {
 
 
 const handleSubmit = async (e) => { 
-  e.preventDefault(); 
-  const hasStripePayment = participants.some( (p) => p.paymentType === "Online" && 
-  p.paymentMethod === "Credit Card (Stripe)" );
-   const hasZellePayment = participants.some( (p) => p.paymentType === "Online" && 
-   p.paymentMethod === "Zelle" ); if (hasStripePayment) { navigate("/payment-page", 
-    { state: { participants } }); return; } 
-    if (hasZellePayment) { navigate("/zelle-payment", { state: { participants } }); 
-    return; }
-     try {
-       console.log( participants); 
-       const response = await axios.post(
-         `${API_URL}api/registration`, 
-         { 
-          participants: participants 
-        }, 
-         {
-           headers: { "Content-Type": "application/json" } 
-          } ); 
-          alert("Registration Submitted Successfully!");
-          setIsSubmitted(true); 
-          console.log("Server Response:", response.data); 
-          navigate('/') 
-        } 
-        catch (error) {
-           console.error("Submission Error:", error); 
-           alert( error.response?.data?.message || "Something went wrong while submitting." ); } };
+  e.preventDefault();
+  
+  setIsLoading(true); // Start loading
+
+  const hasStripePayment = participants.some(
+    (p) => p.paymentType === "Online" && p.paymentMethod === "Credit Card (Stripe)"
+  );
+  const hasZellePayment = participants.some(
+    (p) => p.paymentType === "Online" && p.paymentMethod === "Zelle"
+  );
+
+  if (hasStripePayment) {
+    setIsLoading(false);
+    navigate("/payment-page", { state: { participants } });
+    return;
+  }
+
+  if (hasZellePayment) {
+    setIsLoading(false);
+    navigate("/zelle-payment", { state: { participants } });
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      `${API_URL}api/registration`,
+      { participants },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    alert("Registration Submitted Successfully!");
+    setIsSubmitted(true);
+    console.log("Server Response:", response.data);
+    navigate('/');
+  } catch (error) {
+    console.error("Submission Error:", error);
+    alert(error.response?.data?.message || "Something went wrong while submitting.");
+  } finally {
+    setIsLoading(false); // Stop loading
+  }
+};
 
 
 
@@ -564,12 +580,23 @@ const handleSubmit = async (e) => {
   Back / Add More
 </button>
 
-    <button
-      onClick={handleSubmit}
-      className="flex-1 bg-[#C49A3C] text-white py-3 rounded-lg hover:opacity-90 transition"
-    >
-      Confirm & Submit
-    </button>
+<button
+  onClick={handleSubmit}
+  disabled={isLoading}
+  className="flex-1 bg-[#C49A3C] text-white py-3 rounded-lg hover:opacity-90 transition flex items-center justify-center"
+>
+  {isLoading ? (
+    <>
+      <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
+      Submitting...
+    </>
+  ) : (
+    "Confirm & Submit"
+  )}
+</button>
   </div>
 </div>
 
