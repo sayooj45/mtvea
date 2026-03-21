@@ -16,9 +16,15 @@ const Navbar = () => {
     <nav className="bg-[#1B2B4B] text-white h-[80px] md:h-[100px] flex items-center justify-between px-6 shadow-md relative z-50">
 
       {/* Logo */}
-      <NavLink to="/">
-        <img src="/logo.png" alt="logo" className="md:h-[150px] h-[80px] cursor-pointer fixed" />
-      </NavLink>
+<NavLink to="/">
+  <div className="fixed top-[20px] md:top-[25px]  bg-white rounded-full md:h-[150px] md:w-[150px] h-[75px] w-[75px] flex items-center justify-center  overflow-visible z-50">
+    <img
+      src="/logo.png"
+      alt="logo"
+      className="md:h-[200px] md:w-[200px] w-[100px] h-[100px] max-w-none object-cover cursor-pointer "
+    />
+  </div>
+</NavLink>
 
       {/* Desktop */}
       <div className="hidden md:flex gap-6">

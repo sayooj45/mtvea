@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from '../../assets/logo.png'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
@@ -83,67 +82,33 @@ const handleReview = (e) => {
 
 
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-
-
-
-  const hasStripePayment = participants.some(
-    (p) =>
-    p.paymentType === "Online" &&
-    p.paymentMethod === "Credit Card (Stripe)"
-    );
-
-    const hasZellePayment = participants.some(
-    (p) =>
-    p.paymentType === "Online" &&
-    p.paymentMethod === "Zelle"
-    );
-
-    if (hasStripePayment) {
-      navigate("/payment-page", {
-        state: { participants }
-      });
-      return;
-    }
-    if (hasZellePayment) {
-      navigate("/zelle-payment", {
-        state: { participants }
-      });
-      return;
-    }
-
-  try {
-
-    const response = await axios.post(
-      `${API_URL}api/registration`,
-      {
-        participants: participants
-      },
-      {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    );
-
-    alert("Registration Submitted Successfully!");
-    setIsSubmitted(true);
-    console.log("Server Response:", response.data);
-    navigate('/')
-
-  } catch (error) {
-
-    console.error("Submission Error:", error);
-
-    alert(
-      error.response?.data?.message ||
-      "Something went wrong while submitting."
-    );
-
-  }
-
-};
+const handleSubmit = async (e) => { 
+  e.preventDefault(); 
+  const hasStripePayment = participants.some( (p) => p.paymentType === "Online" && 
+  p.paymentMethod === "Credit Card (Stripe)" );
+   const hasZellePayment = participants.some( (p) => p.paymentType === "Online" && 
+   p.paymentMethod === "Zelle" ); if (hasStripePayment) { navigate("/payment-page", 
+    { state: { participants } }); return; } 
+    if (hasZellePayment) { navigate("/zelle-payment", { state: { participants } }); 
+    return; }
+     try {
+       console.log( participants); 
+       const response = await axios.post(
+         `${API_URL}api/registration`, 
+         { 
+          participants: participants 
+        }, 
+         {
+           headers: { "Content-Type": "application/json" } 
+          } ); 
+          alert("Registration Submitted Successfully!");
+          setIsSubmitted(true); 
+          console.log("Server Response:", response.data); 
+          navigate('/') 
+        } 
+        catch (error) {
+           console.error("Submission Error:", error); 
+           alert( error.response?.data?.message || "Something went wrong while submitting." ); } };
 
 
 
@@ -259,15 +224,15 @@ const handleReview = (e) => {
 
                 <select name="age" value={formData.age} onChange={handleChange} className={inputClass} required>
                   <option value="">Select Age</option>
-                  <option value="under-12">Under 10</option>
-                  <option value="12-18">10–18</option>
+                  <option value="under-10">Under 10</option>
+                  <option value="10-18">10–18</option>
                   <option value="above-18">Above 18</option>
                 </select>
 
                 <select name="gender" value={formData.gender} onChange={handleChange} className={inputClass} required>
                   <option value="">Gender</option>
-                  <option>Male</option>
-                  <option>Female</option>
+                  <option value='male'>Male</option>
+                  <option value='female'>Female</option>
                 </select>
 
                 <input name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone" className={inputClass} required />
@@ -424,33 +389,43 @@ const handleReview = (e) => {
       formData.needShuttle === "Yes - Both arrival and departure" ) && (
   <div className="grid md:grid-cols-2 gap-4 mt-4 p-4 border rounded-lg bg-gray-50">
     
-    <input
-      type="text"
-      name="flightNumber"
-      value={formData.flightNumber}
-      onChange={handleChange}
-      placeholder="Flight Number"
-      className={inputClass}
-    />
+  <input
+    type="text"
+    name="flightNumber"
+    value={formData.flightNumber}
+    onChange={handleChange}
+    placeholder="Flight Number"
+    className={inputClass}
+  />
 
-    <input
-      type="time"
-      name="arrivalTime"
-      value={formData.arrivalTime}
-      onChange={handleChange}
-      className={inputClass}
-    />
+  {/* Arrival Date */}
+  <input
+    type="date"
+    name="arrivalDate"
+    value={formData.arrivalDate}
+    onChange={handleChange}
+    className={inputClass}
+  />
 
-    <input
-      type="text"
-      name="busDetails"
-      value={formData.busDetails}
-      onChange={handleChange}
-      placeholder="Bus Details"
-      className="md:col-span-2 border p-3 rounded"
-    />
+  {/* Arrival Time */}
+  <input
+    type="time"
+    name="arrivalTime"
+    value={formData.arrivalTime}
+    onChange={handleChange}
+    className={inputClass}
+  />
 
-  </div>
+  <input
+    type="text"
+    name="busDetails"
+    value={formData.busDetails}
+    onChange={handleChange}
+    placeholder="Bus Details"
+    className="md:col-span-2 border p-3 rounded"
+  />
+
+</div>
 )}
 </section>
 
@@ -460,19 +435,29 @@ const handleReview = (e) => {
                 Payment Method
               </h2>
 
-              <select name="paymentType" value={formData.paymentType} onChange={handleChange} className={inputClass}>
+              <select name="paymentType"  value={formData.paymentType} onChange={handleChange} className={inputClass}>
                 <option value="">Select Payment Type</option>
                 <option value="Online">Online</option>
-                <option value="During Participation">During Participation</option>
+                <option value="During participation">During Participation</option>
               </select>
 
-              {formData.paymentType === "Online" && (
-                <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange} className={inputClass}>
+              {(formData.paymentType === "Online") && (
+                <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange} className={`${inputClass} mt-5`}>
                   <option value="">Select Method</option>
                   <option value="Zelle">Zelle</option>
                   <option value="Credit Card (Stripe)">Stripe</option>
                 </select>
               )}
+              {
+                (formData.paymentType === "During participation" )&& (
+                <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange} className={`${inputClass} mt-5`}>
+                  <option value="">Select Method</option>
+                  <option value="Cheque">Cheque</option>
+                  <option value="Cash">Cash</option>
+                </select>
+              )
+                
+              }
             </section>
 
             {/* BUTTONS */}
@@ -545,6 +530,7 @@ const handleReview = (e) => {
     {p.needShuttle !== "No - I will arrange my own transportation" && (
       <>
         <ReviewRow label="Flight Number" value={p.flightNumber} />
+        <ReviewRow label="Arrival Time" value={p.arrivalDate} />
         <ReviewRow label="Arrival Time" value={p.arrivalTime} />
         <ReviewRow label="Bus Details" value={p.busDetails} />
       </>

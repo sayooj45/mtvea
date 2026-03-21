@@ -12,7 +12,8 @@ const PaymentPage = () => {
   const participants = location.state?.participants || [];
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 p-6">
+    <div className="min-h-screen flex justify-center items-center bg-[#FBF8F2] p-6">
+      <Navbar/>
 
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg">
 
@@ -26,7 +27,7 @@ const PaymentPage = () => {
         </Elements>
 
       </div>
-
+    <Footer/>
     </div>
   );
 };

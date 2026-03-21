@@ -23,13 +23,13 @@ const About = () => {
 
         {/* Story */}
         <section className="mb-10">
-          <span className="bg-[#F9F3E3] text-[#C49A3C] text-xs px-3 py-1 uppercase">
+          <span className="bg-[#F9F3E3] text-[#C49A3C] text-sm px-3 py-1 uppercase">
             Our Story
           </span>
           <h2 className="text-2xl font-serif text-[#1B2B4B] mt-3 mb-4">
             A Legacy of Evangelism Since 1924
           </h2>
-          <p className="text-gray-600 text-sm leading-7">
+          <p className="text-gray-600 text-md leading-7">
             The Mar Thoma Voluntary Evangelists’ Association (MTVEA) formed 1924 as a result of the spiritual renewal that followed the Reformation
              within the Church. This renewal created a deep desire among believers to share the Gospel of Jesus Christ. It was realized that evangelistic 
              responsibility could not be limited to a few full-time workers, but that every member of the Church, filled with the joy and assurance of salvation,
@@ -50,7 +50,7 @@ const About = () => {
 
         {/* Mission */}
         <section className="mb-10">
-          <span className="bg-[#F9F3E3] text-[#C49A3C] text-xs px-3 py-1 uppercase">
+          <span className="bg-[#F9F3E3] text-[#C49A3C] text-sm px-3 py-1 uppercase">
             Our Mission
           </span>
           <h2 className="text-2xl font-serif text-[#1B2B4B] mt-3 mb-4">
@@ -69,13 +69,13 @@ const About = () => {
 
         {/* Theme */}
         <div className="bg-[#1B2B4B] text-center text-white py-10 rounded-lg mb-10">
-          <p className="text-[#E8C97A] text-xs uppercase tracking-widest">
+          <p className="text-[#E8C97A] text-sm uppercase tracking-widest">
             Conference Theme 2026
           </p>
           <h3 className="text-xl font-serif italic mt-2">
             "Come and See: The Divine Invite"
           </h3>
-          <p className="text-white/40 text-xs mt-1">St. John 1:39 & 46</p>
+          <p className="text-white/40 text-sm mt-1">St. John 1:39 & 46</p>
         </div>
 
         {/* CTA */}

@@ -3,8 +3,7 @@ import banner1 from "../../assets/banners/banner1.jpg";
 import banner2 from "../../assets/banners/banner2.jpg";
 import banner3 from "../../assets/banners/banner3.jpg";
 import speaker1 from "../../assets/speaker1.png";
-import speaker from "../../assets/speaker1.jpeg";
-import speaker2 from "../../assets/speaker2.jpg";
+import speaker2 from "../../assets/speaker2.jpeg";
 import { useNavigate } from "react-router-dom";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
@@ -53,7 +52,7 @@ const prevSlide = () => {
       ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/50 to-[#1B2B4B]/90"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/40 to-[#1B2B4B]/60"></div>
 
       {/* Content */}
       <div className="absolute inset-0 text-white overflow-y-auto flex items-center justify-center">
@@ -62,7 +61,7 @@ const prevSlide = () => {
         {slide === 0 && (
           <div className="flex flex-col justify-center items-center text-center h-full px-4">
 
-            <p className="uppercase tracking-widest text-yellow-400 text-xs mb-3">
+            <p className="uppercase tracking-widest text-yellow-400 text-2xl bold mb-3" style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.6)" }}>
               XVIII Mar Thoma Voluntary Evangelists' Association
             </p>
 
@@ -71,11 +70,11 @@ const prevSlide = () => {
               <span className="italic text-yellow-300">2026</span>
             </h1>
 
-            <p className="italic text-yellow-300 mb-2">
+            <p className="italic text-yellow-300 mb-2 text-xl">
               "Come and See: The Divine Invite"
             </p>
 
-            <p className="text-sm opacity-70 mb-6">
+            <p className="text-md opacity-80 mb-6 ">
               St. John 1:39 & 46
             </p>
 
@@ -104,7 +103,7 @@ const prevSlide = () => {
         {slide === 1 && (
           <div className="flex flex-col justify-center items-center h-full px-4 text-center min-h-full">
 
-            <p className="text-yellow-400 uppercase text-xs tracking-widest mb-2">
+            <p className="text-yellow-400 uppercase text-md tracking-widest mb-2">
               Join Us
             </p>
 
@@ -112,7 +111,7 @@ const prevSlide = () => {
               Register for the Conference
             </h2>
 
-            <p className="text-white/70 text-sm mb-8">
+            <p className="text-white/80 text-md mb-8">
               Open to all members of MTVEA, Sevika Sanghom, and Senior Citizen Fellowship
             </p>
 
@@ -121,7 +120,7 @@ const prevSlide = () => {
               <div className="border border-yellow-500/30 rounded-lg p-6 bg-[#1B2B4B]/60 backdrop-blur">
                 <p className="text-xs uppercase text-white/60 mb-2">Adults</p>
                 <h3 className="text-3xl text-yellow-400 font-serif">$150</h3>
-                <p className="text-xs text-white/60 mt-2">
+                <p className="text-sm text-white/60 mt-2">
                   $50 Registration + $100 Conference Fee
                 </p>
                 <div className="mt-3 text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
@@ -132,7 +131,7 @@ const prevSlide = () => {
               <div className="border border-yellow-500/30 rounded-lg p-6 bg-[#1B2B4B]/60 backdrop-blur">
                 <p className="text-xs uppercase text-white/60 mb-2">Youth</p>
                 <h3 className="text-3xl text-yellow-400 font-serif">$100</h3>
-                <p className="text-xs text-white/60 mt-2">
+                <p className="text-sm text-white/60 mt-2">
                   $50 Registration + $50 Conference Fee
                 </p>
                 <div className="mt-3 text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
@@ -143,7 +142,7 @@ const prevSlide = () => {
               <div className="border border-yellow-500/30 rounded-lg p-6 bg-[#1B2B4B]/60 backdrop-blur">
                 <p className="text-xs uppercase text-white/60 mb-2">Children</p>
                 <h3 className="text-3xl text-green-400 font-serif">Free</h3>
-                <p className="text-xs text-white/60 mt-2">
+                <p className="text-sm text-white/60 mt-2">
                   No registration fee
                 </p>
                 <div className="mt-3 text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
@@ -171,7 +170,7 @@ const prevSlide = () => {
               Come and See : The Divine Invite
             </h2>
 
-            <p className="text-white/70 max-w-xl mb-6 text-sm md:text-base">
+            <p className="text-white/80 max-w-xl mb-6 text-sm md:text-base">
               Join us for a blessed gathering of worship, prayer, and the Word of God,
               with inspiring messages from our honored guest speakers.
             </p>
@@ -191,9 +190,9 @@ const prevSlide = () => {
   max-w-[280px] sm:max-w-none mx-auto group cursor-pointer"
   onClick={() => navigate("/speakers")}
 >
-  <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
+  <div className="w-full aspect-[4/4.1] bg-[#1B2B4B] overflow-hidden">
     <img
-      src={speaker}
+      src={speaker1}
       alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
     />
@@ -214,7 +213,7 @@ const prevSlide = () => {
   transition duration-300 hover:scale-105
   max-w-[280px] sm:max-w-none mx-auto group"> {/* Added 'group' for child hover effects */}
   
-  <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
+  <div className="w-full aspect-[4/4.1] bg-[#1B2B4B] overflow-hidden">
     <img
       src={speaker2}
       alt="Rev. Mothy Varkey"

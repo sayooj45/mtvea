@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Navbar from "../nav/NavBar";
 import Footer from "../footer/Footer";
-import speaker from "../../assets/speaker1.jpeg";
+import speake1Video from '../../assets/speaker1.mp4'
 import speaker1 from "../../assets/speaker1.png";
-import speaker2 from "../../assets/speaker2.jpg";
+import speaker2 from "../../assets/speaker2.jpeg";
+import { FaPlay } from "react-icons/fa";
 
 /* ✅ Reusable Speaker Card */
 const SpeakerCard = ({ speaker, index }) => {
   const [expanded, setExpanded] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   const shortText =
     speaker.description.length > 300
@@ -21,17 +23,51 @@ const SpeakerCard = ({ speaker, index }) => {
       }`}
     >
       {/* IMAGE */}
-      <div className="w-full md:w-1/2 overflow-hidden rounded-2xl shadow-lg group">
-        <img
-          src={speaker.image}
-          alt={speaker.name}
-          className="w-full h-[360px] md:h-[440px] object-cover transform group-hover:scale-105 transition duration-500"
-        />
-      </div>
+  
+<div className="w-full md:w-full overflow-hidden rounded-2xl shadow-lg relative">
+
+  {!showVideo ? (   // ✅ FIXED HERE
+    <>
+      <img
+        src={speaker.image}
+        alt={speaker.name}
+        className="w-full h-[360px] md:h-[500px] object-cover"
+      />
+
+      {speaker.video && (
+<button
+  onClick={() => setShowVideo(true)}
+  className="absolute inset-0 flex items-center justify-center group"
+>
+  <div className="relative flex items-center justify-center">
+    
+    {/* Glow Ring */}
+    <span className="absolute inline-flex h-20 w-20 rounded-full bg-white/20 blur-xl group-hover:scale-110 transition"></span>
+
+    {/* Main Button */}
+<div className="backdrop-blur-md bg-white/30 border border-white/40 text-white rounded-full h-16 w-16 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
+  <FaPlay className="ml-1" />
+</div>
+
+  </div>
+</button>
+      )}
+    </>
+  ) : (
+    <video
+      src={speaker.video}
+      controls
+      autoPlay
+      className="w-full h-[360px] md:h-[500px] object-cover"
+    />
+  )}
+
+</div>
+
 
       {/* TEXT */}
       <div className="w-full md:w-1/2 max-w-xl">
-        <span className="text-[#C49A3C] text-xs uppercase tracking-widest">
+        <span className="text-[#C49A3C] text-sm uppercase tracking-widest">
           {speaker.role}
         </span>
 
@@ -41,7 +77,7 @@ const SpeakerCard = ({ speaker, index }) => {
 
         <div className="w-12 h-[2px] bg-[#C49A3C] my-4"></div>
 
-        <p className="text-gray-600 leading-7 text-sm md:text-base whitespace-pre-line text-justify">
+        <p className="text-gray-600 leading-7 text-md md:text-base whitespace-pre-line text-justify">
           {expanded ? speaker.description : shortText}
         </p>
 
@@ -49,7 +85,7 @@ const SpeakerCard = ({ speaker, index }) => {
         {speaker.description.length > 300 && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="mt-3 text-[#C49A3C] text-sm font-medium hover:underline"
+            className="mt-3 text-[#C49A3C] text-md font-medium hover:underline"
           >
             {expanded ? "Show Less" : "Read More"}
           </button>
@@ -64,7 +100,8 @@ const SpeakersPage = () => {
     {
       name: "Rt. Rev. Dr. Abraham Mar Paulos Episcopa",
       role: "Speaker",
-      image: speaker,
+      image: speaker1,
+      video: speake1Video,
       description: `Rt. Rev. Dr. Abraham Mar Paulos Episcopa is a respected spiritual leader known for his inspiring preaching and deep theological understanding. 
 
 He has been actively involved in pastoral ministry, leadership development, and spiritual guidance across various communities. His messages emphasize faith, service, and a life rooted in Christ. 
