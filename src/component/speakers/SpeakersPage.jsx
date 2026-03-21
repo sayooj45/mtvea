@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../nav/NavBar";
 import Footer from "../footer/Footer";
-
+import speaker from "../../assets/speaker1.jpeg";
 import speaker1 from "../../assets/speaker1.png";
 import speaker2 from "../../assets/speaker2.jpg";
 
@@ -64,7 +64,7 @@ const SpeakersPage = () => {
     {
       name: "Rt. Rev. Dr. Abraham Mar Paulos Episcopa",
       role: "Speaker",
-      image: speaker1,
+      image: speaker,
       description: `Rt. Rev. Dr. Abraham Mar Paulos Episcopa is a respected spiritual leader known for his inspiring preaching and deep theological understanding. 
 
 He has been actively involved in pastoral ministry, leadership development, and spiritual guidance across various communities. His messages emphasize faith, service, and a life rooted in Christ. 

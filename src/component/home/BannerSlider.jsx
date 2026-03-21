@@ -3,6 +3,7 @@ import banner1 from "../../assets/banners/banner1.jpg";
 import banner2 from "../../assets/banners/banner2.jpg";
 import banner3 from "../../assets/banners/banner3.jpg";
 import speaker1 from "../../assets/speaker1.png";
+import speaker from "../../assets/speaker1.jpeg";
 import speaker2 from "../../assets/speaker2.jpg";
 import { useNavigate } from "react-router-dom";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
@@ -192,7 +193,7 @@ const prevSlide = () => {
 >
   <div className="w-full aspect-[4/3] bg-[#1B2B4B] overflow-hidden">
     <img
-      src={speaker1}
+      src={speaker}
       alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
     />
