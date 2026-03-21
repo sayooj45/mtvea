@@ -5,6 +5,7 @@ import speake1Video from '../../assets/speaker1.mp4'
 import speaker1 from "../../assets/speaker1.png";
 import speaker2 from "../../assets/speaker2.jpeg";
 import { FaPlay } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 /* ✅ Reusable Speaker Card */
 const SpeakerCard = ({ speaker, index }) => {
@@ -156,12 +157,12 @@ Currently, he serves as the Vicar of Punalur St Thomas Mar Thoma Church.`
         <p className="text-gray-600 text-sm mt-2 mb-4">
           Be part of a life-changing experience
         </p>
-        <a
-          href="/registration"
+        <Link
+          to="/registration"
           className="bg-[#C49A3C] text-white px-6 py-3 rounded-lg hover:scale-105 transition"
         >
           Register Now
-        </a>
+        </Link>
       </div>
 
       <Footer />
