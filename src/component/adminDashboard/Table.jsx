@@ -31,25 +31,30 @@ const Table = () => {
 
     const exportData = filteredData.map((item) => ({
     "First Name": item.firstName,
-    "Last Name": item.lastName,
-    Age: item.age,
-    Gender: item.gender,
-    Address: item.address,
-    "Phone Number": item.phone,
-    "Email Address": item.email,
-    "Parish Name": item.parish,
-    "Shirt Size": item.shirtSize,
-    "Dietary Restrictions": item.dietaryRestrictions,
-    "Sponsor a souvenir page": item.sponsorSouvenir,
-    "Hotel booked": item.bookedHotel,
-    "NeedAssistance":item.needAssistance,
-    "NeedShuttle":item.needShuttle,
-    "FlightNumber":item.flightNumber,
-    "BusDetails":item.busDetails,
-    "ArrivalDate":item.arrivalDate,
-    "ArrivalTime":item.arrivalTime,
-    "PaymentMethod":item.paymentMethod
+  "Last Name": item.lastName,
+  "Age": item.age,
+  "Gender": item.gender,
+  "Address": item.address,
+  "Phone Number": item.phone,
+  "Email Address": item.email,
+  "Parish Name": item.parish,
 
+  "Shirt Size": item.shirtSize,
+  "Dietary Restrictions": item.dietaryRestrictions,
+  "Sponsor a Souvenir Page": item.sponsorSouvenir,
+
+  "Hotel Booked": item.bookedHotel,
+
+  "Need Assistance": item.needAssistance,
+  "Need Shuttle": item.needShuttle,
+
+  "Flight Number": item.flightNumber,
+  "Bus Details": item.busDetails,
+  "Arrival Date": item.arrivalDate,
+  "Arrival Time": item.arrivalTime,
+
+  "Payment Type": item.paymentType,        
+  "Payment Method": item.paymentMethod
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(exportData);
