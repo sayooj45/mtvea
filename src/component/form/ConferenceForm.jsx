@@ -13,6 +13,7 @@ const ConferenceForm = () => {
 
 
 
+
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -76,6 +77,7 @@ const handleReview = (e) => {
     setFormData(emptyForm);
   }
 
+
   setIsReviewing(true); 
 
   window.scrollTo(0, 0);
@@ -126,6 +128,10 @@ const handleSubmit = async (e) => {
   }
 };
 
+//calculation
+
+
+
 
 
   const labelClass = "block text-base font-bold text-gray-700 mb-1";
@@ -148,6 +154,15 @@ const handleSubmit = async (e) => {
   ];
 
   const step = isSubmitted ? 3 : isReviewing ? 2 : 1;
+
+  const getTotalAmount = () => {
+  return participants.reduce((total, p) => {
+    if (p.age === "under-10") return total + 0;
+    if (p.age === "10-18") return total + 100;
+    if (p.age === "above-18") return total + 150;
+    return total;
+  }, 0);
+};
 
   return (
   <div className="min-h-screen bg-[#FBF8F2] py-10 px-4">
@@ -564,8 +579,36 @@ const handleSubmit = async (e) => {
         </div>
       </div>
 
+      <ReviewRow
+  label="Fee"
+  value={
+    p.age === "under-10"
+      ? "₹ 0"
+      : p.age === "10-18"
+      ? "₹ 100"
+      : "₹ 150"
+  }
+/>
+      
+      
+
     </div>
   ))}
+  <div className="border rounded-xl p-6 bg-white shadow-md">
+  <h4 className="text-lg font-semibold text-[#1B2B4B] mb-4 border-b pb-2">
+    Total Amount
+  </h4>
+
+  <div className="flex justify-between text-base md:text-lg font-semibold">
+    <span>Total Participants:</span>
+    <span>{participants.length}</span>
+  </div>
+
+  <div className="flex justify-between text-base md:text-lg font-semibold mt-2">
+    <span>Total Fee:</span>
+    <span className="text-[#C49A3C]">₹ {getTotalAmount()}</span>
+  </div>
+</div>
 
   {/* ACTION BUTTONS */}
   <div className="flex gap-4 pt-4">
