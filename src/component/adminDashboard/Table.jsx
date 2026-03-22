@@ -159,75 +159,83 @@ useEffect(() => {
 
             {/* Header */}
             <thead className="bg-gray-900 text-white uppercase text-xs sticky top-0">
-              <tr>
-                <th className="px-4 py-3">First Name</th>
-                <th className="px-4 py-3">Last Name</th>
-                <th className="px-4 py-3">Age</th>
-                <th className="px-4 py-3">Gender</th>
-                <th className="px-4 py-3">Address</th>
-                <th className="px-4 py-3">Phone</th>
-                <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">Parish</th>
-                <th className="px-4 py-3">Shirt Size</th> 
-                <th className="px-4 py-3">Dietary</th>
-                <th className="px-4 py-3">Sponsor</th>
+  <tr>
+    <th className="px-4 py-3">First Name</th>
+    <th className="px-4 py-3">Last Name</th>
+    <th className="px-4 py-3">Age</th>
+    <th className="px-4 py-3">Gender</th>
+    <th className="px-4 py-3">Address</th>
+    <th className="px-4 py-3">Phone</th>
+    <th className="px-4 py-3">Email</th>
+    <th className="px-4 py-3">Parish</th>
 
-                <th className="px-4 py-3">Hotel</th>
-                <th className="px-4 py-3">Transport</th>
-                <th className="px-4 py-3">Assistance</th>
+    <th className="px-4 py-3">Shirt Size</th>
+    <th className="px-4 py-3">Dietary</th>
+    <th className="px-4 py-3">Sponsor</th>
 
-                <th className="px-4 py-3">Shuttle</th>
-                <th className="px-4 py-3">Flight</th>
-                <th className="px-4 py-3">Bus</th>
-                <th className="px-4 py-3">Arrival Date</th>
-                <th className="px-4 py-3">Arrival Time</th>
+    <th className="px-4 py-3">Hotel</th>
 
-                <th className="px-4 py-3">Payment</th>
+    {/* FIXED SECTION */}
+    <th className="px-4 py-3">Assistance</th>
+    <th className="px-4 py-3">Shuttle</th>
 
-              </tr>
-            </thead>
+    <th className="px-4 py-3">Flight No</th>
+    <th className="px-4 py-3">Bus Details</th>
+    <th className="px-4 py-3">Arrival Date</th>
+    <th className="px-4 py-3">Arrival Time</th>
+
+    {/* NEW */}
+    <th className="px-4 py-3">Payment Type</th>
+    <th className="px-4 py-3">Payment Method</th>
+  </tr>
+</thead>
 
             {/* Body */}
         <tbody className="divide-y">
 
-          {currentData.map((item,index)=>(
-          <tr key={index} className="hover:bg-gray-50">
+  {currentData.map((item, index) => (
+    <tr key={index} className="hover:bg-gray-50">
 
-            <td className="px-4 py-3">{item.firstName}</td>
-            <td className="px-4 py-3">{item.lastName}</td>
-            <td className="px-4 py-3">{item.age}</td>
-            <td className="px-4 py-3">{item.gender}</td>
-            <td className="px-4 py-3">{item.address}</td>
-            <td className="px-4 py-3">{item.phone}</td>
-            <td className="px-4 py-3 text-blue-600">{item.email}</td>
-            <td className="px-4 py-3">{item.parish}</td>
+      <td className="px-4 py-3">{item.firstName}</td>
+      <td className="px-4 py-3">{item.lastName}</td>
+      <td className="px-4 py-3">{item.age}</td>
+      <td className="px-4 py-3">{item.gender}</td>
+      <td className="px-4 py-3">{item.address}</td>
+      <td className="px-4 py-3">{item.phone}</td>
+      <td className="px-4 py-3 text-blue-600">{item.email}</td>
+      <td className="px-4 py-3">{item.parish}</td>
 
-            <td className="px-4 py-3">{item.shirtSize}</td>
-            <td className="px-4 py-3">{item.dietaryRestrictions}</td>
-            <td className="px-4 py-3">{item.sponsorSouvenir}</td>
+      <td className="px-4 py-3">{item.shirtSize}</td>
+      <td className="px-4 py-3">{item.dietaryRestrictions}</td>
+      <td className="px-4 py-3">{item.sponsorSouvenir}</td>
 
-            <td className="px-4 py-3">{item.bookedHotel}</td>
-            <td className="px-4 py-3">{item.needAssistance}</td>
+      <td className="px-4 py-3">{item.bookedHotel}</td>
 
-            <td className="px-4 py-3">{item.needShuttle}</td>
-            <td className="px-4 py-3">{item.flightNumber}</td>
-            <td className="px-4 py-3">{item.busDetails}</td>
-            <td className="px-4 py-3">{item.arrivalDate}</td>
-            <td className="px-4 py-3">{item.arrivalTime}</td>
+      {/* FIXED ORDER */}
+      <td className="px-4 py-3">{item.needAssistance}</td>
+      <td className="px-4 py-3">{item.needShuttle}</td>
 
-            <td className="px-4 py-3 font-semibold">{item.paymentMethod}</td>
+      <td className="px-4 py-3">{item.flightNumber}</td>
+      <td className="px-4 py-3">{item.busDetails}</td>
+      <td className="px-4 py-3">{item.arrivalDate}</td>
+      <td className="px-4 py-3">{item.arrivalTime}</td>
 
-          </tr>
-          ))}
-          {currentData.length === 0 && (
-                <tr>
-                    <td colSpan="13" className="text-center py-6 text-gray-500">
-                    No results found
-                    </td>
-                </tr>
-          )}
+      {/* ADD THIS */}
+      <td className="px-4 py-3">{item.paymentType}</td>
+      <td className="px-4 py-3 font-semibold">{item.paymentMethod}</td>
 
-        </tbody>
+    </tr>
+  ))}
+
+  {currentData.length === 0 && (
+    <tr>
+      <td colSpan="20" className="text-center py-6 text-gray-500">
+        No results found
+      </td>
+    </tr>
+  )}
+
+</tbody>
 
       </table>
 
