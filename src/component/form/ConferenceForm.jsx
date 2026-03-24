@@ -114,17 +114,17 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await axios.post(
-      `${API_URL}/api/registration`,
+      `${API_URL}api/registration`,
       { participants },
       { headers: { "Content-Type": "application/json" } }
     );
 
     setIsSubmitted(true);
     console.log("Server Response:", response.data);
-    // navigate('/');
-//     setTimeout(() => {
-//   navigate('/');
-// }, 3000);
+    navigate('/');
+    setTimeout(() => {
+  navigate('/');
+}, 10000);
   } catch (error) {
   console.error("Submission Error:", error);
   setSubmitError(
