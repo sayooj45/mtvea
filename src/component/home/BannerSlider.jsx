@@ -101,66 +101,72 @@ const prevSlide = () => {
 
         {/* ---------------- SLIDE 2 ---------------- */}
         {slide === 1 && (
-          <div className="flex flex-col justify-center items-center h-full px-4 text-center min-h-full">
+  <div className="flex flex-col justify-center items-center h-full px-4 sm:px-6 md:px-10 text-center min-h-full">
 
-            <p className="text-yellow-400 uppercase text-md tracking-widest mb-2">
-              Join Us
-            </p>
+    {/* Top Text */}
+    <p className="text-yellow-400 uppercase text-xs sm:text-sm tracking-widest mb-2">
+      Join Us
+    </p>
 
-            <h2 className="text-3xl md:text-4xl font-serif mb-2">
-              Register for the Conference
-            </h2>
+    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-3 leading-tight">
+      Register for the Conference
+    </h2>
 
-            <p className="text-white/80 text-md mb-8">
-              Open to all members of MTVEA, Sevika Sanghom, and Senior Citizen Fellowship
-            </p>
+    <p className="text-white/80 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-xl">
+      Open to all members of MTVEA, Sevika Sanghom, and Senior Citizen Fellowship
+    </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-4xl">
+    {/* Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full max-w-6xl">
 
-              <div className="border border-yellow-500/30 rounded-lg p-6 bg-[#1B2B4B]/60 backdrop-blur">
-                <p className="text-xs uppercase text-white/60 mb-2">Adults</p>
-                <h3 className="text-3xl text-yellow-400 font-serif">$150</h3>
-                <p className="text-sm text-white/60 mt-2">
-                  $50 Registration + $100 Conference Fee
-                </p>
-                <div className="mt-3 text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
-                  18 years and above
-                </div>
-              </div>
+      {/* Adults */}
+      <div className="border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur hover:scale-105 transition">
+        <p className="text-xs uppercase text-white/60 mb-2">Adults</p>
+        <h3 className="text-2xl sm:text-3xl text-yellow-400 font-serif">$150</h3>
+        <p className="text-xs sm:text-sm text-white/60 mt-2">
+          $50 Registration + $100 Conference Fee
+        </p>
+        <div className="mt-3 text-[10px] sm:text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
+          18 years and above
+        </div>
+      </div>
 
-              <div className="border border-yellow-500/30 rounded-lg p-6 bg-[#1B2B4B]/60 backdrop-blur">
-                <p className="text-xs uppercase text-white/60 mb-2">Youth</p>
-                <h3 className="text-3xl text-yellow-400 font-serif">$100</h3>
-                <p className="text-sm text-white/60 mt-2">
-                  $50 Registration + $50 Conference Fee
-                </p>
-                <div className="mt-3 text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
-                  Under 18 years
-                </div>
-              </div>
+      {/* Youth */}
+      <div className="border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur hover:scale-105 transition">
+        <p className="text-xs uppercase text-white/60 mb-2">Youth</p>
+        <h3 className="text-2xl sm:text-3xl text-yellow-400 font-serif">$100</h3>
+        <p className="text-xs sm:text-sm text-white/60 mt-2">
+          $50 Registration + $50 Conference Fee
+        </p>
+        <div className="mt-3 text-[10px] sm:text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
+          Under 18 years
+        </div>
+      </div>
 
-              <div className="border border-yellow-500/30 rounded-lg p-6 bg-[#1B2B4B]/60 backdrop-blur">
-                <p className="text-xs uppercase text-white/60 mb-2">Children</p>
-                <h3 className="text-3xl text-green-400 font-serif">Free</h3>
-                <p className="text-sm text-white/60 mt-2">
-                  No registration fee
-                </p>
-                <div className="mt-3 text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
-                  Under 10 years
-                </div>
-              </div>
+      {/* Children */}
+      <div className="border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur hover:scale-105 transition">
+        <p className="text-xs uppercase text-white/60 mb-2">Children</p>
+        <h3 className="text-2xl sm:text-3xl text-green-400 font-serif">Free</h3>
+        <p className="text-xs sm:text-sm text-white/60 mt-2">
+          No registration fee
+        </p>
+        <div className="mt-3 text-[10px] sm:text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
+          Under 10 years
+        </div>
+      </div>
 
-            </div>
+    </div>
 
-            <button
-              onClick={() => navigate("/registration")}
-              className="mt-8 relative overflow-hidden bg-yellow-500 px-8 py-3 rounded text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/40"
-            >
-              Register Now →
-            </button>
+    {/* Button */}
+    <button
+      onClick={() => navigate("/registration")}
+      className="mt-6 sm:mt-8 relative overflow-hidden bg-yellow-500 px-6 sm:px-8 py-2.5 sm:py-3 rounded text-xs sm:text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/40"
+    >
+      Register Now →
+    </button>
 
-          </div>
-        )}
+  </div>
+)}
 
         {/* ---------------- SLIDE 3 ---------------- */}
         {slide === 2 && (
