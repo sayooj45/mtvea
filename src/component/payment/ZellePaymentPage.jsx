@@ -26,7 +26,7 @@ const ZellePaymentPage = () => {
     try {
       const formData = new FormData();
       formData.append("transactionId", transactionId);
-      formData.append("participants", JSON.stringify(participants));
+      // formData.append("participants", JSON.stringify(participants));
       formData.append("file", screenshot);
 
       await axios.post(
