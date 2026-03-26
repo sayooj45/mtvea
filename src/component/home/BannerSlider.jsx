@@ -51,7 +51,7 @@ const BannerSlider = () => {
       ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/40 to-[#1B2B4B]/60"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/40 to-[#1B2B4B]/60"></div> */}
 
       {/* Content */}
       <div className="absolute inset-0 text-white overflow-y-auto flex items-center justify-center">

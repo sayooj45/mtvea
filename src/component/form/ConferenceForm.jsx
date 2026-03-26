@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import QR from "../../assets/QR.png";
@@ -22,6 +22,7 @@ const ConferenceForm = () => {
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState(""); // "success" | "error"
   const [isFinalSubmitting, setIsFinalSubmitting] = useState(false);
+  const [preview, setPreview] = useState(null);
 
   const navigate = useNavigate();
 
@@ -96,7 +97,7 @@ const ConferenceForm = () => {
       setFormData((prev) => ({
         ...prev,
         needShuttle: value,
-        flightNumber: "",
+        arrivalFlightNumber: "",
         arrivalFlightTime: "",
         busDetails: "",
       }));
@@ -130,8 +131,16 @@ const ConferenceForm = () => {
     setIsLoading(true);
     setSubmitError("");
 
+    const singlePaymentMethod = participants.find(
+      (p) => p.paymentMethod
+    )?.paymentMethod;
+    const singlePaymenttype = participants.find(
+      (p) => p.paymentType
+    )?.paymentType;
+
     const hasStripePayment = participants.some(
-      (p) => p.paymentType === "Online" && p.paymentMethod === "Credit Card"
+      (p) =>
+        p.paymentType === "Online" && p.paymentMethod === "Credit Card (Stripe)"
     );
     const hasZellePayment = participants.some(
       (p) => p.paymentType === "Online" && p.paymentMethod === "Zelle"
@@ -139,7 +148,53 @@ const ConferenceForm = () => {
 
     if (hasStripePayment) {
       setIsLoading(false);
-      navigate("/payment-page", { state: { participants } });
+      // navigate("/payment-page", { state: { participants } });
+      try {
+        const cleanedParticipants = participants.map(
+          ({ paymentType, paymentMethod, ...rest }) => rest
+        );
+
+        console.log("FINAL PAYLOAD:", {
+          participants: cleanedParticipants,
+          paymentType: singlePaymenttype,
+          paymentMethod: singlePaymentMethod,
+          zelle_id: "",
+        });
+
+        const response = await axios.post(
+          `${API_URL}api/registration`,
+          {
+            participants: cleanedParticipants,
+            paymentType: singlePaymenttype,
+            paymentMethod: singlePaymentMethod,
+            zelle_id: "",
+          },
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+        console.log("Stripe Response:", response.data);
+
+        if (response.data.url) {
+          window.location.href = response.data.url;
+          return;
+        }
+
+        setIsSubmitted(true);
+        console.log("Server Response:", response.data);
+
+        // setTimeout(() => {
+        //   navigate("/");
+        // }, 10000);
+        window.scrollTo(0, 0);
+      } catch (error) {
+        console.error("Submission Error:", error);
+        setSubmitError(
+          error.response?.data?.message ||
+            "Something went wrong while submitting."
+        );
+      } finally {
+        setIsLoading(false);
+      }
       return;
     }
 
@@ -159,6 +214,7 @@ const ConferenceForm = () => {
       const cleanedParticipants = participants.map(
         ({ paymentType, paymentMethod, ...rest }) => rest
       );
+
       console.log(singlePaymentMethod);
       console.log(singlePaymenttype);
       console.log(cleanedParticipants);
@@ -193,6 +249,12 @@ const ConferenceForm = () => {
   };
 
   //zelle submit
+
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
 
   const zellePaymentSubmit = async () => {
     if (!transactionId || !screenshot) {
@@ -259,7 +321,7 @@ const ConferenceForm = () => {
       // setTimeout(() => {
       //   navigate("/");
       // }, 10000);
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
     } catch (error) {
       console.error("Submission Error:", error);
       setSubmitError(
@@ -1005,7 +1067,7 @@ const ConferenceForm = () => {
                   >
                     <option value="">Select Method</option>
                     <option value="Zelle">Zelle</option>
-                    <option value="Credit Card">Credit Card</option>
+                    <option value="Credit Card (Stripe)">Credit Card</option>
                   </select>
                 )}
                 {formData.paymentType === "During participation" && (
@@ -1291,9 +1353,28 @@ const ConferenceForm = () => {
 
             <input
               type="file"
-              onChange={(e) => setScreenshot(e.target.files[0])}
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                setScreenshot(file);
+
+                if (file) {
+                  setPreview(URL.createObjectURL(file));
+                }
+              }}
               className="w-full border p-2 rounded"
             />
+
+            {preview && (
+              <div className="text-center">
+                <p className="text-sm text-gray-500 mb-2">Preview</p>
+                <img
+                  src={preview}
+                  alt="preview"
+                  className="w-40 h-40 object-cover mx-auto rounded shadow"
+                />
+              </div>
+            )}
 
             {/* Submit */}
             <button
