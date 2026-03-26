@@ -119,45 +119,47 @@ const Table = () => {
   return (
     <div className=" min-h-screen p-4 md:p-6 ">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 mb-2">
+        {/* LEFT: LOGO + TITLE */}
+        <div className="flex items-center gap-2 sm:gap-3">
           <img
             src="/logo.png"
             alt="logo"
-            className="w-10 h-10 object-contain"
+            className="w-14 sm:w-16 md:w-18 lg:w-18 h-auto object-contain"
           />
 
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
+          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">
             Applications
           </h1>
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Download Button */}
+        {/* RIGHT: ACTIONS */}
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          {/* Download */}
           <button
-            className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg text-sm font-medium shadow transition"
             onClick={downloadExcel}
+            className="bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition whitespace-nowrap"
           >
-            Download Excel
+            Download
           </button>
 
           {/* Search */}
-          <div className="flex items-center bg-white border border-gray-300 rounded-lg px-3 py-2 shadow-sm">
-            <CiSearch className="text-gray-400 text-xl mr-2" />
+          <div className="flex items-center bg-white border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-sm flex-1 min-w-[120px] max-w-[200px]">
+            <CiSearch className="text-gray-400 text-base sm:text-lg mr-1 sm:mr-2" />
             <input
               type="text"
               placeholder="Search..."
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
-                setCurrentPage(1); // reset pagination when searching
+                setCurrentPage(1);
               }}
-              className="outline-none text-sm w-32 md:w-40"
+              className="outline-none text-xs sm:text-sm w-full"
             />
           </div>
 
           {/* Logout */}
-          <button className="text-red-500 text-2xl hover:scale-110 transition">
+          <button className="text-red-500 text-xl sm:text-2xl hover:scale-110 transition">
             <IoIosLogOut />
           </button>
         </div>
