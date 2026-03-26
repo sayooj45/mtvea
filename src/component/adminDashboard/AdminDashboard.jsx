@@ -3,14 +3,10 @@ import Table from "./Table";
 
 const AdminDashboard = () => {
   return (
-    <div className="min-h-screen ">
-        
+    <div className="min-h-screen bg-[#FBF8F2]">
       <div className="max-w-[1400px] mx-auto px-6 py-8">
-
         <Table />
-
       </div>
-
     </div>
   );
 };

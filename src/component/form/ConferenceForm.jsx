@@ -41,13 +41,12 @@ const ConferenceForm = () => {
     needAssistance: "",
     needShuttle: "",
     arrivalFlightNumber: "",
-    arrivalBusDetails: "",
-    arrivalDate: "",
-    arrivalTime: "",
+    busDetails: "",
+    arrivalFlightDate: "",
+    arrivalFlightTime: "",
     departureFlightNumber: "",
-    departureBusDetails: "",
-    departureDate: "",
-    departureTime: "",
+    departureFlightDate: "",
+    departureFlightTime: "",
     paymentType: "",
     paymentMethod: "",
   });
@@ -68,13 +67,12 @@ const ConferenceForm = () => {
     needAssistance: "",
     needShuttle: "",
     arrivalFlightNumber: "",
-    arrivalBusDetails: "",
-    arrivalDate: "",
-    arrivalTime: "",
+    busDetails: "",
+    arrivalFlightDate: "",
+    arrivalFlightTime: "",
     departureFlightNumber: "",
-    departureBusDetails: "",
-    departureDate: "",
-    departureTime: "",
+    departureFlightDate: "",
+    departureFlightTime: "",
     paymentType: "",
     paymentMethod: "",
   };
@@ -99,7 +97,7 @@ const ConferenceForm = () => {
         ...prev,
         needShuttle: value,
         flightNumber: "",
-        arrivalTime: "",
+        arrivalFlightTime: "",
         busDetails: "",
       }));
       return;
@@ -199,6 +197,7 @@ const ConferenceForm = () => {
 
       console.log(response.data.success);
       setZelleStatus(response.data.success);
+      console.log(response.data.paymentProofId);
       setZelleId(response.data.paymentProofId);
       // setIsSubmitted(true);
       setIsZelleStep(false);
@@ -207,6 +206,7 @@ const ConferenceForm = () => {
       setMessageType("success");
     } catch (err) {
       // alert("Error submitting payment");
+      console.log(err);
       setMessageType("error");
       setMessage(
         "Something went wrong while submitting your payment. Please try again."
@@ -221,7 +221,7 @@ const ConferenceForm = () => {
       const cleanedParticipants = participants.map(
         ({ paymentType, paymentMethod, ...rest }) => rest
       );
-      console.log(cleanedParticipants);
+      console.log(cleanedParticipants, zelleId);
 
       const response = await axios.post(
         `${API_URL}api/registration`,
@@ -375,108 +375,9 @@ const ConferenceForm = () => {
     );
   }
 
-  // if (isZelleStep) {
-  //   return (
-  //     <div className="min-h-screen bg-[#FBF8F2] flex flex-col items-center justify-center px-4">
-
-  //       <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-6 space-y-6">
-
-  //         <h2 className="text-2xl font-bold text-center text-[#1B2B4B]">
-  //           Zelle Payment
-  //         </h2>
-
-  //         {/* QR */}
-  //         <div className="text-center space-y-3">
-  //           <p className="font-semibold">Scan to Pay</p>
-
-  //           <img
-  //             src={QR}
-  //             alt="QR"
-  //             className="w-40 h-40 mx-auto bg-white p-2 rounded shadow"
-  //           />
-
-  //           <p className="text-sm text-gray-600">
-  //             {import.meta.env.VITE_ZELLE_EMAIL}
-  //           </p>
-  //           <p>Total Amount: ₹ {getTotalAmount()}</p>
-  //         </div>
-
-  //         {/* Transaction */}
-  //         <input
-  //           type="text"
-  //           placeholder="Transaction ID"
-  //           value={transactionId}
-  //           onChange={(e) => setTransactionId(e.target.value)}
-  //           className="w-full border p-2 rounded"
-  //         />
-
-  //         <input
-  //           type="file"
-  //           onChange={(e) => setScreenshot(e.target.files[0])}
-  //           className="w-full border p-2 rounded"
-  //         />
-
-  //         <button
-  //           onClick={async () => {
-  //             if (!transactionId || !screenshot) {
-  //               alert("Provide both fields");
-  //               return;
-  //             }
-
-  //             setIsLoading(true);
-
-  //             try {
-  //               const formData = new FormData();
-  //               formData.append("transactionId", transactionId);
-  //               // formData.append("participants", JSON.stringify(participants));
-  //               formData.append("file", screenshot);
-
-  //              const response = await axios.post(
-  //                 `${API_URL}api/zelle`,
-  //                 formData
-  //               );
-
-  //               setIsSubmitted(true);
-  //               console.log(response);
-
-  //             } catch (err) {
-  //               alert("Error submitting payment");
-  //             }
-
-  //             setIsLoading(false);
-  //           }}
-  //           className="w-full bg-[#1B2B4B] text-white py-3 rounded"
-  //         >
-  //           {isLoading ? "Submitting..." : "Submit Payment"}
-  //         </button>
-
-  //         {/* Back */}
-  //         <button
-  //           onClick={() => setIsZelleStep(false)}
-  //           className="w-full text-gray-500 underline"
-  //         >
-  //           ← Back to Review
-  //         </button>
-
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="min-h-screen bg-[#FBF8F2] py-10 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* HEADER */}
-        {/* <div className="bg-[#1B2B4B] text-center py-8 rounded-t-xl shadow-md">
-        <img src={logo} className="w-20 mx-auto mb-4" />
-        <h1 className="text-2xl md:text-3xl font-serif text-white">
-          {isReviewing ? "Review Registration" : "Conference Registration"}
-        </h1>
-        <p className="text-white/60 text-sm mt-2">
-          MTVEA XVIIIth National Conference 2026
-        </p>
-      </div> */}
-
         <div className="flex justify-center mb-10 px-4">
           <div className="w-full max-w-3xl grid grid-cols-4 items-center">
             {steps.map((s, index) => (
@@ -822,8 +723,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="date"
-                            name="arrivalDate"
-                            value={formData.arrivalDate}
+                            name="arrivalFlightDate"
+                            value={formData.arrivalFlightDate}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
                           />
@@ -835,8 +736,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="time"
-                            name="arrivalTime"
-                            value={formData.arrivalTime}
+                            name="arrivalFlightTime"
+                            value={formData.arrivalFlightTime}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
                           />
@@ -848,8 +749,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="arrivalBusDetails"
-                            value={formData.arrivalBusDetails}
+                            name="busDetails"
+                            value={formData.busDetails}
                             onChange={handleChange}
                             placeholder="Optional"
                             className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
@@ -891,8 +792,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="date"
-                            name="departureDate"
-                            value={formData.departureDate}
+                            name="departureFlightDate"
+                            value={formData.departureFlightDate}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
                           />
@@ -904,8 +805,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="time"
-                            name="departureTime"
-                            value={formData.departureTime}
+                            name="departureFlightTime"
+                            value={formData.departureFlightTime}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
                           />
@@ -917,8 +818,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="text"
-                            name="departureBusDetails"
-                            value={formData.departureBusDetails}
+                            name="busDetails"
+                            value={formData.busDetails}
                             onChange={handleChange}
                             placeholder="Optional"
                             className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
@@ -961,8 +862,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="date"
-                            name="arrivalDate"
-                            value={formData.arrivalDate}
+                            name="arrivalFlightDate"
+                            value={formData.arrivalFlightDate}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-green-500`}
                           />
@@ -974,21 +875,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="time"
-                            name="arrivalTime"
-                            value={formData.arrivalTime}
-                            onChange={handleChange}
-                            className={`${inputClass} focus:ring-2 focus:ring-green-500`}
-                          />
-                        </div>
-
-                        <div className="space-y-1 md:col-span-2">
-                          <label className="text-sm text-gray-500">
-                            Bus Details
-                          </label>
-                          <input
-                            type="text"
-                            name="arrivalBusDetails"
-                            value={formData.arrivalBusDetails}
+                            name="arrivalFlightTime"
+                            value={formData.arrivalFlightTime}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-green-500`}
                           />
@@ -1027,8 +915,8 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="date"
-                            name="departureDate"
-                            value={formData.departureDate}
+                            name="departureFlightDate"
+                            value={formData.departureFlightDate}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-red-500`}
                           />
@@ -1040,25 +928,29 @@ const ConferenceForm = () => {
                           </label>
                           <input
                             type="time"
-                            name="departureTime"
-                            value={formData.departureTime}
+                            name="departureFlightTime"
+                            value={formData.departureFlightTime}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-red-500`}
                           />
                         </div>
+                      </div>
+                    </div>
 
-                        <div className="space-y-1 md:col-span-2">
-                          <label className="text-sm text-gray-500">
-                            Bus Details
-                          </label>
-                          <input
-                            type="text"
-                            name="departureBusDetails"
-                            value={formData.departureBusDetails}
-                            onChange={handleChange}
-                            className={`${inputClass} focus:ring-2 focus:ring-red-500`}
-                          />
-                        </div>
+                    {/* COMMON BUS DETAILS */}
+                    <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 hover:shadow-lg transition">
+                      <div className="space-y-1">
+                        <label className="text-sm text-gray-500">
+                          Bus Details (Arrival / Departure)
+                        </label>
+                        <input
+                          type="text"
+                          name="busDetails"
+                          value={formData.busDetails}
+                          onChange={handleChange}
+                          className={`${inputClass} focus:ring-2 focus:ring-blue-500`}
+                          placeholder="Enter bus info (if applicable)"
+                        />
                       </div>
                     </div>
                   </div>
@@ -1208,15 +1100,15 @@ const ConferenceForm = () => {
                             />
                             <ReviewRow
                               label="Arrival Date"
-                              value={p.arrivalDate}
+                              value={p.arrivalFlightDate}
                             />
                             <ReviewRow
                               label="Arrival Time"
-                              value={p.arrivalTime}
+                              value={p.arrivalFlightTime}
                             />
                             <ReviewRow
                               label="Bus Details"
-                              value={p.arrivalBusDetails}
+                              value={p.busDetails}
                             />
                           </>
                         ) : p.needShuttle === "Yes - Departure only" ? (
@@ -1227,15 +1119,15 @@ const ConferenceForm = () => {
                             />
                             <ReviewRow
                               label="Departure Date"
-                              value={p.departureDate}
+                              value={p.departureFlightDate}
                             />
                             <ReviewRow
                               label="Departure Time"
-                              value={p.departureTime}
+                              value={p.departureFlightTime}
                             />
                             <ReviewRow
                               label="Bus Details"
-                              value={p.departureBusDetails}
+                              value={p.busDetails}
                             />
                           </>
                         ) : p.needShuttle ===
@@ -1247,15 +1139,15 @@ const ConferenceForm = () => {
                             />
                             <ReviewRow
                               label="Arrival Date"
-                              value={p.arrivalDate}
+                              value={p.arrivalFlightDate}
                             />
                             <ReviewRow
                               label="Arrival Time"
-                              value={p.arrivalTime}
+                              value={p.arrivalFlightTime}
                             />
                             <ReviewRow
                               label="Bus Details"
-                              value={p.arrivalBusDetails}
+                              value={p.busDetails}
                             />
                             <ReviewRow
                               label="Departure Flight"
@@ -1263,15 +1155,15 @@ const ConferenceForm = () => {
                             />
                             <ReviewRow
                               label="Departure Date"
-                              value={p.departureDate}
+                              value={p.departureFlightDate}
                             />
                             <ReviewRow
                               label="Departure Time"
-                              value={p.departureTime}
+                              value={p.departureFlightTime}
                             />
                             <ReviewRow
                               label="Departure Bus Details"
-                              value={p.departureBusDetails}
+                              value={p.busDetails}
                             />
                           </>
                         ) : null}
@@ -1432,7 +1324,7 @@ const ConferenceForm = () => {
               onClick={zelleRegistration}
               className="w-full bg-[#1B2B4B] hover:bg-[#16233c] transition text-white py-3 rounded-lg font-medium"
             >
-              Complete Registration
+              {isLoading ? "submiting..." : "Complete Registration"}
             </button>
           </div>
         </div>

@@ -31,27 +31,32 @@ const Table = () => {
       "Last Name": item.lastName,
       Age: item.age,
       Gender: item.gender,
-      Address: item.address,
-      "Phone Number": item.phone,
-      "Email Address": item.email,
-      "Parish Name": item.parish,
+      Phone: item.phone,
+      Email: item.email,
 
-      "Shirt Size": item.shirtSize,
-      "Dietary Restrictions": item.dietaryRestrictions,
-      "Sponsor a Souvenir Page": item.sponsorSouvenir,
+      Shuttle: item.needShuttle,
 
-      "Hotel Booked": item.bookedHotel,
+      "Arrival Flight": item.arrivalFlightNumber,
+      "Arrival Date": item.arrivalFlightDate
+        ? new Date(item.arrivalFlightDate).toLocaleDateString()
+        : "",
+      "Arrival Time": item.arrivalFlightTime,
 
-      "Need Assistance": item.needAssistance,
-      "Need Shuttle": item.needShuttle,
+      "Departure Flight": item.departureFlightNumber,
+      "Departure Date": item.departureFlightDate
+        ? new Date(item.departureFlightDate).toLocaleDateString()
+        : "",
+      "Departure Time": item.departureFlightTime,
 
-      "Flight Number": item.flightNumber,
       "Bus Details": item.busDetails,
-      "Arrival Date": item.arrivalDate,
-      "Arrival Time": item.arrivalTime,
+      Hotel: item.bookedHotel,
+      Assistance: item.needAssistance,
 
       "Payment Type": item.paymentType,
-      "Payment Method": item.paymentMethod,
+      Method: item.paymentMethod,
+      Status: item.paymentStatus,
+
+      Created: new Date(item.createdAt).toLocaleString(),
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(exportData);
@@ -95,7 +100,7 @@ const Table = () => {
   }, []);
 
   return (
-    <div className=" min-h-screen p-4 md:p-6">
+    <div className=" min-h-screen p-4 md:p-6 ">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div className="flex items-center gap-3">
@@ -152,29 +157,33 @@ const Table = () => {
                 <th className="px-4 py-3">Last Name</th>
                 <th className="px-4 py-3">Age</th>
                 <th className="px-4 py-3">Gender</th>
-                <th className="px-4 py-3">Address</th>
                 <th className="px-4 py-3">Phone</th>
                 <th className="px-4 py-3">Email</th>
-                <th className="px-4 py-3">Parish</th>
 
-                <th className="px-4 py-3">Shirt Size</th>
-                <th className="px-4 py-3">Dietary</th>
-                <th className="px-4 py-3">Sponsor</th>
-
-                <th className="px-4 py-3">Hotel</th>
-
-                {/* FIXED SECTION */}
-                <th className="px-4 py-3">Assistance</th>
                 <th className="px-4 py-3">Shuttle</th>
 
-                <th className="px-4 py-3">Flight No</th>
-                <th className="px-4 py-3">Bus Details</th>
+                {/* ARRIVAL */}
+                <th className="px-4 py-3">Arrival Flight</th>
                 <th className="px-4 py-3">Arrival Date</th>
                 <th className="px-4 py-3">Arrival Time</th>
 
-                {/* NEW */}
+                {/* DEPARTURE */}
+                <th className="px-4 py-3">Departure Flight</th>
+                <th className="px-4 py-3">Departure Date</th>
+                <th className="px-4 py-3">Departure Time</th>
+
+                {/* OTHER */}
+                <th className="px-4 py-3">Bus</th>
+                <th className="px-4 py-3">Hotel</th>
+                <th className="px-4 py-3">Assistance</th>
+
+                {/* PAYMENT */}
                 <th className="px-4 py-3">Payment Type</th>
-                <th className="px-4 py-3">Payment Method</th>
+                <th className="px-4 py-3">Method</th>
+                <th className="px-4 py-3">Status</th>
+
+                {/* META */}
+                <th>Created</th>
               </tr>
             </thead>
 
@@ -186,30 +195,48 @@ const Table = () => {
                   <td className="px-4 py-3">{item.lastName}</td>
                   <td className="px-4 py-3">{item.age}</td>
                   <td className="px-4 py-3">{item.gender}</td>
-                  <td className="px-4 py-3">{item.address}</td>
                   <td className="px-4 py-3">{item.phone}</td>
                   <td className="px-4 py-3 text-blue-600">{item.email}</td>
-                  <td className="px-4 py-3">{item.parish}</td>
 
-                  <td className="px-4 py-3">{item.shirtSize}</td>
-                  <td className="px-4 py-3">{item.dietaryRestrictions}</td>
-                  <td className="px-4 py-3">{item.sponsorSouvenir}</td>
-
-                  <td className="px-4 py-3">{item.bookedHotel}</td>
-
-                  {/* FIXED ORDER */}
-                  <td className="px-4 py-3">{item.needAssistance}</td>
                   <td className="px-4 py-3">{item.needShuttle}</td>
 
-                  <td className="px-4 py-3">{item.flightNumber}</td>
-                  <td className="px-4 py-3">{item.busDetails}</td>
-                  <td className="px-4 py-3">{item.arrivalDate}</td>
-                  <td className="px-4 py-3">{item.arrivalTime}</td>
+                  {/* ARRIVAL */}
+                  <td className="px-4 py-3">
+                    {item.arrivalFlightNumber || "-"}
+                  </td>
+                  <td className="px-4 py-3">
+                    {item.arrivalFlightDate
+                      ? new Date(item.arrivalFlightDate).toLocaleDateString()
+                      : "-"}
+                  </td>
+                  <td className="px-4 py-3">{item.arrivalFlightTime || "-"}</td>
 
-                  {/* ADD THIS */}
+                  {/* DEPARTURE */}
+                  <td className="px-4 py-3">
+                    {item.departureFlightNumber || "-"}
+                  </td>
+                  <td className="px-4 py-3">
+                    {item.departureFlightDate
+                      ? new Date(item.departureFlightDate).toLocaleDateString()
+                      : "-"}
+                  </td>
+                  <td className="px-4 py-3">
+                    {item.departureFlightTime || "-"}
+                  </td>
+
+                  {/* OTHER */}
+                  <td className="px-4 py-3">{item.busDetails || "-"}</td>
+                  <td className="px-4 py-3">{item.bookedHotel}</td>
+                  <td className="px-4 py-3">{item.needAssistance}</td>
+
+                  {/* PAYMENT */}
                   <td className="px-4 py-3">{item.paymentType}</td>
-                  <td className="px-4 py-3 font-semibold">
-                    {item.paymentMethod}
+                  <td className="px-4 py-3">{item.paymentMethod}</td>
+                  <td className="px-4 py-3">{item.paymentStatus}</td>
+
+                  {/* META */}
+                  <td className="px-4 py-3">
+                    {new Date(item.createdAt).toLocaleString()}
                   </td>
                 </tr>
               ))}
