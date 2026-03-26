@@ -20,7 +20,7 @@ const ConferenceForm = () => {
   const [zelleStatus, setZelleStatus] = useState("");
   const [zelleId, setZelleId] = useState("");
   const [message, setMessage] = useState(null);
-  const [messageType, setMessageType] = useState(""); // "success" | "error"
+  const [messageType, setMessageType] = useState("");
   const [isFinalSubmitting, setIsFinalSubmitting] = useState(false);
   const [preview, setPreview] = useState(null);
 
@@ -810,6 +810,7 @@ const ConferenceForm = () => {
                             type="date"
                             name="arrivalFlightDate"
                             value={formData.arrivalFlightDate}
+                            min={new Date().toISOString().split("T")[0]}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
                           />
@@ -949,6 +950,7 @@ const ConferenceForm = () => {
                             type="date"
                             name="arrivalFlightDate"
                             value={formData.arrivalFlightDate}
+                            min={new Date().toISOString().split("T")[0]}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-green-500`}
                           />
@@ -1002,6 +1004,7 @@ const ConferenceForm = () => {
                             type="date"
                             name="departureFlightDate"
                             value={formData.departureFlightDate}
+                            min={new Date().toISOString().split("T")[0]}
                             onChange={handleChange}
                             className={`${inputClass} focus:ring-2 focus:ring-red-500`}
                           />
