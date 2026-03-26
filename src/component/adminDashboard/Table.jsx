@@ -99,6 +99,23 @@ const Table = () => {
     fetchParticipants();
   }, []);
 
+  const getStatusStyles = (status) => {
+    switch (status) {
+      case "paid":
+        return "bg-green-300 text-green-700 border border-green-300  ";
+      case "pending":
+        return "bg-yellow-100 text-yellow-700 border border-yellow-300 cursor-pointer hover:bg-yellow-200";
+      case "failed":
+        return "bg-red-100 text-red-700 border border-red-300 hover:bg-red-200";
+      default:
+        return "bg-gray-100 text-gray-600 border border-gray-300 hover:bg-gray-200";
+    }
+  };
+
+  const formatStatus = (status) => {
+    return status.charAt(0).toUpperCase() + status.slice(1);
+  };
+
   return (
     <div className=" min-h-screen p-4 md:p-6 ">
       {/* Header */}
@@ -190,7 +207,7 @@ const Table = () => {
             {/* Body */}
             <tbody className="divide-y">
               {currentData.map((item, index) => (
-                <tr key={index} className="hover:bg-gray-50">
+                <tr key={index} className="hover:bg-gray-50 font-medium">
                   <td className="px-4 py-3">{item.firstName}</td>
                   <td className="px-4 py-3">{item.lastName}</td>
                   <td className="px-4 py-3">{item.age}</td>
@@ -232,7 +249,15 @@ const Table = () => {
                   {/* PAYMENT */}
                   <td className="px-4 py-3">{item.paymentType}</td>
                   <td className="px-4 py-3">{item.paymentMethod}</td>
-                  <td className="px-4 py-3">{item.paymentStatus}</td>
+                  <td className="px-4 py-3">
+                    <button
+                      className={`px-4 py-1.5 rounded-full text-sm font-medium capitalize tracking-wide transition-all duration-200 ${getStatusStyles(
+                        item.paymentStatus
+                      )}`}
+                    >
+                      {formatStatus(item.paymentStatus)}
+                    </button>
+                  </td>
 
                   {/* META */}
                   <td className="px-4 py-3">

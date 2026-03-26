@@ -44,10 +44,8 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FBF8F2] px-4 py-10">
-
       {/* Card */}
       <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-6 sm:p-8 space-y-6">
-
         {/* Logo */}
         <div className="flex justify-center">
           <img
@@ -64,7 +62,6 @@ const Login = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-
           {/* Email */}
           <div>
             <label className="block text-sm font-semibold mb-1 text-gray-700">
@@ -112,7 +109,7 @@ const Login = () => {
           </div>
 
           {/* Forgot Password */}
-          <div className="flex justify-end">
+          {/* <div className="flex justify-end">
             <button
               type="button"
               onClick={() => navigate("/forgot-password")}
@@ -120,7 +117,7 @@ const Login = () => {
             >
               Forgot Password?
             </button>
-          </div>
+          </div> */}
 
           {/* Error */}
           {error && (
@@ -144,7 +141,6 @@ const Login = () => {
               "Sign In"
             )}
           </button>
-
         </form>
       </div>
     </div>
