@@ -1296,7 +1296,7 @@ const ConferenceForm = () => {
                   }}
                   className="flex-1 bg-gray-200 py-3 rounded-xl hover:bg-gray-300 transition"
                 >
-                  Back / Add More
+                  + Add More
                 </button>
 
                 <button
