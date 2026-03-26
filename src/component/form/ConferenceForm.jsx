@@ -177,9 +177,9 @@ const ConferenceForm = () => {
       setIsSubmitted(true);
       console.log("Server Response:", response.data);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 10000);
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, 10000);
       window.scrollTo(0, 0);
     } catch (error) {
       console.error("Submission Error:", error);
@@ -256,9 +256,9 @@ const ConferenceForm = () => {
       setIsSubmitted(true);
       console.log("Server Response:", response.data);
 
-      setTimeout(() => {
-        navigate("/");
-      }, 10000);
+      // setTimeout(() => {
+      //   navigate("/");
+      // }, 10000);
       window.scrollTo(0, 0);
     } catch (error) {
       console.error("Submission Error:", error);
