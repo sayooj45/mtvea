@@ -185,7 +185,7 @@ const ConferenceForm = () => {
         // setTimeout(() => {
         //   navigate("/");
         // }, 10000);
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
       } catch (error) {
         console.error("Submission Error:", error);
         setSubmitError(
@@ -406,7 +406,10 @@ const ConferenceForm = () => {
           </div>
 
           <button
-            onClick={() => navigate("/")}
+            onClick={() => {
+              navigate("/");
+              window.scrollTo(0, 0);
+            }}
             className="w-full bg-[#1B2B4B] text-white py-3 rounded-lg hover:opacity-90"
           >
             Back to Home
