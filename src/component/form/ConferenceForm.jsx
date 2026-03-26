@@ -150,9 +150,27 @@ const ConferenceForm = () => {
     }
 
     try {
+      const singlePaymentMethod = participants.find(
+        (p) => p.paymentMethod
+      )?.paymentMethod;
+      const singlePaymenttype = participants.find(
+        (p) => p.paymentType
+      )?.paymentType;
+      const cleanedParticipants = participants.map(
+        ({ paymentType, paymentMethod, ...rest }) => rest
+      );
+      console.log(singlePaymentMethod);
+      console.log(singlePaymenttype);
+      console.log(cleanedParticipants);
+
       const response = await axios.post(
         `${API_URL}api/registration`,
-        { participants },
+        {
+          participants: cleanedParticipants,
+          paymentType: singlePaymenttype,
+          paymentMethod: singlePaymentMethod,
+          zelle_id: "",
+        },
         { headers: { "Content-Type": "application/json" } }
       );
 
@@ -162,6 +180,7 @@ const ConferenceForm = () => {
       setTimeout(() => {
         navigate("/");
       }, 10000);
+      window.scrollTo(0, 0);
     } catch (error) {
       console.error("Submission Error:", error);
       setSubmitError(
@@ -240,6 +259,7 @@ const ConferenceForm = () => {
       setTimeout(() => {
         navigate("/");
       }, 10000);
+      window.scrollTo(0, 0);
     } catch (error) {
       console.error("Submission Error:", error);
       setSubmitError(
