@@ -147,7 +147,7 @@ const ConferenceForm = () => {
     );
 
     if (hasStripePayment) {
-      setIsLoading(false);
+      setIsLoading(true);
       // navigate("/payment-page", { state: { participants } });
       try {
         const cleanedParticipants = participants.map(
@@ -1377,7 +1377,7 @@ const ConferenceForm = () => {
                 <img
                   src={preview}
                   alt="preview"
-                  className="w-40 h-40 object-cover mx-auto rounded shadow"
+                  className="w-50 h-60 object-cover mx-auto rounded shadow"
                 />
               </div>
             )}
