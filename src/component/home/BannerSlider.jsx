@@ -55,7 +55,7 @@ const BannerSlider = () => {
       ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/30 to-[#1B2B4B]/40"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/40 to-[#1B2B4B]/60"></div>
 
       {/* Content */}
       <div className="absolute inset-0 text-white overflow-y-auto flex items-center justify-center">
@@ -78,7 +78,7 @@ const BannerSlider = () => {
               "Come and See: The Divine Invite"
             </p>
 
-            <p className="text-md opacity-80 mb-6 ">St. John 1:39 & 46</p>
+            <p className="text-md  mb-6 ">St. John 1:39 & 46</p>
 
             <div className="flex flex-wrap justify-center gap-3">
               <button
