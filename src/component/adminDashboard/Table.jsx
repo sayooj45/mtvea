@@ -4,6 +4,7 @@ import { IoIosLogOut } from "react-icons/io";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Table = () => {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -11,6 +12,8 @@ const Table = () => {
   const [data, setData] = useState([]);
 
   const [search, setSearch] = useState("");
+
+  const navigate = useNavigate();
 
   const filteredData = data.filter(
     (item) =>
@@ -116,6 +119,11 @@ const Table = () => {
     return status.charAt(0).toUpperCase() + status.slice(1);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <div className=" min-h-screen p-4 md:p-6 ">
       {/* Header */}
@@ -159,7 +167,10 @@ const Table = () => {
           </div>
 
           {/* Logout */}
-          <button className="text-red-500 text-xl sm:text-2xl hover:scale-110 transition">
+          <button
+            className="text-red-500 text-xl sm:text-2xl hover:scale-110 transition cursor-pointer"
+            onClick={handleLogout}
+          >
             <IoIosLogOut />
           </button>
         </div>

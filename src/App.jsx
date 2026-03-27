@@ -6,8 +6,6 @@ import HomePage from "./page/Home";
 import RegistrationPage from "./page/RegistrationPage";
 import ResetPassword from "./component/forgotPassword/ResetPassword";
 import ForgotPassword from "./component/forgotPassword/ForgotPassword";
-import PaymentPage from "./component/payment/PaymentPage";
-import ZellePaymentPage from "./component/payment/ZellePaymentPage";
 import AboutPage from "./page/AboutPage";
 import SpeakersPage from "./page/SpeakersPage";
 import StripSuccess from "./page/StripSuccess";
@@ -25,8 +23,6 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/adminDashboard" element={<AdminDashboard />} />
-        <Route path="/payment-page" element={<PaymentPage />} />
-        <Route path="/zelle-payment" element={<ZellePaymentPage />} />
         <Route path="/speakers" element={<SpeakersPage />} />
         <Route path="/success" element={<StripSuccess />} />
         <Route path="/cancel" element={<StripCancel />} />
