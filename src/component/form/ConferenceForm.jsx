@@ -1323,80 +1323,92 @@ const ConferenceForm = () => {
       </div>
 
       {isZelleStep && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
-          <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6 space-y-6 animate-fade-in">
-            <h2 className="text-2xl font-bold text-center text-[#1B2B4B]">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center 
+  bg-black/40 backdrop-blur-md px-3 sm:px-4"
+        >
+          <div
+            className="w-full max-w-lg bg-white rounded-2xl shadow-2xl 
+    p-4 sm:p-6 space-y-5 sm:space-y-6 animate-fade-in
+    max-h-[90vh] overflow-y-auto"
+          >
+            {/* Title */}
+            <h2 className="text-xl sm:text-2xl font-bold text-center text-[#1B2B4B]">
               Zelle Payment
             </h2>
 
-            {/* QR */}
-            <div className="text-center space-y-3">
-              <p className="font-semibold">Scan to Pay</p>
+            {/* QR Section */}
+            <div className="text-center space-y-2 sm:space-y-3">
+              <p className="font-semibold text-sm sm:text-base">Scan to Pay</p>
 
               <img
                 src={QR}
                 alt="QR"
-                className="w-40 h-40 mx-auto bg-white p-2 rounded shadow"
+                className="w-32 h-32 sm:w-40 sm:h-40 mx-auto bg-white p-2 rounded shadow"
               />
 
-              <p className="text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-gray-600 break-all">
                 {import.meta.env.VITE_ZELLE_EMAIL}
               </p>
 
-              <p className="font-semibold text-[#1B2B4B]">
+              <p className="font-semibold text-[#1B2B4B] text-sm sm:text-base">
                 Total: ₹ {getTotalAmount()}
               </p>
             </div>
 
             {/* Inputs */}
-            <input
-              type="text"
-              placeholder="Transaction ID"
-              value={transactionId}
-              onChange={(e) => setTransactionId(e.target.value)}
-              className="w-full border p-2 rounded"
-            />
+            <div className="space-y-3">
+              <input
+                type="text"
+                placeholder="Transaction ID"
+                value={transactionId}
+                onChange={(e) => setTransactionId(e.target.value)}
+                className="w-full border p-2 sm:p-3 rounded text-sm sm:text-base"
+              />
 
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files[0];
-                setScreenshot(file);
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  setScreenshot(file);
 
-                if (file) {
-                  setPreview(URL.createObjectURL(file));
-                }
-              }}
-              className="w-full border p-2 rounded"
-            />
+                  if (file) {
+                    setPreview(URL.createObjectURL(file));
+                  }
+                }}
+                className="w-full border p-2 sm:p-3 rounded text-sm"
+              />
+            </div>
 
+            {/* Preview */}
             {preview && (
               <div className="text-center">
-                <p className="text-sm text-gray-500 mb-2">Preview</p>
+                <p className="text-xs sm:text-sm text-gray-500 mb-2">Preview</p>
                 <img
                   src={preview}
                   alt="preview"
-                  className="w-50 h-60 object-cover mx-auto rounded shadow"
+                  className="w-32 sm:w-40 h-40 sm:h-56 object-cover mx-auto rounded shadow"
                 />
               </div>
             )}
 
-            {/* Submit */}
-            <button
-              onClick={zellePaymentSubmit}
-              className="w-full bg-[#1B2B4B] text-white py-3 rounded"
-            >
-              {isLoading ? "Submitting..." : "Submit Payment"}
-            </button>
+            {/* Buttons */}
+            <div className="space-y-2">
+              <button
+                onClick={zellePaymentSubmit}
+                className="w-full bg-[#1B2B4B] text-white py-2.5 sm:py-3 rounded text-sm sm:text-base"
+              >
+                {isLoading ? "Submitting..." : "Submit Payment"}
+              </button>
 
-            {/* Close */}
-            <button
-              onClick={() => setIsZelleStep(false)}
-              className="w-full text-gray-500 underline"
-            >
-              Cancel
-            </button>
+              <button
+                onClick={() => setIsZelleStep(false)}
+                className="w-full text-gray-500 underline text-sm"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       )}
