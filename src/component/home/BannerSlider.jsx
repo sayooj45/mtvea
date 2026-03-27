@@ -13,7 +13,11 @@ const BannerSlider = () => {
 
   const navigate = useNavigate();
 
-  const slides = [banner1, banner2, banner3];
+  const slides = [
+    "https://images.pexels.com/photos/280193/pexels-photo-280193.jpeg",
+    banner2,
+    banner3,
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,7 +55,7 @@ const BannerSlider = () => {
       ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/20 to-[#1B2B4B]/40"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/30 to-[#1B2B4B]/40"></div>
 
       {/* Content */}
       <div className="absolute inset-0 text-white overflow-y-auto flex items-center justify-center">
@@ -59,8 +63,8 @@ const BannerSlider = () => {
         {slide === 0 && (
           <div className="flex flex-col justify-center items-center text-center h-full px-4">
             <p
-              className="uppercase tracking-widest text-yellow-400 text-2xl bold mb-3"
-              style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.6)" }}
+              className="uppercase tracking-widest text-yellow-400 text-3xl bold mb-3"
+              style={{ textShadow: "3px 3px 6px rgba(0,0,0,0.6)" }}
             >
               XVIII Mar Thoma Voluntary Evangelists' Association
             </p>
@@ -70,7 +74,7 @@ const BannerSlider = () => {
               <span className="italic text-yellow-300">2026</span>
             </h1>
 
-            <p className="italic text-yellow-300 mb-2 text-xl">
+            <p className="italic text-yellow-300 mb-2 text-2xl">
               "Come and See: The Divine Invite"
             </p>
 
