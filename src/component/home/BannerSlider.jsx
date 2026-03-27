@@ -13,11 +13,7 @@ const BannerSlider = () => {
 
   const navigate = useNavigate();
 
-  const slides = [
-    "https://images.pexels.com/photos/280193/pexels-photo-280193.jpeg",
-    banner2,
-    banner3,
-  ];
+  const slides = [banner1, banner2, banner3];
 
   useEffect(() => {
     const interval = setInterval(() => {
