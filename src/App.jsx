@@ -14,6 +14,7 @@ import OurTeam from "./page/OurTeam";
 import Souvenir from "./page/Souvenir";
 import Accommodation from "./page/Accommodation";
 import ProgramInformation from "./page/ProgramInformation";
+import ErrorPage from "./page/ErrorPage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/souvenir" element={<Souvenir />} />
         <Route path="/accommodation" element={<Accommodation />} />
         <Route path="/program-Information" element={<ProgramInformation />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
   );

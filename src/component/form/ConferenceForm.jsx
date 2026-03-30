@@ -1294,13 +1294,13 @@ const ConferenceForm = () => {
                       </h3>
 
                       <div className="flex gap-2">
-                        <span className="bg-[#C49A3C] px-3 py-1 rounded-full text-sm font-medium">
+                        {/* <span className="bg-[#C49A3C] px-3 py-1 rounded-full text-sm font-medium">
                           {p.age === "under-10"
                             ? "Free"
                             : p.age === "10-18"
                             ? "₹100"
                             : "₹150"}
-                        </span>
+                        </span> */}
 
                         <button
                           onClick={() => {
@@ -1308,7 +1308,7 @@ const ConferenceForm = () => {
                             setEditIndex(i);
                             setIsReviewing(false);
                           }}
-                          className="bg-white text-[#1B2B4B] px-3 py-1 rounded text-xs"
+                          className="bg-[#C49A3C] px-3 py-1 rounded-full text-sm font-medium"
                         >
                           Edit
                         </button>
