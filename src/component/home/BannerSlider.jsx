@@ -57,7 +57,7 @@ const BannerSlider = () => {
       <div className="absolute inset-0 text-white overflow-y-auto flex items-center justify-center">
         {/* ---------------- SLIDE 1 ---------------- */}
         {slide === 0 && (
-          <div className="flex flex-col justify-center items-center text-center min-h-screen px-4 sm:px-6 md:px-10 lg:px-16 py-10 text-white">
+          <div className="flex flex-col justify-center items-center text-center h-full px-4 sm:px-6 md:px-10 lg:px-16 py-10 text-white">
             {/* Organization Name */}
             <p
               className="uppercase tracking-widest text-yellow-400 text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-3"
