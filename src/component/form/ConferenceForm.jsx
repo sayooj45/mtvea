@@ -21,6 +21,8 @@ const ConferenceForm = () => {
   const [messageType, setMessageType] = useState("");
   const [preview, setPreview] = useState(null);
 
+  const [editIndex, setEditIndex] = useState(null);
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -78,7 +80,17 @@ const ConferenceForm = () => {
   const handleAddParticipant = () => {
     if (!formData.firstName || !formData.lastName) return;
 
-    setParticipants((prev) => [...prev, formData]);
+    if (editIndex !== null) {
+      // UPDATE existing participant
+      const updated = [...participants];
+      updated[editIndex] = formData;
+      setParticipants(updated);
+      setEditIndex(null);
+    } else {
+      // ADD new participant
+      setParticipants((prev) => [...prev, formData]);
+    }
+
     setFormData(emptyForm);
   };
 
@@ -115,10 +127,17 @@ const ConferenceForm = () => {
 
     if (Object.keys(newErrors).length > 0) return;
 
-    setParticipants((prev) => [...prev, formData]);
+    if (editIndex !== null) {
+      const updated = [...participants];
+      updated[editIndex] = formData;
+      setParticipants(updated);
+      setEditIndex(null);
+    } else {
+      setParticipants((prev) => [...prev, formData]);
+    }
+
     setFormData(emptyForm);
     setIsReviewing(true);
-
     window.scrollTo(0, 0);
   };
 
@@ -1269,6 +1288,32 @@ const ConferenceForm = () => {
                         <ReviewRow label="Method" value={p.paymentMethod} />
                       </div>
                     </div>
+                    <div className="bg-[#1B2B4B] text-white px-6 py-4 flex justify-between items-center">
+                      <h3 className="text-lg font-semibold">
+                        Participant {i + 1}
+                      </h3>
+
+                      <div className="flex gap-2">
+                        <span className="bg-[#C49A3C] px-3 py-1 rounded-full text-sm font-medium">
+                          {p.age === "under-10"
+                            ? "Free"
+                            : p.age === "10-18"
+                            ? "₹100"
+                            : "₹150"}
+                        </span>
+
+                        <button
+                          onClick={() => {
+                            setFormData(p);
+                            setEditIndex(i);
+                            setIsReviewing(false);
+                          }}
+                          className="bg-white text-[#1B2B4B] px-3 py-1 rounded text-xs"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -1295,11 +1340,12 @@ const ConferenceForm = () => {
                 <button
                   onClick={() => {
                     setIsReviewing(false);
+                    setEditIndex(null);
                     setFormData(emptyForm);
                   }}
                   className="flex-1 bg-gray-200 py-3 rounded-xl hover:bg-gray-300 transition"
                 >
-                  + Add More
+                  Add More
                 </button>
 
                 <button
