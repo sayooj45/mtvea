@@ -15,13 +15,10 @@ const ConferenceForm = () => {
   const [isZelleStep, setIsZelleStep] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [screenshot, setScreenshot] = useState(null);
-  const [zellePayment, setZellePayment] = useState(false);
-  const [creditCardPayment, setCreditCardPayment] = useState(false);
-  const [zelleStatus, setZelleStatus] = useState("");
+  // const [zellePayment, setZellePayment] = useState(false);
   const [zelleId, setZelleId] = useState("");
   const [message, setMessage] = useState(null);
   const [messageType, setMessageType] = useState("");
-  const [isFinalSubmitting, setIsFinalSubmitting] = useState(false);
   const [preview, setPreview] = useState(null);
 
   const navigate = useNavigate();
@@ -277,12 +274,11 @@ const ConferenceForm = () => {
       const response = await axios.post(`${API_URL}api/zelle`, formData);
 
       console.log(response.data.success);
-      setZelleStatus(response.data.success);
       console.log(response.data.paymentProofId);
       setZelleId(response.data.paymentProofId);
       // setIsSubmitted(true);
       setIsZelleStep(false);
-      setZellePayment(true);
+      // setZellePayment(true);
       setMessage("Payment verified and go to submit the registration.");
       setMessageType("success");
     } catch (err) {
@@ -588,9 +584,13 @@ const ConferenceForm = () => {
                     placeholder="Phone"
                     className={inputClass}
                     required
+                    maxLength={10}
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
                   />
                   <input
                     name="email"
+                    type="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email"

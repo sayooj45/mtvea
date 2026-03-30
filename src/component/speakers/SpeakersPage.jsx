@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../nav/NavBar";
 import Footer from "../footer/Footer";
-import speake1Video from '../../assets/speaker1.mp4'
-import speaker1 from "../../assets/speaker1.png";
+import speake1Video from "../../assets/speaker1.mp4";
+import speaker1 from "../../assets/speaker11.png";
 import speaker2 from "../../assets/speaker2.jpeg";
 import { FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -24,47 +24,42 @@ const SpeakerCard = ({ speaker, index }) => {
       }`}
     >
       {/* IMAGE */}
-  
-<div className="w-full md:w-full overflow-hidden rounded-2xl shadow-lg relative">
 
-  {!showVideo ? (   // ✅ FIXED HERE
-    <>
-      <img
-        src={speaker.image}
-        alt={speaker.name}
-        className="w-full h-[360px] md:h-[500px] object-cover"
-      />
+      <div className="w-full md:w-full overflow-hidden rounded-2xl shadow-lg relative">
+        {!showVideo ? ( // ✅ FIXED HERE
+          <>
+            <img
+              src={speaker.image}
+              alt={speaker.name}
+              className="w-full h-[360px] md:h-[650px] object-cover"
+            />
 
-      {speaker.video && (
-<button
-  onClick={() => setShowVideo(true)}
-  className="absolute inset-0 flex items-center justify-center group"
->
-  <div className="relative flex items-center justify-center">
-    
-    {/* Glow Ring */}
-    <span className="absolute inline-flex h-20 w-20 rounded-full bg-white/20 blur-xl group-hover:scale-110 transition"></span>
+            {speaker.video && (
+              <button
+                onClick={() => setShowVideo(true)}
+                className="absolute inset-0 flex items-center justify-center group"
+              >
+                <div className="relative flex items-center justify-center">
+                  {/* Glow Ring */}
+                  <span className="absolute inline-flex h-20 w-20 rounded-full bg-white/20 blur-xl group-hover:scale-110 transition"></span>
 
-    {/* Main Button */}
-<div className="backdrop-blur-md bg-white/30 border border-white/40 text-white rounded-full h-16 w-16 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-  <FaPlay className="ml-1" />
-</div>
-
-  </div>
-</button>
-      )}
-    </>
-  ) : (
-    <video
-      src={speaker.video}
-      controls
-      autoPlay
-      className="w-full h-[360px] md:h-[500px] object-cover"
-    />
-  )}
-
-</div>
-
+                  {/* Main Button */}
+                  <div className="backdrop-blur-md bg-white/30 border border-white/40 text-white rounded-full h-16 w-16 flex items-center justify-center shadow-xl group-hover:scale-110 transition">
+                    <FaPlay className="ml-1" />
+                  </div>
+                </div>
+              </button>
+            )}
+          </>
+        ) : (
+          <video
+            src={speaker.video}
+            controls
+            autoPlay
+            className="w-full h-[360px] md:h-[500px] object-cover"
+          />
+        )}
+      </div>
 
       {/* TEXT */}
       <div className="w-full md:w-1/2 max-w-xl">
@@ -107,7 +102,7 @@ const SpeakersPage = () => {
 
 He has been actively involved in pastoral ministry, leadership development, and spiritual guidance across various communities. His messages emphasize faith, service, and a life rooted in Christ. 
 
-Through his ministry, he continues to inspire believers to grow spiritually and actively participate in the mission of the Church.`
+Through his ministry, he continues to inspire believers to grow spiritually and actively participate in the mission of the Church.`,
     },
     {
       name: "Rev. Mothy Varkey",
@@ -121,8 +116,8 @@ He holds a PhD in New Testament Studies from Murdoch University (Australia), alo
 
 A member of the Society for New Testament Studies (SNTS), he has influenced generations of church leaders and continues to inspire through writing, podcasts, and global speaking engagements. 
 
-Currently, he serves as the Vicar of Punalur St Thomas Mar Thoma Church.`
-    }
+Currently, he serves as the Vicar of Punalur St Thomas Mar Thoma Church.`,
+    },
   ];
 
   return (

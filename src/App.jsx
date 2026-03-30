@@ -10,6 +10,10 @@ import AboutPage from "./page/AboutPage";
 import SpeakersPage from "./page/SpeakersPage";
 import StripSuccess from "./page/StripSuccess";
 import StripCancel from "./page/StripCancel";
+import OurTeam from "./page/OurTeam";
+import Souvenir from "./page/Souvenir";
+import Accommodation from "./page/Accommodation";
+import ProgramInformation from "./page/ProgramInformation";
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
         <Route path="/speakers" element={<SpeakersPage />} />
         <Route path="/success" element={<StripSuccess />} />
         <Route path="/cancel" element={<StripCancel />} />
+        <Route path="/team" element={<OurTeam />} />
+        <Route path="/souvenir" element={<Souvenir />} />
+        <Route path="/accommodation" element={<Accommodation />} />
+        <Route path="/program-Information" element={<ProgramInformation />} />
       </Routes>
     </Router>
   );

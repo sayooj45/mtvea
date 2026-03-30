@@ -8,7 +8,6 @@ function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-
       <Navbar setActive={setActive} />
 
       <div className="flex-1">

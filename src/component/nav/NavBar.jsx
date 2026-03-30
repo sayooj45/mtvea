@@ -9,22 +9,24 @@ const Navbar = () => {
     { name: "about", path: "/about" },
     { name: "speakers", path: "/speakers" },
     { name: "register", path: "/registration" },
-    // { name: "contact", path: "/contact" },
+    { name: "our team", path: "/team" },
+    { name: "souvenir", path: "/souvenir" },
+    { name: "accommodation", path: "/accommodation" },
+    { name: "program-Information", path: "/program-Information" },
   ];
 
   return (
     <nav className="bg-[#1B2B4B] text-white h-[80px] md:h-[100px] flex items-center justify-between px-6 shadow-md relative z-50">
-
       {/* Logo */}
-<NavLink to="/">
-  <div className="fixed top-[20px] md:top-[25px]  bg-white rounded-full md:h-[150px] md:w-[150px] h-[75px] w-[75px] flex items-center justify-center  overflow-visible z-50">
-    <img
-      src="/logo.png"
-      alt="logo"
-      className="md:h-[200px] md:w-[200px] w-[100px] h-[100px] max-w-none object-cover cursor-pointer "
-    />
-  </div>
-</NavLink>
+      <NavLink to="/">
+        <div className="fixed top-[20px] md:top-[25px]  bg-white rounded-full md:h-[150px] md:w-[150px] h-[75px] w-[75px] flex items-center justify-center  overflow-visible z-50">
+          <img
+            src="/logo.png"
+            alt="logo"
+            className="md:h-[200px] md:w-[200px] w-[100px] h-[100px] max-w-none object-cover cursor-pointer "
+          />
+        </div>
+      </NavLink>
 
       {/* Desktop */}
       <div className="hidden md:flex gap-6">
@@ -64,14 +66,14 @@ const Navbar = () => {
               to={item.path}
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
-  `uppercase text-sm pb-2 relative transition-all duration-200
+                `uppercase text-sm pb-2 relative transition-all duration-200
   ${isActive ? "text-yellow-400" : "text-white"}
   
   after:content-[''] after:block after:h-[2px] after:bg-yellow-400 
   ${isActive ? "after:w-full" : "after:w-0"}
   
   active:scale-95 active:text-yellow-300`
-}
+              }
             >
               {item.name}
             </NavLink>
