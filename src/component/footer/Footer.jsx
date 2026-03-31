@@ -38,17 +38,17 @@ const Footer = () => {
       {/* Links */}
       <div className="flex justify-center gap-2 mt-4 text-xs text-white/40">
         <Link
-          to="/privacy-policy"
+          to="/privacy"
           className="hover:underline hover:text-white/70 transition cursor-pointer"
         >
           Privacy Policy
         </Link>
         <span>·</span>
         <Link
-          to="/terms-of-service"
+          to="/terms"
           className="hover:underline hover:text-white/70 transition cursor-pointer"
         >
-          Terms
+          Terms and Condition
         </Link>
       </div>
 

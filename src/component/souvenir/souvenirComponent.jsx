@@ -1,5 +1,6 @@
 import Navbar from "../nav/NavBar";
 import Footer from "../footer/Footer";
+import { useEffect, useState } from "react";
 
 const premiumAds = [
   { name: "Back Cover Page", price: "$3,000" },
@@ -15,6 +16,28 @@ const interiorAds = [
 ];
 
 const SouvenirComponent = () => {
+  const [showTop, setShowTop] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTop(true);
+      } else {
+        setShowTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <div className="bg-[#FBF8F2] text-[#1a1a1a]">
       <Navbar />
@@ -114,7 +137,38 @@ const SouvenirComponent = () => {
           <p className="text-[#E8C97A] font-medium">mtvea2026@gmail.com</p>
         </section>
       </div>
+      {showTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 group"
+        >
+          {/* Glow */}
+          <span className="absolute inset-0 rounded-full bg-[#1B2B4B]/40 blur-xl opacity-70 group-hover:opacity-100 transition"></span>
 
+          {/* Button */}
+          <div
+            className="relative flex items-center justify-center w-12 h-12 rounded-full 
+      bg-[#1B2B4B] text-white shadow-xl backdrop-blur-md 
+      border border-white/20 
+      group-hover:scale-110 transition-all duration-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 group-hover:-translate-y-1 transition"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 15l7-7 7 7"
+              />
+            </svg>
+          </div>
+        </button>
+      )}
       <Footer />
     </div>
   );

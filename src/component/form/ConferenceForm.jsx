@@ -4,6 +4,29 @@ import { useNavigate } from "react-router-dom";
 import QR from "../../assets/QR.png";
 
 const ConferenceForm = () => {
+  const [showTop, setShowTop] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTop(true);
+      } else {
+        setShowTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const API_URL = import.meta.env.VITE_API_URL;
 
   const [isReviewing, setIsReviewing] = useState(false);
@@ -273,8 +296,9 @@ const ConferenceForm = () => {
   }, [preview]);
 
   const zellePaymentSubmit = async () => {
-    if (!transactionId || !screenshot) {
-      alert("Provide both fields");
+    // ✅ Allow either one
+    if (!transactionId && !screenshot) {
+      alert("Provide Transaction ID or Screenshot");
       return;
     }
 
@@ -282,31 +306,31 @@ const ConferenceForm = () => {
 
     try {
       const formData = new FormData();
-      formData.append("transactionId", transactionId);
-      // formData.append("participants", JSON.stringify(participants));
-      formData.append("screenshot", screenshot);
 
+      if (transactionId) {
+        formData.append("transactionId", transactionId);
+      }
+
+      if (screenshot) {
+        formData.append("screenshot", screenshot);
+      }
+
+      // debug
       for (let pair of formData.entries()) {
         console.log(pair[0], pair[1]);
       }
 
       const response = await axios.post(`${API_URL}api/zelle`, formData);
 
-      console.log(response.data.success);
-      console.log(response.data.paymentProofId);
       setZelleId(response.data.paymentProofId);
-      // setIsSubmitted(true);
       setIsZelleStep(false);
-      // setZellePayment(true);
+
       setMessage("Payment verified and go to submit the registration.");
       setMessageType("success");
     } catch (err) {
-      // alert("Error submitting payment");
       console.log(err);
       setMessageType("error");
-      setMessage(
-        "Something went wrong while submitting your payment. Please try again."
-      );
+      setMessage("Something went wrong while submitting your payment.");
     }
 
     setIsLoading(false);
@@ -626,6 +650,7 @@ const ConferenceForm = () => {
                     onChange={handleChange}
                     placeholder="Parish Name"
                     className="md:col-span-2 border p-3 rounded"
+                    required
                   />
 
                   <input
@@ -634,6 +659,7 @@ const ConferenceForm = () => {
                     onChange={handleChange}
                     placeholder="Address"
                     className="md:col-span-2 border p-3 rounded"
+                    required
                   />
                 </div>
               </section>
@@ -684,6 +710,7 @@ const ConferenceForm = () => {
                     onChange={handleChange}
                     placeholder="Dietary Restrictions (If not put N/A)"
                     className={inputClass}
+                    required
                   />
 
                   <div>
@@ -702,6 +729,7 @@ const ConferenceForm = () => {
                             checked={formData.sponsorSouvenir === option}
                             onChange={handleChange}
                             className="accent-[#1B2B4B]"
+                            required
                           />
                           {option}
                         </label>
@@ -734,6 +762,7 @@ const ConferenceForm = () => {
                             checked={formData.bookedHotel === option}
                             onChange={handleChange}
                             className="accent-[#1B2B4B]"
+                            required
                           />
                           {option}
                         </label>
@@ -757,6 +786,7 @@ const ConferenceForm = () => {
                             checked={formData.needAssistance === option}
                             onChange={handleChange}
                             className="accent-[#1B2B4B]"
+                            required
                           />
                           {option}
                         </label>
@@ -787,6 +817,7 @@ const ConferenceForm = () => {
                             checked={formData.needShuttle === option}
                             onChange={handleChange}
                             className="accent-[#1B2B4B] mt-1"
+                            required
                           />
                           <span>{option}</span>
                         </label>
@@ -1075,6 +1106,7 @@ const ConferenceForm = () => {
                   value={formData.paymentType}
                   onChange={handleChange}
                   className={inputClass}
+                  required
                 >
                   <option value="">Select Payment Type</option>
                   <option value="Online">Online</option>
@@ -1089,6 +1121,7 @@ const ConferenceForm = () => {
                     value={formData.paymentMethod}
                     onChange={handleChange}
                     className={`${inputClass} mt-5`}
+                    required
                   >
                     <option value="">Select Method</option>
                     <option value="Zelle">Zelle</option>
@@ -1101,6 +1134,7 @@ const ConferenceForm = () => {
                     value={formData.paymentMethod}
                     onChange={handleChange}
                     className={`${inputClass} mt-5`}
+                    required
                   >
                     <option value="">Select Method</option>
                     <option value="Cheque">Cheque</option>
@@ -1403,28 +1437,54 @@ const ConferenceForm = () => {
             </div>
 
             {/* Inputs */}
-            <div className="space-y-3">
-              <input
-                type="text"
-                placeholder="Transaction ID"
-                value={transactionId}
-                onChange={(e) => setTransactionId(e.target.value)}
-                className="w-full border p-2 sm:p-3 rounded text-sm sm:text-base"
-              />
+            <div className="space-y-4">
+              {/* Transaction ID */}
+              <div>
+                <label className="text-sm font-medium text-gray-700">
+                  Transaction ID
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Transaction ID"
+                  value={transactionId}
+                  onChange={(e) => setTransactionId(e.target.value)}
+                  className="w-full mt-1 border p-3 rounded text-sm focus:outline-none focus:ring-2 focus:ring-[#1B2B4B]"
+                />
+              </div>
 
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  setScreenshot(file);
+              {/* OR Divider */}
+              <div className="flex items-center gap-3">
+                <div className="flex-1 h-px bg-gray-300"></div>
+                <span className="text-xs text-gray-500 font-medium">OR</span>
+                <div className="flex-1 h-px bg-gray-300"></div>
+              </div>
 
-                  if (file) {
-                    setPreview(URL.createObjectURL(file));
-                  }
-                }}
-                className="w-full border p-2 sm:p-3 rounded text-sm"
-              />
+              {/* File Upload */}
+              <div>
+                <label className="text-sm font-medium text-gray-700">
+                  Upload Screenshot
+                </label>
+
+                <label className="mt-2 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 cursor-pointer hover:border-[#1B2B4B] transition">
+                  <span className="text-xs sm:text-sm text-gray-500">
+                    Click to upload or drag & drop
+                  </span>
+
+                  <input
+                    type="file"
+                    accept="image/*,.pdf"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      setScreenshot(file);
+
+                      if (file) {
+                        setPreview(URL.createObjectURL(file));
+                      }
+                    }}
+                    className="hidden"
+                  />
+                </label>
+              </div>
             </div>
 
             {/* Preview */}
@@ -1523,6 +1583,38 @@ const ConferenceForm = () => {
             </button>
           </div>
         </div>
+      )}
+      {showTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 group"
+        >
+          {/* Glow */}
+          <span className="absolute inset-0 rounded-full bg-[#1B2B4B]/40 blur-xl opacity-70 group-hover:opacity-100 transition"></span>
+
+          {/* Button */}
+          <div
+            className="relative flex items-center justify-center w-12 h-12 rounded-full 
+      bg-[#1B2B4B] text-white shadow-xl backdrop-blur-md 
+      border border-white/20 
+      group-hover:scale-110 transition-all duration-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 group-hover:-translate-y-1 transition"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 15l7-7 7 7"
+              />
+            </svg>
+          </div>
+        </button>
       )}
     </div>
   );

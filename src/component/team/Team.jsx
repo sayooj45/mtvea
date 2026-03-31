@@ -1,5 +1,6 @@
 import Navbar from "../nav/NavBar";
 import Footer from "../footer/Footer";
+import { useEffect, useState } from "react";
 
 const groupedTeams = [
   {
@@ -7,7 +8,6 @@ const groupedTeams = [
     sections: [
       {
         title: "Leadership",
-        highlight: true,
         members: [
           { role: "President", name: "Rev. Abraham V. Samson" },
           { role: "General Convenor", name: "Mr. Shaji S Ramapuram" },
@@ -18,7 +18,6 @@ const groupedTeams = [
       },
     ],
   },
-
   {
     group: "Core Committees",
     sections: [
@@ -45,7 +44,6 @@ const groupedTeams = [
       },
     ],
   },
-
   {
     group: "Support Committees",
     sections: [
@@ -121,7 +119,6 @@ const groupedTeams = [
       },
     ],
   },
-
   {
     group: "Regional Team",
     sections: [
@@ -138,7 +135,105 @@ const groupedTeams = [
   },
 ];
 
+const LeadershipCard = ({ member }) => {
+  const initials = member.name
+    ?.split(" ")
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  return (
+    <div className="bg-white border border-[#E6D8B5] rounded-xl p-6 text-center hover:shadow-md transition">
+      <div className="w-14 h-14 mx-auto mb-4 rounded-full bg-[#1B2B4B] flex items-center justify-center text-white font-semibold">
+        {initials}
+      </div>
+
+      <p className="text-[11px] uppercase tracking-wide text-[#C49A3C] mb-1">
+        {member.role}
+      </p>
+
+      <h3 className="text-[#1B2B4B] text-sm font-medium">{member.name}</h3>
+    </div>
+  );
+};
+
+const CommitteeCard = ({ section }) => (
+  <div className="bg-white rounded-xl border border-[#E6D8B5] overflow-hidden shadow-sm hover:shadow-md transition">
+    <div className="bg-[#1B2B4B] text-white px-5 py-3 font-semibold text-sm">
+      {section.title}
+    </div>
+
+    <div className="p-5 space-y-4">
+      {section.members.map((member, i) => (
+        <div key={i}>
+          <p className="text-[11px] uppercase text-[#C49A3C] tracking-wide">
+            {member.role}
+          </p>
+          <p className="text-[#1B2B4B] text-sm font-medium">{member.name}</p>
+
+          {i !== section.members.length - 1 && (
+            <div className="w-full h-px bg-gray-200 mt-3"></div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const RegionalTeamCard = ({ section }) => {
+  return (
+    <div className="bg-[#1B2B4B] text-white rounded-2xl px-6 py-6 md:px-10 md:py-8 shadow-md">
+      {/* TITLE */}
+      <h3 className="text-lg md:text-xl font-serif mb-4">{section.title}</h3>
+
+      {/* DIVIDER */}
+      <div className="w-full h-px bg-white/20 mb-6"></div>
+
+      {/* MEMBERS */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
+        {section.members.map((member, i) => (
+          <div key={i}>
+            {/* ROLE */}
+            <p className="text-[10px] uppercase tracking-widest text-white/50 mb-1">
+              {member.role}
+            </p>
+
+            {/* NAME */}
+            <p className="text-[#E3B04B] text-sm md:text-base font-medium">
+              {member.name}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Team = () => {
+  const [showTop, setShowTop] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTop(true);
+      } else {
+        setShowTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="bg-[#FBF8F2] text-[#1a1a1a]">
       <Navbar />
@@ -155,7 +250,7 @@ const Team = () => {
       </div>
 
       {/* CONTENT */}
-      <div className="max-w-6xl mx-auto px-6 py-14 space-y-16">
+      <div className="max-w-6xl mx-auto px-6 py-14 space-y-14">
         {groupedTeams.map((group, gIndex) => (
           <div key={gIndex}>
             {/* GROUP TITLE */}
@@ -163,60 +258,67 @@ const Team = () => {
               {group.group}
             </h2>
 
-            <div className="space-y-12">
-              {group.sections.map((section, index) => (
-                <section key={index}>
-                  {/* SECTION HEADER */}
-                  <div className="mb-6">
-                    <span className="bg-[#F9F3E3] text-[#C49A3C] text-xs px-3 py-1 uppercase tracking-wide">
-                      Committee
-                    </span>
-
-                    <h3 className="text-xl md:text-2xl font-serif text-[#1B2B4B] mt-3">
-                      {section.title}
-                    </h3>
-                  </div>
-
-                  {/* CARDS */}
-                  <div
-                    className={`grid gap-4 sm:gap-6 
-              ${
-                section.highlight
-                  ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-                  : "grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
-              }`}
-                  >
-                    {section.members.map((member, i) => (
-                      <div
-                        key={i}
-                        className={`group bg-white border rounded-lg p-5 transition-all duration-300 
-                  hover:shadow-lg hover:-translate-y-1
-                  ${
-                    section.highlight
-                      ? "border-[#C49A3C]/40 bg-[#FFFDF7]"
-                      : "border-[#C49A3C]/20"
-                  }`}
-                      >
-                        <p className="text-xs uppercase text-gray-500 mb-2">
-                          {member.role}
-                        </p>
-
-                        {member.name && (
-                          <h3 className="text-lg font-semibold text-[#1B2B4B] group-hover:text-[#C49A3C] transition">
-                            {member.name}
-                          </h3>
-                        )}
-
-                        <div className="w-8 h-[2px] bg-[#C49A3C] mt-3"></div>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
+            {/* CONDITIONAL UI */}
+            {group.group === "Leadership" ? (
+              group.sections.map((section, i) => (
+                <div
+                  key={i}
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                >
+                  {section.members.map((member, idx) => (
+                    <LeadershipCard key={idx} member={member} />
+                  ))}
+                </div>
+              ))
+            ) : group.group === "Regional Team" ? (
+              <div className="">
+                {group.sections.map((section, i) => (
+                  <RegionalTeamCard key={i} section={section} />
+                ))}
+              </div>
+            ) : (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {group.sections.map((section, i) => (
+                  <CommitteeCard key={i} section={section} />
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
+
+      {showTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 group"
+        >
+          {/* Glow */}
+          <span className="absolute inset-0 rounded-full bg-[#1B2B4B]/40 blur-xl opacity-70 group-hover:opacity-100 transition"></span>
+
+          {/* Button */}
+          <div
+            className="relative flex items-center justify-center w-12 h-12 rounded-full 
+      bg-[#1B2B4B] text-white shadow-xl backdrop-blur-md 
+      border border-white/20 
+      group-hover:scale-110 transition-all duration-300"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5 group-hover:-translate-y-1 transition"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 15l7-7 7 7"
+              />
+            </svg>
+          </div>
+        </button>
+      )}
 
       <Footer />
     </div>

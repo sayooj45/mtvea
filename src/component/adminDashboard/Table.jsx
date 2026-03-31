@@ -130,6 +130,28 @@ const Table = () => {
     navigate("/login");
   };
 
+  const updatePaymentStatus = async (id) => {
+    try {
+      // toggle logic (you can customize)
+      const newStatus = "paid";
+
+      const response = await axios.patch(`${API_URL}api/payment-status`, {
+        id,
+        status: newStatus,
+      });
+
+      // update UI instantly
+      setData((prev) =>
+        prev.map((item) =>
+          item._id === id ? { ...item, paymentStatus: newStatus } : item
+        )
+      );
+    } catch (error) {
+      console.error("Status update error:", error);
+      alert("Failed to update status");
+    }
+  };
+
   return (
     <div className=" min-h-screen p-4 md:p-6 ">
       {/* Header */}
@@ -223,7 +245,8 @@ const Table = () => {
                 <th className="px-4 py-3">Status</th>
 
                 {/* META */}
-                <th>Created</th>
+                {/* <th className="px-4 py-3">ID</th> */}
+                <th className="px-4 py-3">Created</th>
               </tr>
             </thead>
 
@@ -278,6 +301,10 @@ const Table = () => {
                   <td className="px-4 py-3">{item.paymentMethod}</td>
                   <td className="px-4 py-3">
                     <button
+                      onClick={() =>
+                        item.paymentStatus === "pending" &&
+                        updatePaymentStatus(item._id)
+                      }
                       className={`px-4 py-1.5 rounded-full text-sm font-medium capitalize tracking-wide transition-all duration-200 ${getStatusStyles(
                         item.paymentStatus
                       )}`}
@@ -287,6 +314,7 @@ const Table = () => {
                   </td>
 
                   {/* META */}
+                  {/* <td className="px-4 py-3">{item._id}</td> */}
                   <td className="px-4 py-3">
                     {new Date(item.createdAt).toLocaleString()}
                   </td>

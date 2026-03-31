@@ -15,6 +15,8 @@ import Souvenir from "./page/Souvenir";
 import Accommodation from "./page/Accommodation";
 import ProgramInformation from "./page/ProgramInformation";
 import ErrorPage from "./page/ErrorPage";
+import TermsAndConditions from "./page/TermsAndConditions";
+import PrivacyPolicy from "./page/PrivacyPolicy";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
         <Route path="/souvenir" element={<Souvenir />} />
         <Route path="/accommodation" element={<Accommodation />} />
         <Route path="/program-Information" element={<ProgramInformation />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
