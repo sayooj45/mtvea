@@ -4,14 +4,12 @@ import Navbar from "../nav/NavBar";
 import Footer from "../footer/Footer";
 
 function HomePage() {
-  const [active, setActive] = useState("home");
-
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar setActive={setActive} />
+      <Navbar />
 
       <div className="flex-1">
-        <BannerSlider setActive={setActive} />
+        <BannerSlider />
       </div>
 
       <Footer />

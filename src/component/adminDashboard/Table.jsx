@@ -13,6 +13,10 @@ const Table = () => {
 
   const [search, setSearch] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [previewImage, setPreviewImage] = useState(null);
+
   const navigate = useNavigate();
 
   const filteredData = data.filter(
@@ -132,10 +136,11 @@ const Table = () => {
 
   const updatePaymentStatus = async (id) => {
     try {
-      // toggle logic (you can customize)
+      setIsLoading(id);
+
       const newStatus = "paid";
 
-      const response = await axios.patch(`${API_URL}api/payment-status`, {
+      await axios.patch(`${API_URL}api/payment-status`, {
         id,
         status: newStatus,
       });
@@ -149,9 +154,10 @@ const Table = () => {
     } catch (error) {
       console.error("Status update error:", error);
       alert("Failed to update status");
+    } finally {
+      setIsLoading(null);
     }
   };
-
   return (
     <div className=" min-h-screen p-4 md:p-6 ">
       {/* Header */}
@@ -242,6 +248,8 @@ const Table = () => {
                 {/* PAYMENT */}
                 <th className="px-4 py-3">Payment Type</th>
                 <th className="px-4 py-3">Method</th>
+                <th className="px-4 py-3">Zelle Id</th>
+                <th className="px-4 py-3">Zelle Image</th>
                 <th className="px-4 py-3">Status</th>
 
                 {/* META */}
@@ -300,16 +308,41 @@ const Table = () => {
                   <td className="px-4 py-3">{item.paymentType}</td>
                   <td className="px-4 py-3">{item.paymentMethod}</td>
                   <td className="px-4 py-3">
+                    {item.zelleProofId?.transactionId}
+                  </td>
+                  <td className="px-4 py-3">
+                    {item.zelleProofId?.screenshotUrl ? (
+                      <button
+                        onClick={() =>
+                          setPreviewImage(item.zelleProofId.screenshotUrl)
+                        }
+                        className="text-[#1B2B4B] underline hover:text-[#C49A3C]"
+                      >
+                        View Screenshot
+                      </button>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                  <td className="px-4 py-3">
                     <button
                       onClick={() =>
                         item.paymentStatus === "pending" &&
                         updatePaymentStatus(item._id)
                       }
-                      className={`px-4 py-1.5 rounded-full text-sm font-medium capitalize tracking-wide transition-all duration-200 ${getStatusStyles(
-                        item.paymentStatus
-                      )}`}
+                      disabled={isLoading === item._id}
+                      className={`px-4 py-1.5 rounded-full text-sm font-medium capitalize tracking-wide transition-all duration-200 flex items-center justify-center gap-2
+      ${getStatusStyles(item.paymentStatus)}
+      ${isLoading === item._id ? "opacity-70 cursor-not-allowed" : ""}
+    `}
                     >
-                      {formatStatus(item.paymentStatus)}
+                      {isLoading === item._id ? (
+                        <>
+                          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                        </>
+                      ) : (
+                        formatStatus(item.paymentStatus)
+                      )}
                     </button>
                   </td>
 
@@ -366,6 +399,26 @@ const Table = () => {
           </button>
         </div>
       </div>
+      {previewImage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="relative max-w-3xl w-full p-4">
+            {/* Close Button */}
+            <button
+              onClick={() => setPreviewImage(null)}
+              className="absolute top-2 right-2 text-white text-xl"
+            >
+              ✕
+            </button>
+
+            {/* Image */}
+            <img
+              src={previewImage}
+              alt="Screenshot"
+              className="w-full max-h-[80vh] object-contain rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

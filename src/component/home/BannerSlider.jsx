@@ -54,7 +54,8 @@ const BannerSlider = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-[#1B2B4B]/40 to-[#1B2B4B]/60"></div>
 
       {/* Content */}
-      <div className="absolute inset-0 text-white overflow-y-auto flex items-center justify-center">
+      <div className="absolute inset-0 text-white overflow-y-auto flex items-start md:items-center justify-center">
+        {" "}
         {/* ---------------- SLIDE 1 ---------------- */}
         {slide === 0 && (
           <div className="flex flex-col justify-center items-center text-center h-full px-4 sm:px-6 md:px-10 lg:px-16 py-10 text-white">
@@ -112,7 +113,6 @@ const BannerSlider = () => {
             </div>
           </div>
         )}
-
         {/* ---------------- SLIDE 2 ---------------- */}
         {slide === 1 && (
           <div className="flex flex-col justify-center items-center w-full px-4 sm:px-6 md:px-10 py-10 text-center ">
@@ -206,10 +206,13 @@ const BannerSlider = () => {
             </button>
           </div>
         )}
-
         {/* ---------------- SLIDE 3 ---------------- */}
         {slide === 2 && (
-          <div className="flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-10 py-10 w-full pt-[150px] sm:pt-[120px] md:pt-[140px]">
+          <div
+            className="flex flex-col justify-start md:justify-center items-center text-center 
+    px-4 sm:px-6 md:px-10 py-10 w-full 
+    min-h-full md:min-h-0"
+          >
             {" "}
             {/* Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-3 text-yellow-400 leading-snug ">
@@ -221,7 +224,10 @@ const BannerSlider = () => {
               of God, with inspiring messages from our honored guest speakers.
             </p>
             {/* Speakers Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl">
+            <div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl 
+  max-h-[50vh] overflow-y-auto md:max-h-full md:overflow-visible"
+            >
               {/* Speaker 1 */}
               <div
                 onClick={() => navigate("/speakers")}
@@ -229,7 +235,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/4] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
@@ -259,7 +265,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/4] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
