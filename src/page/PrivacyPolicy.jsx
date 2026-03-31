@@ -112,24 +112,37 @@ const PrivacyPolicy = () => {
           </div>
 
           {/* Contact */}
-          <div>
-            <h3 className="text-lg font-semibold text-[#1B2B4B] mb-2">
+          <div className="bg-[#1B2B4B] text-center text-white py-10 px-6 rounded-lg mt-10">
+            {/* Title */}
+            <p className="text-[#E8C97A] text-sm uppercase tracking-widest">
               Contact for Privacy Requests
-            </h3>
-            <p>
-              Mar Thoma Voluntary Evangelists Association — Diocese of North
-              America
             </p>
 
-            <p className="mt-2">
-              📧 Email:{" "}
-              <span className="text-[#C49A3C] font-medium">
-                mtvea2026@gmail.com
-              </span>
-              <br />
-              📞 Phone:{" "}
-              <span className="text-[#C49A3C] font-medium">972-261-4221</span>
+            {/* Organization */}
+            <h3 className="text-lg md:text-xl font-serif mt-2">
+              Mar Thoma Voluntary Evangelists Association
+            </h3>
+
+            <p className="text-white/60 text-sm mt-1">
+              Diocese of North America
             </p>
+
+            {/* Divider */}
+            <div className="w-16 h-[2px] bg-[#E8C97A] mx-auto my-4"></div>
+
+            {/* Contact Info */}
+            <div className="space-y-2 text-sm md:text-base">
+              <p>
+                📧{" "}
+                <span className="text-[#E8C97A] font-medium">
+                  mtvea2026@gmail.com
+                </span>
+              </p>
+              <p>
+                📞{" "}
+                <span className="text-[#E8C97A] font-medium">972-261-4221</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

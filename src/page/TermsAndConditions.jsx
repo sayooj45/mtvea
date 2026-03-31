@@ -103,20 +103,38 @@ const TermsAndConditions = () => {
             </p>
           </div>
 
-          <div>
-            <h3 className="text-lg font-semibold text-[#1B2B4B] mb-2">
+          <div className="bg-[#1B2B4B] text-center text-white py-10 px-6 rounded-lg mt-10">
+            {/* Title */}
+            <p className="text-[#E8C97A] text-sm uppercase tracking-widest">
               Contact Information
-            </h3>
-            <p>For registration-related inquiries, please contact us:</p>
-            <p className="mt-2">
-              📧 Email:{" "}
-              <span className="text-[#C49A3C] font-medium">
-                mtvea2026@gmail.com
-              </span>
-              <br />
-              📞 Phone:{" "}
-              <span className="text-[#C49A3C] font-medium">972-261-4221</span>
             </p>
+
+            {/* Subtitle */}
+            <h3 className="text-lg md:text-xl font-serif mt-2">
+              Registration Support
+            </h3>
+
+            <p className="text-white/60 text-sm mt-1">
+              For registration-related inquiries, please contact us
+            </p>
+
+            {/* Divider */}
+            <div className="w-16 h-[2px] bg-[#E8C97A] mx-auto my-4"></div>
+
+            {/* Contact Details */}
+            <div className="space-y-2 text-sm md:text-base">
+              <p>
+                📧{" "}
+                <span className="text-[#E8C97A] font-medium">
+                  mtvea2026@gmail.com
+                </span>
+              </p>
+
+              <p>
+                📞{" "}
+                <span className="text-[#E8C97A] font-medium">972-261-4221</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
