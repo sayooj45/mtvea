@@ -116,7 +116,7 @@ const Navbar = () => {
             </div>
 
             {/* Bottom CTA */}
-            <div className="mt-auto">
+            {/* <div className="mt-auto">
               <button
                 onClick={() => {
                   setOpen(false);
@@ -127,7 +127,7 @@ const Navbar = () => {
               >
                 Register Now
               </button>
-            </div>
+            </div> */}
           </div>
         </>
       )}

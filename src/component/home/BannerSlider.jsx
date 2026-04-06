@@ -79,17 +79,22 @@ const BannerSlider = () => {
         {" "}
         {/* ---------------- SLIDE 1 ---------------- */}
         {slide === 0 && (
-          <div className="flex flex-col justify-center items-center text-center h-full px-6 md:px-10 lg:px-16 text-white max-w-3xl mx-auto">
+          <div
+            className="flex flex-col justify-center items-center text-center 
+min-h-[70vh] md:min-h-[80vh] 
+px-6 md:px-10 lg:px-10 
+text-white max-w-2xl mx-auto"
+          >
             {/* Organization */}
             <p className="uppercase tracking-[0.2em] text-xs sm:text-sm text-yellow-400 mb-4 font-serif">
-              MTVEA Conference 2026
+              Mar Thoma Voluntary Evangelists' Association (MTVEA)
             </p>
 
             {/* Main Heading */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif leading-tight mb-4 font-serif">
               XVIIIth Diocesan Conference
               <span className="block text-yellow-400 text-xl sm:text-2xl md:text-3xl mt-2 font-normal">
-                Dallas, 2026
+                2026 - Dallas
               </span>
             </h1>
 
@@ -104,7 +109,7 @@ const BannerSlider = () => {
             </p>
 
             {/* Venue */}
-            <p className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed mb-8">
+            <p className="text-sm sm:text-base text-white max-w-xl leading-relaxed mb-8">
               Hosted by MTVEA Southwest - Center A <br />
               The Mar Thoma Church of Dallas, Farmers Branch
             </p>
@@ -210,9 +215,11 @@ const BannerSlider = () => {
         {/* ---------------- SLIDE 3 ---------------- */}
         {slide === 2 && (
           <div
-            className="flex flex-col justify-start md:justify-center items-center text-center 
-  px-4 sm:px-6 md:px-10 pt-10 w-full 
-  min-h-full md:min-h-0 mt-6 md:mt-0"
+            className="flex flex-col justify-center md:justify-center items-center text-center 
+  px-4 sm:px-6 md:px-10 
+  pt-16 md:pt-0 
+  w-full h-full 
+  overflow-hidden"
           >
             {" "}
             {/* Heading */}
@@ -227,7 +234,7 @@ const BannerSlider = () => {
             {/* Speakers Grid */}
             <div
               className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl 
-  max-h-[100vh] overflow-y-auto md:max-h-full md:overflow-visible mb-10"
+  max-h-full  md:max-h-full"
             >
               {/* Speaker 1 */}
               <div
@@ -236,7 +243,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/3.5] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
@@ -266,7 +273,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/3.5] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"

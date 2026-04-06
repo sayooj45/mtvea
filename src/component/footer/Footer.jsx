@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-[#0d1220] text-center py-8 px-4">
       {/* Title */}
       <h2 className="text-[#E8C97A] font-serif text-sm font-semibold">
-        MTVEA XVIIIth National Conference 2026
+        Mar Thoma Voluntary Evangelists' Association (MTVEA)
       </h2>
 
       <p className="text-white/40 text-xs mt-1">

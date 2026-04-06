@@ -26,7 +26,7 @@ const SpeakerCard = ({ speaker, index }) => {
       {/* IMAGE */}
 
       <div className="w-full md:w-full overflow-hidden rounded-2xl shadow-lg relative">
-        {!showVideo ? ( // ✅ FIXED HERE
+        {!showVideo ? (
           <>
             <img
               src={speaker.image}
@@ -63,9 +63,9 @@ const SpeakerCard = ({ speaker, index }) => {
 
       {/* TEXT */}
       <div className="w-full md:w-1/2 max-w-xl">
-        <span className="text-[#C49A3C] text-sm uppercase tracking-widest">
+        {/* <span className="text-[#C49A3C] text-sm uppercase tracking-widest">
           {speaker.role}
-        </span>
+        </span> */}
 
         <h2 className="text-2xl md:text-3xl font-serif text-[#1B2B4B] mt-3 leading-snug">
           {speaker.name}
