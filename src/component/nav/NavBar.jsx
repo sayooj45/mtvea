@@ -29,7 +29,7 @@ const Navbar = () => {
     <nav className="bg-[#1B2B4B] text-white h-[80px] md:h-[100px] flex items-center justify-between px-6 shadow-md relative z-50">
       {/* Logo */}
       <NavLink to="/">
-        <div className="fixed top-[20px] md:top-[25px]  bg-white rounded-full md:h-[150px] md:w-[150px] h-[75px] w-[75px] flex items-center justify-center  overflow-visible z-50">
+        <div className=" mt-[70px]  md:mt-[120px]  bg-white rounded-full md:h-[150px] md:w-[150px] h-[75px] w-[75px] flex items-center justify-center  overflow-visible z-50">
           <img
             src="/logo.png"
             alt="logo"
