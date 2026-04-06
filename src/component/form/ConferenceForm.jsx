@@ -57,12 +57,13 @@ const ConferenceForm = () => {
     phone: "",
     email: "",
     parish: "",
-    shirtSize: "",
+    // shirtSize: "",
     dietaryRestrictions: "",
     sponsorSouvenir: "",
     bookedHotel: "",
     needAssistance: "",
     needShuttle: "",
+    pickupAirport: "",
     arrivalFlightNumber: "",
     busDetails: "",
     arrivalFlightDate: "",
@@ -83,12 +84,13 @@ const ConferenceForm = () => {
     phone: "",
     email: "",
     parish: "",
-    shirtSize: "",
+    // shirtSize: "",
     dietaryRestrictions: "",
     sponsorSouvenir: "",
     bookedHotel: "",
     needAssistance: "",
     needShuttle: "",
+    pickupAirport: "",
     arrivalFlightNumber: "",
     busDetails: "",
     arrivalFlightDate: "",
@@ -671,7 +673,7 @@ const ConferenceForm = () => {
                 </h2>
 
                 <div className="space-y-4">
-                  <div>
+                  {/* <div>
                     <label className={labelClass}>Shirt Size</label>
                     <div className="flex flex-wrap gap-3">
                       {[
@@ -702,7 +704,7 @@ const ConferenceForm = () => {
                         </button>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
 
                   <input
                     name="dietaryRestrictions"
@@ -838,6 +840,26 @@ const ConferenceForm = () => {
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-5">
+                        <div className="space-y-1">
+                          <label className="text-sm text-gray-500">
+                            Pickup Airport Station
+                          </label>
+                          <select
+                            name="pickupAirport"
+                            value={formData.pickupAirport}
+                            onChange={handleChange}
+                            className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
+                          >
+                            <option value="">Select Airport</option>
+                            <option value="DFW">
+                              DFW (Dallas/Fort Worth International Airport)
+                            </option>
+                            <option value="Love Field">
+                              Love Field (Dallas Love Field Airport)
+                            </option>
+                          </select>
+                        </div>
+
                         <div className="space-y-1">
                           <label className="text-sm text-gray-500">
                             Flight Number
@@ -979,6 +1001,26 @@ const ConferenceForm = () => {
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-5">
+                        <div className="space-y-1">
+                          <label className="text-sm text-gray-500">
+                            Pickup Airport Station
+                          </label>
+                          <select
+                            name="pickupAirport"
+                            value={formData.pickupAirport}
+                            onChange={handleChange}
+                            className={`${inputClass} focus:ring-2 focus:ring-[#C49A3C]`}
+                          >
+                            <option value="">Select Airport</option>
+                            <option value="DFW">
+                              DFW (Dallas/Fort Worth International Airport)
+                            </option>
+                            <option value="Love Field">
+                              Love Field (Dallas Love Field Airport)
+                            </option>
+                          </select>
+                        </div>
+
                         <div className="space-y-1">
                           <label className="text-sm text-gray-500">
                             Flight Number
@@ -1210,7 +1252,7 @@ const ConferenceForm = () => {
                       </h4>
 
                       <div className="grid md:grid-cols-2 gap-4 text-sm">
-                        <ReviewRow label="Shirt Size" value={p.shirtSize} />
+                        {/* <ReviewRow label="Shirt Size" value={p.shirtSize} /> */}
                         <ReviewRow
                           label="Dietary"
                           value={p.dietaryRestrictions}
@@ -1235,6 +1277,10 @@ const ConferenceForm = () => {
 
                         {p.needShuttle === "Yes - Arrival only" ? (
                           <>
+                            <ReviewRow
+                              label="Arrival Flight"
+                              value={p.pickupAirport}
+                            />
                             <ReviewRow
                               label="Flight"
                               value={p.arrivalFlightNumber}
@@ -1274,6 +1320,10 @@ const ConferenceForm = () => {
                         ) : p.needShuttle ===
                           "Yes - Both arrival and departure" ? (
                           <>
+                            <ReviewRow
+                              label="Arrival Flight"
+                              value={p.pickupAirport}
+                            />
                             <ReviewRow
                               label="Arrival Flight"
                               value={p.arrivalFlightNumber}

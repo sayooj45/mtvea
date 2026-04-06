@@ -27,8 +27,8 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        {/* <Route path="/forgot-password" element={<ForgotPassword />} /> */}
+        {/* <Route path="/reset-password" element={<ResetPassword />} /> */}
         <Route path="/adminDashboard" element={<AdminDashboard />} />
         <Route path="/speakers" element={<SpeakersPage />} />
         <Route path="/success" element={<StripSuccess />} />

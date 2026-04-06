@@ -110,7 +110,7 @@ const About = () => {
                 key={i}
                 className="bg-white border border-[#C49A3C]/20 p-4 rounded flex gap-2"
               >
-                <div className="w-2 h-2 bg-[#C49A3C] mt-2"></div>
+                {/* <div className="w-2 h-2 bg-[#C49A3C] mt-2"></div> */}
                 <p className="text-sm text-gray-600">{item}</p>
               </div>
             ))}

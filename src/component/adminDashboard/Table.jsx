@@ -48,6 +48,7 @@ const Table = () => {
       "Sponsor Souvenir": item.sponsorSouvenir,
 
       Shuttle: item.needShuttle,
+      pickupAirport: item.pickupAirport,
 
       "Arrival Flight": item.arrivalFlightNumber,
       "Arrival Date": item.arrivalFlightDate
@@ -225,7 +226,7 @@ const Table = () => {
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Address</th>
 
-                <th className="px-4 py-3">Shirt Size</th>
+                {/* <th className="px-4 py-3">Shirt Size</th> */}
                 <th className="px-4 py-3">Dietary Restrictions</th>
 
                 <th className="px-4 py-3">Shuttle</th>
@@ -270,7 +271,7 @@ const Table = () => {
                   <td className="px-4 py-3 text-blue-600">{item.email}</td>
                   <td className="px-4 py-3">{item.address}</td>
 
-                  <td className="px-4 py-3">{item.shirtSize}</td>
+                  {/* <td className="px-4 py-3">{item.shirtSize}</td> */}
                   <td className="px-4 py-3">{item.dietaryRestrictions}</td>
 
                   <td className="px-4 py-3">{item.needShuttle}</td>

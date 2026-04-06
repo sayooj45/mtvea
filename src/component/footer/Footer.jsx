@@ -12,7 +12,7 @@ const Footer = () => {
 
       <p className="text-white/40 text-xs mt-1">
         The Mar Thoma Church of Dallas Farmers Branch 11550 Luna Rd., Farmers
-        Branch, Texas - 75234
+        Branch, TX - 75234
       </p>
 
       {/* Contact Info */}

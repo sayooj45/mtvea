@@ -19,7 +19,7 @@ const groupedTeams = [
     ],
   },
   {
-    group: "Core Committees",
+    group: "Sub Committees",
     sections: [
       {
         title: "Program Committee",
@@ -45,7 +45,7 @@ const groupedTeams = [
     ],
   },
   {
-    group: "Support Committees",
+    // group: "Support Committees",
     sections: [
       {
         title: "Souvenir Committee",
@@ -114,7 +114,6 @@ const groupedTeams = [
         members: [
           { role: "Chairman", name: "Dr. Shiji Philip" },
           { role: "Convener", name: "Rev. Abraham V. Samson" },
-          { role: "Member", name: "Tom" },
         ],
       },
     ],

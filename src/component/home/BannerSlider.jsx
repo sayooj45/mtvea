@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import banner1 from "../../assets/banners/banner1.png";
 import banner2 from "../../assets/banners/banner2.jpg";
 import banner3 from "../../assets/banners/banner3.jpg";
+import mobileBanner1 from "../../assets/banners/mobileBanner1.png";
+import mobileBanner2 from "../../assets/banners/mobileBanner2.png";
+import mobileBanner3 from "../../assets/banners/mobileBanner3.png";
 import speaker1 from "../../assets/speaker11.png";
 import speaker2 from "../../assets/speaker2.jpeg";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +12,24 @@ import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 const BannerSlider = () => {
   const [slide, setSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [lastInteraction, setLastInteraction] = useState(Date.now());
 
   const navigate = useNavigate();
 
-  const slides = [banner1, banner2, banner3];
+  const slides = isMobile
+    ? [mobileBanner1, mobileBanner2, mobileBanner3]
+    : [banner1, banner2, banner3];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,11 +59,16 @@ const BannerSlider = () => {
       {slides.map((img, i) => (
         <div
           key={i}
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+          className={`absolute inset-0 transition-opacity duration-1000 ${
             slide === i ? "opacity-100 z-0" : "opacity-0"
           }`}
-          style={{ backgroundImage: `url(${img})` }}
-        />
+        >
+          <img
+            src={img}
+            alt="banner"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
       ))}
 
       {/* Overlay */}
@@ -58,55 +79,50 @@ const BannerSlider = () => {
         {" "}
         {/* ---------------- SLIDE 1 ---------------- */}
         {slide === 0 && (
-          <div className="flex flex-col justify-center items-center text-center h-full px-4 sm:px-6 md:px-10 lg:px-16 py-10 text-white">
-            {/* Organization Name */}
-            <p
-              className="uppercase tracking-widest text-yellow-400 text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-3"
-              style={{ textShadow: "2px 2px 6px rgba(0,0,0,0.6)" }}
-            >
-              Mar Thoma Voluntary Evangelists' Association (MTVEA)
+          <div className="flex flex-col justify-center items-center text-center h-full px-6 md:px-10 lg:px-16 text-white max-w-3xl mx-auto">
+            {/* Organization */}
+            <p className="uppercase tracking-[0.2em] text-xs sm:text-sm text-yellow-400 mb-4 font-serif">
+              MTVEA Conference 2026
             </p>
 
             {/* Main Heading */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif leading-snug mb-4">
-              XVIIIth Diocesan Conference <br />
-              <span className="italic text-yellow-300 block mt-1">
-                2026 - Dallas
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif leading-tight mb-4 font-serif">
+              XVIIIth Diocesan Conference
+              <span className="block text-yellow-400 text-xl sm:text-2xl md:text-3xl mt-2 font-normal">
+                Dallas, 2026
               </span>
             </h1>
 
             {/* Theme */}
-            <p className="italic text-yellow-300 mb-2 text-lg sm:text-xl md:text-2xl">
-              "Come and See: The Divine Invite"
+            <p className="text-lg sm:text-xl md:text-2xl italic text-white/90 mb-6">
+              “Come and See: The Divine Invite”
             </p>
 
-            {/* Verse */}
-            <p className="text-sm sm:text-base md:text-lg mb-4 opacity-90">
-              St. John 1:39 & 46
+            {/* Date */}
+            <p className="text-base sm:text-lg text-white/80 mb-6">
+              August 20–23, 2026
             </p>
 
-            {/* Host + Venue */}
-            <div className="space-y-2 text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed mb-6">
-              <p>Hosted by MTVEA Southwest - Center A</p>
-              <p>
-                Venue: The Mar Thoma Church of Dallas Farmers Branch, 11550 Luna
-                Rd, Farmers Branch, Texas - 75234
-              </p>
-            </div>
+            {/* Venue */}
+            <p className="text-sm sm:text-base text-white/60 max-w-xl leading-relaxed mb-8">
+              Hosted by MTVEA Southwest - Center A <br />
+              The Mar Thoma Church of Dallas, Farmers Branch
+            </p>
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <button
                 onClick={() => navigate("/registration")}
-                className="relative overflow-hidden bg-yellow-500 px-6 py-3 rounded-md text-sm sm:text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/40 w-full sm:w-auto"
+                className="bg-yellow-500 px-6 py-3 rounded-md text-sm font-medium 
+        transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-yellow-500/40"
               >
-                <span className="relative z-10">Register Now</span>
-                <span className="absolute inset-0 bg-white/20 opacity-0 hover:opacity-100 transition duration-300"></span>
+                Register Now
               </button>
 
               <button
                 onClick={() => navigate("/about")}
-                className="relative overflow-hidden border border-white px-6 py-3 rounded-md text-sm sm:text-base transition-all duration-300 hover:bg-white hover:text-[#1B2B4B] hover:scale-105 hover:shadow-lg w-full sm:w-auto"
+                className="border border-white/40 px-6 py-3 rounded-md text-sm 
+        transition-all duration-300 hover:bg-white hover:text-[#1B2B4B]"
               >
                 Learn More
               </button>
@@ -115,16 +131,21 @@ const BannerSlider = () => {
         )}
         {/* ---------------- SLIDE 2 ---------------- */}
         {slide === 1 && (
-          <div className="flex flex-col justify-center items-center w-full px-4 sm:px-6 md:px-10 py-10 text-center ">
+          <div className="flex flex-col justify-center items-center w-full px-4 sm:px-6 md:px-10 pt-10 text-center ">
             {/* Top Text */}
             <p className="text-yellow-400 uppercase text-[10px] sm:text-xs md:text-sm tracking-widest mb-2">
               Join Us
             </p>
 
             {/* Heading */}
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-3 leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-2 leading-tight">
               Register for the Conference
             </h2>
+
+            {/* ✅ Event Date (NEW) */}
+            <p className="text-sm sm:text-base md:text-lg text-yellow-300 font-medium mb-3 tracking-wide">
+              August 20 • 21 • 22 • 23
+            </p>
 
             {/* Description */}
             <p className="text-white/80 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-xl leading-relaxed">
@@ -135,60 +156,42 @@ const BannerSlider = () => {
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full max-w-6xl">
               {/* Adults */}
-              <div
-                className="group border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur-md 
-    hover:scale-105 hover:border-yellow-400 transition duration-300 shadow-md"
-              >
+              <div className="group border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur-md hover:scale-105 hover:border-yellow-400 transition duration-300 shadow-md">
                 <p className="text-xs uppercase text-white/60 mb-2">Adults</p>
-
                 <h3 className="text-2xl sm:text-3xl text-yellow-400 font-serif">
                   $150
                 </h3>
-
                 <p className="text-xs sm:text-sm text-white/60 mt-2">
                   $50 Registration + $100 Conference Fee
                 </p>
-
                 <div className="mt-3 text-[10px] sm:text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
                   18 years and above
                 </div>
               </div>
 
               {/* Youth */}
-              <div
-                className="group border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur-md 
-    hover:scale-105 hover:border-yellow-400 transition duration-300 shadow-md"
-              >
+              <div className="group border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur-md hover:scale-105 hover:border-yellow-400 transition duration-300 shadow-md">
                 <p className="text-xs uppercase text-white/60 mb-2">Youth</p>
-
                 <h3 className="text-2xl sm:text-3xl text-yellow-400 font-serif">
                   $100
                 </h3>
-
                 <p className="text-xs sm:text-sm text-white/60 mt-2">
                   $50 Registration + $50 Conference Fee
                 </p>
-
                 <div className="mt-3 text-[10px] sm:text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
                   Under 18 years
                 </div>
               </div>
 
               {/* Children */}
-              <div
-                className="group border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur-md 
-    hover:scale-105 hover:border-green-400 transition duration-300 shadow-md"
-              >
+              <div className="group border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur-md hover:scale-105 hover:border-green-400 transition duration-300 shadow-md">
                 <p className="text-xs uppercase text-white/60 mb-2">Children</p>
-
                 <h3 className="text-2xl sm:text-3xl text-green-400 font-serif">
                   Free
                 </h3>
-
                 <p className="text-xs sm:text-sm text-white/60 mt-2">
                   No registration fee
                 </p>
-
                 <div className="mt-3 text-[10px] sm:text-xs bg-white/10 px-3 py-1 rounded-full inline-block">
                   Under 10 years
                 </div>
@@ -198,9 +201,7 @@ const BannerSlider = () => {
             {/* Button */}
             <button
               onClick={() => navigate("/registration")}
-              className="mt-8 relative overflow-hidden bg-yellow-500 px-6 sm:px-8 py-2.5 sm:py-3 rounded-md 
-    text-sm sm:text-base font-medium transition-all duration-300 
-    hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/40 w-full sm:w-auto"
+              className="mt-8 relative overflow-hidden bg-yellow-500 px-6 sm:px-8 py-2.5 sm:py-3 rounded-md text-sm sm:text-base font-medium transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/40 w-full sm:w-auto"
             >
               Register Now →
             </button>
@@ -210,7 +211,7 @@ const BannerSlider = () => {
         {slide === 2 && (
           <div
             className="flex flex-col justify-start md:justify-center items-center text-center 
-  px-4 sm:px-6 md:px-10 py-10 w-full 
+  px-4 sm:px-6 md:px-10 pt-10 w-full 
   min-h-full md:min-h-0 mt-6 md:mt-0"
           >
             {" "}
@@ -226,7 +227,7 @@ const BannerSlider = () => {
             {/* Speakers Grid */}
             <div
               className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl 
-  max-h-[50vh] overflow-y-auto md:max-h-full md:overflow-visible"
+  max-h-[100vh] overflow-y-auto md:max-h-full md:overflow-visible mb-10"
             >
               {/* Speaker 1 */}
               <div
