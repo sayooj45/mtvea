@@ -81,36 +81,59 @@ const BannerSlider = () => {
         {slide === 0 && (
           <div
             className="flex flex-col justify-center items-center text-center 
-min-h-[70vh] md:min-h-[80vh] 
-px-6 md:px-10 lg:px-10 
-text-white max-w-2xl mx-auto"
+    min-h-[70vh] md:min-h-[80vh] 
+    px-6 md:px-10 
+    text-white max-w-3xl mx-auto"
           >
             {/* Organization */}
-            <p className="uppercase tracking-[0.2em] text-xs sm:text-sm text-yellow-400 mb-4 font-serif">
-              Mar Thoma Voluntary Evangelists' Association (MTVEA)
+            <p
+              className="uppercase tracking-[0.25em] text-[11px] sm:text-xs 
+    text-yellow-400 mb-5 font-serif opacity-90"
+            >
+              Mar Thoma Voluntary Evangelists' Association
             </p>
 
             {/* Main Heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif leading-tight mb-4 font-serif">
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl 
+    leading-[1.2] mb-4 font-serif font-semibold tracking-wide"
+            >
               XVIIIth Diocesan Conference
-              <span className="block text-yellow-400 text-xl sm:text-2xl md:text-3xl mt-2 font-normal">
-                2026 - Dallas
-              </span>
             </h1>
 
+            {/* Location */}
+            <p
+              className="text-lg sm:text-xl md:text-2xl 
+    text-yellow-400 font-serif tracking-wide mb-4"
+            >
+              2026 · Dallas
+            </p>
+
+            {/* Divider (adds professionalism) */}
+            <div className="w-16 h-[1px] bg-yellow-400/60 mb-5"></div>
+
             {/* Theme */}
-            <p className="text-lg sm:text-xl md:text-2xl italic text-white/90 mb-6">
+            <p
+              className="text-lg sm:text-xl md:text-2xl 
+    italic font-serif text-white/90 mb-6 leading-relaxed"
+            >
               “Come and See: The Divine Invite”
             </p>
 
             {/* Date */}
-            <p className="text-base sm:text-lg text-white/80 mb-6">
+            <p
+              className="text-base sm:text-lg 
+    text-white/80 mb-5 tracking-wide"
+            >
               August 20–23, 2026
             </p>
 
             {/* Venue */}
-            <p className="text-sm sm:text-base text-white max-w-xl leading-relaxed mb-8">
-              Hosted by MTVEA Southwest - Center A <br />
+            <p
+              className="text-sm sm:text-base 
+    text-white/80 max-w-xl leading-relaxed mb-8"
+            >
+              Hosted by MTVEA Southwest · Center A <br />
               The Mar Thoma Church of Dallas, Farmers Branch
             </p>
 
