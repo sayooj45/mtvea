@@ -244,6 +244,11 @@ const Table = () => {
                 {/* OTHER */}
                 <th className="px-4 py-3">Bus</th>
                 <th className="px-4 py-3">Hotel</th>
+                <th className="px-4 py-3">Hotel Name</th>
+                <th className="px-4 py-3">Hotel check In Date </th>
+                <th className="px-4 py-3">Hotel check Out Date</th>
+                <th className="px-4 py-3">Hotel Guests</th>
+                <th className="px-4 py-3">Hotel Notes</th>
                 <th className="px-4 py-3">Assistance</th>
 
                 {/* PAYMENT */}
@@ -303,6 +308,24 @@ const Table = () => {
                   {/* OTHER */}
                   <td className="px-4 py-3">{item.busDetails || "-"}</td>
                   <td className="px-4 py-3">{item.bookedHotel}</td>
+
+                  {item.bookedHotel && (
+                    <td className="px-4 py-3">{item.hotelName}</td>
+                  )}
+                  {item.bookedHotel && (
+                    <td className="px-4 py-3">{item.checkInDate}</td>
+                  )}
+                  {item.bookedHotel && (
+                    <td className="px-4 py-3">{item.checkOutDate}</td>
+                  )}
+                  {item.bookedHotel && (
+                    <td className="px-4 py-3">{item.hotelGuests}</td>
+                  )}
+                  {item.bookedHotel && (
+                    <td className="px-4 py-3">
+                      {item.hotelNotes && item.hotelNotes}
+                    </td>
+                  )}
                   <td className="px-4 py-3">{item.needAssistance}</td>
 
                   {/* PAYMENT */}

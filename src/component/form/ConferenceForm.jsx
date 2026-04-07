@@ -73,6 +73,12 @@ const ConferenceForm = () => {
     departureFlightTime: "",
     paymentType: "",
     paymentMethod: "",
+
+    hotelName: "",
+    checkInDate: "",
+    checkOutDate: "",
+    hotelGuests: "",
+    hotelNotes: "",
   });
 
   const emptyForm = {
@@ -100,6 +106,11 @@ const ConferenceForm = () => {
     departureFlightTime: "",
     paymentType: "",
     paymentMethod: "",
+    hotelName: "",
+    checkInDate: "",
+    checkOutDate: "",
+    hotelGuests: "",
+    hotelNotes: "",
   };
 
   const handleAddParticipant = () => {
@@ -673,39 +684,6 @@ const ConferenceForm = () => {
                 </h2>
 
                 <div className="space-y-4">
-                  {/* <div>
-                    <label className={labelClass}>Shirt Size</label>
-                    <div className="flex flex-wrap gap-3">
-                      {[
-                        "Adult S",
-                        "Adult M",
-                        "Adult L",
-                        "Adult XL",
-                        "Adult XXL",
-                        "Youth S",
-                        "Youth M",
-                      ].map((size) => (
-                        <button
-                          type="button"
-                          key={size}
-                          onClick={() =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              shirtSize: size,
-                            }))
-                          }
-                          className={`px-4 py-2 border rounded ${
-                            formData.shirtSize === size
-                              ? "bg-[#1B2B4B] text-white"
-                              : "hover:border-yellow-500"
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                  </div> */}
-
                   <input
                     name="dietaryRestrictions"
                     value={formData.dietaryRestrictions}
@@ -795,38 +773,125 @@ const ConferenceForm = () => {
                       ))}
                     </div>
                   </div>
+                </div>
+                {formData.bookedHotel === "Yes" && (
+                  <div className="mt-6 bg-white border border-gray-200 rounded-2xl shadow-md p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-[#1B2B4B]">
+                        Hotel Details
+                      </h3>
+                      <span className="text-xs bg-[#1B2B4B]/10 text-[#1B2B4B] px-3 py-1 rounded-full">
+                        Accommodation
+                      </span>
+                    </div>
 
-                  {/* Shuttle Service */}
-                  <div>
-                    <label className={labelClass}>
-                      Do you need airport/bus station shuttle service?
-                    </label>
-                    <div className="flex flex-col gap-2 mt-2">
-                      {[
-                        "Yes - Arrival only",
-                        "Yes - Departure only",
-                        "Yes - Both arrival and departure",
-                        "No - I will arrange my own transportation",
-                      ].map((option) => (
-                        <label
-                          key={option}
-                          className="flex items-start gap-2 cursor-pointer"
-                        >
-                          <input
-                            type="radio"
-                            name="needShuttle"
-                            value={option}
-                            checked={formData.needShuttle === option}
-                            onChange={handleChange}
-                            className="accent-[#1B2B4B] mt-1"
-                            required
-                          />
-                          <span>{option}</span>
+                    <div className="grid md:grid-cols-2 gap-5">
+                      {/* Hotel Name */}
+                      <div className="space-y-1">
+                        <label className="text-sm text-gray-500">
+                          Hotel Name
                         </label>
-                      ))}
+                        <input
+                          type="text"
+                          name="hotelName"
+                          value={formData.hotelName}
+                          onChange={handleChange}
+                          placeholder="Enter hotel name"
+                          className={inputClass}
+                        />
+                      </div>
+
+                      {/* Check-in Date */}
+                      <div className="space-y-1">
+                        <label className="text-sm text-gray-500">
+                          Check-in Date
+                        </label>
+                        <input
+                          type="date"
+                          name="checkInDate"
+                          value={formData.checkInDate}
+                          onChange={handleChange}
+                          className={inputClass}
+                        />
+                      </div>
+
+                      {/* Check-out Date */}
+                      <div className="space-y-1">
+                        <label className="text-sm text-gray-500">
+                          Check-out Date
+                        </label>
+                        <input
+                          type="date"
+                          name="checkOutDate"
+                          value={formData.checkOutDate}
+                          onChange={handleChange}
+                          className={inputClass}
+                        />
+                      </div>
+
+                      {/* Number of Guests */}
+                      <div className="space-y-1">
+                        <label className="text-sm text-gray-500">
+                          Number of Guests
+                        </label>
+                        <input
+                          type="number"
+                          name="hotelGuests"
+                          value={formData.hotelGuests}
+                          onChange={handleChange}
+                          placeholder="e.g. 2"
+                          className={inputClass}
+                        />
+                      </div>
+
+                      {/* Notes */}
+                      <div className="space-y-1 md:col-span-2">
+                        <label className="text-sm text-gray-500">
+                          Additional Notes
+                        </label>
+                        <input
+                          type="text"
+                          name="hotelNotes"
+                          value={formData.hotelNotes}
+                          onChange={handleChange}
+                          placeholder="Optional"
+                          className={inputClass}
+                        />
+                      </div>
                     </div>
                   </div>
+                )}
+                {/* Shuttle Service */}
+                <div className="mt-6">
+                  <label className={labelClass}>
+                    Do you need airport/bus station shuttle service?
+                  </label>
+                  <div className="flex flex-col gap-2 mt-2">
+                    {[
+                      "Yes - Arrival only",
+                      "Yes - Departure only",
+                      "Yes - Both arrival and departure",
+                      "No - I will arrange my own transportation",
+                    ].map((option) => (
+                      <label
+                        key={option}
+                        className="flex items-start gap-2 cursor-pointer"
+                      >
+                        <input
+                          type="radio"
+                          name="needShuttle"
+                          value={option}
+                          checked={formData.needShuttle === option}
+                          onChange={handleChange}
+                          className="accent-[#1B2B4B] mt-1"
+                          required
+                        />
+                        <span>{option}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
+
                 {formData.needShuttle === "Yes - Arrival only" ? (
                   <div className="mt-6">
                     <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6">
@@ -1269,6 +1334,23 @@ const ConferenceForm = () => {
 
                       <div className="grid md:grid-cols-2 gap-4 text-sm">
                         <ReviewRow label="Hotel" value={p.bookedHotel} />
+                        {p.bookedHotel === "Yes" ? (
+                          <>
+                            <ReviewRow label="Hotel Name" value={p.hotelName} />
+                            <ReviewRow
+                              label="checkIn Date"
+                              value={p.checkInDate}
+                            />
+                            <ReviewRow
+                              label="checkOut Date"
+                              value={p.checkOutDate}
+                            />
+                            <ReviewRow
+                              label="hotel Notes"
+                              value={p.hotelName}
+                            />
+                          </>
+                        ) : null}
                         <ReviewRow
                           label="Assistance"
                           value={p.needAssistance}
