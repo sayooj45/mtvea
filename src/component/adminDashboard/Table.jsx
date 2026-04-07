@@ -69,6 +69,11 @@ const Table = () => {
       "Payment Type": item.paymentType,
       Method: item.paymentMethod,
       Status: item.paymentStatus,
+      HotelName: item.hotelName,
+      "Check In Date": item.checkInDate,
+      "Check Out Date": item.checkOutDatee,
+      "Hotel Guests": item.hotelGuests,
+      "Hotel Notes": item.hotelNotes,
 
       Created: new Date(item.createdAt).toLocaleString(),
     }));
