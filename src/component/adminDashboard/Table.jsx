@@ -314,23 +314,19 @@ const Table = () => {
                   <td className="px-4 py-3">{item.busDetails || "-"}</td>
                   <td className="px-4 py-3">{item.bookedHotel}</td>
 
-                  {item.bookedHotel && (
-                    <td className="px-4 py-3">{item.hotelName}</td>
-                  )}
-                  {item.bookedHotel && (
-                    <td className="px-4 py-3">{item.checkInDate}</td>
-                  )}
-                  {item.bookedHotel && (
-                    <td className="px-4 py-3">{item.checkOutDate}</td>
-                  )}
-                  {item.bookedHotel && (
-                    <td className="px-4 py-3">{item.hotelGuests}</td>
-                  )}
-                  {item.bookedHotel && (
-                    <td className="px-4 py-3">
-                      {item.hotelNotes && item.hotelNotes}
-                    </td>
-                  )}
+                  <td className="px-4 py-3">{item.hotelName || "-"}</td>
+                  <td className="px-4 py-3">
+                    {item.checkInDate
+                      ? new Date(item.checkInDate).toLocaleDateString()
+                      : "-"}
+                  </td>
+                  <td className="px-4 py-3">
+                    {item.checkOutDate
+                      ? new Date(item.checkOutDate).toLocaleDateString()
+                      : "-"}
+                  </td>
+                  <td className="px-4 py-3">{item.hotelGuests || "-"}</td>
+                  <td className="px-4 py-3">{item.hotelNotes || "-"}</td>
                   <td className="px-4 py-3">{item.needAssistance}</td>
 
                   {/* PAYMENT */}

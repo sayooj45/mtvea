@@ -1347,7 +1347,7 @@ const ConferenceForm = () => {
                             />
                             <ReviewRow
                               label="hotel Notes"
-                              value={p.hotelName}
+                              value={p.hotelNotes}
                             />
                           </>
                         ) : null}
