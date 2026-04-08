@@ -29,3 +29,9 @@ body {
 .animate-slideOut {
   animation: slideOut 0.3s ease-in;
 }
+
+@media (min-width: 420px) {
+  .grid-xs-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
