@@ -240,7 +240,7 @@ const BannerSlider = () => {
           <div
             className="flex flex-col justify-center md:justify-center items-center text-center 
   px-4 sm:px-6 md:px-10 
- pt-10 sm:pt-12 md:pt-0
+ pt-20 sm:pt-12 md:pt-0
   w-full h-full 
   "
           >
