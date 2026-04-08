@@ -241,8 +241,7 @@ const BannerSlider = () => {
             className="flex flex-col justify-center md:justify-center items-center text-center 
   px-4 sm:px-6 md:px-10 
  pt-10 sm:pt-12 md:pt-0
-  w-full h-full 
-  overflow-hidden"
+  w-full h-full "
           >
             {" "}
             {/* Heading */}
@@ -257,7 +256,7 @@ const BannerSlider = () => {
             {/* Speakers Grid */}
             <div
               className="grid grid-cols-1 grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl 
-  max-h-full  md:max-h-full"
+  max-h-full  md:max-h-full max-sm:mb-5"
             >
               {/* Speaker 1 */}
               <div
