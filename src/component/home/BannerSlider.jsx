@@ -254,7 +254,7 @@ const BannerSlider = () => {
                 onClick={() => navigate("/speakers")}
                 className="group cursor-pointer bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col"
               >
-                <div className="w-full h-[180px] sm:h-[200px] md:h-[240px] bg-[#1B2B4B] overflow-hidden shrink-0 ">
+                <div className="w-full aspect-[4/3.7] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0 ">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
@@ -275,11 +275,11 @@ const BannerSlider = () => {
                 onClick={() => navigate("/speakers")}
                 className="group cursor-pointer bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col"
               >
-                <div className="w-full h-[180px] sm:h-[200px] md:h-[240px] bg-[#1B2B4B] overflow-hidden shrink-0">
+                <div className="w-full aspect-[4/3.7] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
-                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-2.5 sm:p-3 text-center">
