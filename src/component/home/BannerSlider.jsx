@@ -267,7 +267,7 @@ border border-white/20 shadow-lg
 transition duration-300 hover:scale-105 hover:shadow-xl 
 flex flex-col"
               >
-                <div className="w-full aspect-[4/3] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0 ">
+                <div className="w-full aspect-[4/3.7] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0 ">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
@@ -297,7 +297,7 @@ flex flex-col"
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/3] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0">
+                <div className="w-full aspect-[4/3.7] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
