@@ -257,7 +257,7 @@ const BannerSlider = () => {
             {/* Speakers Grid */}
             <div
               className="grid grid-cols-1 grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl 
-  max-h-full  md:max-h-full min-h-full overflow-y-auto"
+  max-h-full  md:max-h-full "
             >
               {/* Speaker 1 */}
               <div
