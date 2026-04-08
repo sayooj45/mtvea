@@ -241,7 +241,7 @@ const BannerSlider = () => {
             className="flex flex-col justify-center md:justify-center items-center text-center 
   px-4 sm:px-6 md:px-10 
  pt-10 sm:pt-12 md:pt-0 max-sm:mt-[100px]
-  w-full h-full max-sm:mb-5
+  w-full h-full 
   "
           >
             {" "}
@@ -275,7 +275,7 @@ flex flex-col"
                   />
                 </div>
 
-                <div className="p-2.5 sm:p-3 text-center flex-1 flex flex-col justify-center">
+                <div className="p-2.5 sm:p-3 text-center">
                   <h4
                     className="text-sm sm:text-base md:text-lg font-semibold 
         hover:text-yellow-400 transition-colors duration-200 
@@ -305,7 +305,7 @@ flex flex-col"
                   />
                 </div>
 
-                <div className="p-2.5 sm:p-3 text-center flex-1 flex flex-col justify-center">
+                <div className="p-2.5 sm:p-3 text-center">
                   <h4
                     className="text-sm sm:text-base md:text-lg font-semibold 
         hover:text-yellow-400 transition-colors duration-200 
