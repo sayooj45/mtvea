@@ -237,14 +237,7 @@ const BannerSlider = () => {
         )}
         {/* ---------------- SLIDE 3 ---------------- */}
         {slide === 2 && (
-          <div
-            className="flex flex-col justify-center md:justify-center items-center text-center 
-  px-4 sm:px-6 md:px-10 
- pt-10 sm:pt-12 md:pt-0 max-sm:mt-[100px]
-  w-full h-full 
-  "
-          >
-            {" "}
+          <div className="flex flex-col justify-center md:justify-center items-center text-center px-4 sm:px-6 md:px-10 pt-10 sm:pt-12 md:pt-0 max-sm:mt-[100px] w-full h-full ">
             {/* Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-3 text-yellow-400 leading-snug ">
               Come and See : The Divine Invite
@@ -255,65 +248,44 @@ const BannerSlider = () => {
               of God, with inspiring messages from our honored guest speakers.
             </p>
             {/* Speakers Grid */}
-            <div
-              className="grid grid-cols-1 grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl 
-  max-h-full  md:max-h-full "
-            >
+            <div className="grid grid-cols-1 grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl max-h-full md:max-h-full ">
               {/* Speaker 1 */}
               <div
                 onClick={() => navigate("/speakers")}
-                className="group cursor-pointer bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
-border border-white/20 shadow-lg 
-transition duration-300 hover:scale-105 hover:shadow-xl 
-flex flex-col"
+                className="group cursor-pointer bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl flex flex-col"
               >
-                <div className="w-full aspect-[4/3] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0 ">
+                <div className="w-full aspect-[4/3.7] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0 ">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
-                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-
                 <div className="p-2.5 sm:p-3 text-center">
-                  <h4
-                    className="text-sm sm:text-base md:text-lg font-semibold 
-        hover:text-yellow-400 transition-colors duration-200 
-        underline-offset-4 hover:underline decoration-yellow-400/50"
-                  >
+                  <h4 className="text-sm sm:text-base md:text-lg font-semibold hover:text-yellow-400 transition-colors duration-200 underline-offset-4 hover:underline decoration-yellow-400/50">
                     Rt. Rev. Dr. Abraham Mar Paulos Episcopa
                   </h4>
-
                   <p className="text-[10px] sm:text-xs uppercase tracking-widest opacity-50 mt-1 group-hover:opacity-100 transition-opacity">
                     View Profile
                   </p>
                 </div>
               </div>
-
               {/* Speaker 2 */}
               <div
                 onClick={() => navigate("/speakers")}
-                className="group cursor-pointer bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
-      border border-white/20 shadow-lg 
-      transition duration-300 hover:scale-105 hover:shadow-xl"
+                className="group cursor-pointer bg-white/10 backdrop-blur-md rounded-xl overflow-hidden border border-white/20 shadow-lg transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/3] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0">
+                <div className="w-full aspect-[4/3.7] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
-                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-
                 <div className="p-2.5 sm:p-3 text-center">
-                  <h4
-                    className="text-sm sm:text-base md:text-lg font-semibold 
-        hover:text-yellow-400 transition-colors duration-200 
-        underline-offset-4 hover:underline decoration-yellow-400/50"
-                  >
+                  <h4 className="text-sm sm:text-base md:text-lg font-semibold hover:text-yellow-400 transition-colors duration-200 underline-offset-4 hover:underline decoration-yellow-400/50">
                     Rev. Mothy Varkey
                   </h4>
-
                   <p className="text-[10px] sm:text-xs uppercase tracking-widest opacity-50 mt-1 group-hover:opacity-100 transition-opacity">
                     View Profile
                   </p>
