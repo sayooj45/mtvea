@@ -237,7 +237,7 @@ const BannerSlider = () => {
         )}
         {/* ---------------- SLIDE 3 ---------------- */}
         {slide === 2 && (
-          <div className="flex flex-col justify-center md:justify-center items-center text-center px-4 sm:px-6 md:px-10 pt-10 sm:pt-12 md:pt-0 max-sm:mt-[100px] w-full h-full ">
+          <div className="flex flex-col justify-center md:justify-center items-center text-center px-4 sm:px-6 md:px-10 pt-10 sm:pt-12 md:pt-0 max-sm:mt-[100px] w-full h-full max-sm:mb-5">
             {/* Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-3 text-yellow-400 leading-snug ">
               Come and See : The Divine Invite
