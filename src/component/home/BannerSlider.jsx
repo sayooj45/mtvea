@@ -257,16 +257,17 @@ const BannerSlider = () => {
             {/* Speakers Grid */}
             <div
               className="grid grid-cols-1 grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl 
-  max-h-full  md:max-h-full"
+  max-h-full  md:max-h-full min-h-full overflow-y-auto"
             >
               {/* Speaker 1 */}
               <div
                 onClick={() => navigate("/speakers")}
                 className="group cursor-pointer bg-white/10 backdrop-blur-md rounded-xl overflow-hidden 
-      border border-white/20 shadow-lg 
-      transition duration-300 hover:scale-105 hover:shadow-xl"
+border border-white/20 shadow-lg 
+transition duration-300 hover:scale-105 hover:shadow-xl 
+flex flex-col"
               >
-                <div className="w-full aspect-[4/4] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden ">
+                <div className="w-full aspect-[4/3] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0 ">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
@@ -274,7 +275,7 @@ const BannerSlider = () => {
                   />
                 </div>
 
-                <div className="p-2.5 sm:p-3 text-center">
+                <div className="p-2.5 sm:p-3 text-center flex-1 flex flex-col justify-center">
                   <h4
                     className="text-sm sm:text-base md:text-lg font-semibold 
         hover:text-yellow-400 transition-colors duration-200 
@@ -296,7 +297,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/3] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden shrink-0">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
@@ -304,7 +305,7 @@ const BannerSlider = () => {
                   />
                 </div>
 
-                <div className="p-2.5 sm:p-3 text-center">
+                <div className="p-2.5 sm:p-3 text-center flex-1 flex flex-col justify-center">
                   <h4
                     className="text-sm sm:text-base md:text-lg font-semibold 
         hover:text-yellow-400 transition-colors duration-200 
