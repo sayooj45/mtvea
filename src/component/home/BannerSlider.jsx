@@ -159,7 +159,7 @@ const BannerSlider = () => {
         )}
         {/* ---------------- SLIDE 2 ---------------- */}
         {slide === 1 && (
-          <div className="flex flex-col justify-center items-center w-full px-4 sm:px-6 md:px-10 pt-10 text-center ">
+          <div className="flex flex-col justify-center items-center w-full px-4 sm:px-6 md:px-10 pt-10 text-center max-sm:mb-5">
             {/* Top Text */}
             <p className="text-yellow-400 uppercase text-[10px] sm:text-xs md:text-sm tracking-widest mb-2">
               Join Us
@@ -266,7 +266,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4] sm:aspect-[4/3.5] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden ">
+                <div className="w-full aspect-[4/4] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden ">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
@@ -296,7 +296,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4] sm:aspect-[4/3.7] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/4] sm:aspect-[4/3] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
