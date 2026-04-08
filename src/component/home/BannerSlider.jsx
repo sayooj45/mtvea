@@ -271,7 +271,7 @@ flex flex-col"
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
 
@@ -301,7 +301,7 @@ flex flex-col"
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
 
