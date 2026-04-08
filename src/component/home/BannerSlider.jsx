@@ -248,7 +248,7 @@ const BannerSlider = () => {
               of God, with inspiring messages from our honored guest speakers.
             </p>
             {/* Speakers Grid */}
-            <div className="grid grid-cols-1  grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl max-h-full md:max-h-full ">
+            <div className="grid grid-cols-1 grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl max-h-full md:max-h-full ">
               {/* Speaker 1 */}
               <div
                 onClick={() => navigate("/speakers")}
@@ -258,7 +258,7 @@ const BannerSlider = () => {
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-2.5 sm:p-3 text-center">
@@ -279,7 +279,7 @@ const BannerSlider = () => {
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-2.5 sm:p-3 text-center">
