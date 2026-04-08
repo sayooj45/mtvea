@@ -240,7 +240,7 @@ const BannerSlider = () => {
           <div
             className="flex flex-col justify-center md:justify-center items-center text-center 
   px-4 sm:px-6 md:px-10 
- pt-20 sm:pt-12 md:pt-0
+ pt-10 sm:pt-12 md:pt-0 max-sm:mt-10
   w-full h-full 
   "
           >
@@ -266,7 +266,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/4] sm:aspect-[4/3.7] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden ">
+                <div className="w-full aspect-[4/4] sm:aspect-[4/3.5] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden ">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
