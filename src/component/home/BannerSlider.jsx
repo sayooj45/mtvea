@@ -182,7 +182,7 @@ const BannerSlider = () => {
             </p>
 
             {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 w-full max-w-6xl">
               {/* Adults */}
               <div className="group border border-yellow-500/30 rounded-xl p-5 sm:p-6 bg-[#1B2B4B]/60 backdrop-blur-md hover:scale-105 hover:border-yellow-400 transition duration-300 shadow-md">
                 <p className="text-xs uppercase text-white/60 mb-2">Adults</p>
@@ -240,7 +240,7 @@ const BannerSlider = () => {
           <div
             className="flex flex-col justify-center md:justify-center items-center text-center 
   px-4 sm:px-6 md:px-10 
-  pt-16 md:pt-0 
+ pt-10 sm:pt-12 md:pt-0
   w-full h-full 
   overflow-hidden"
           >
@@ -256,7 +256,7 @@ const BannerSlider = () => {
             </p>
             {/* Speakers Grid */}
             <div
-              className="grid grid-cols-1 grid-xs-2 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-xs sm:max-w-2xl md:max-w-3xl 
+              className="grid grid-cols-1 grid-xs-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full max-w-[280px] xs:max-w-md sm:max-w-xl md:max-w-2xl 
   max-h-full  md:max-h-full"
             >
               {/* Speaker 1 */}
@@ -266,7 +266,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/3.5] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/4] sm:aspect-[4/3.7] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden ">
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
@@ -274,9 +274,9 @@ const BannerSlider = () => {
                   />
                 </div>
 
-                <div className="p-3 sm:p-4 text-center">
+                <div className="p-2.5 sm:p-3 text-center">
                   <h4
-                    className="text-base sm:text-lg md:text-xl font-semibold 
+                    className="text-sm sm:text-base md:text-lg font-semibold 
         hover:text-yellow-400 transition-colors duration-200 
         underline-offset-4 hover:underline decoration-yellow-400/50"
                   >
@@ -296,7 +296,7 @@ const BannerSlider = () => {
       border border-white/20 shadow-lg 
       transition duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="w-full aspect-[4/3.5] md:aspect-[4/4.2] bg-[#1B2B4B] overflow-hidden">
+                <div className="w-full aspect-[4/4] sm:aspect-[4/3.7] md:aspect-[4/4] bg-[#1B2B4B] overflow-hidden">
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
@@ -304,9 +304,9 @@ const BannerSlider = () => {
                   />
                 </div>
 
-                <div className="p-3 sm:p-4 text-center">
+                <div className="p-2.5 sm:p-3 text-center">
                   <h4
-                    className="text-base sm:text-lg md:text-xl font-semibold 
+                    className="text-sm sm:text-base md:text-lg font-semibold 
         hover:text-yellow-400 transition-colors duration-200 
         underline-offset-4 hover:underline decoration-yellow-400/50"
                   >
