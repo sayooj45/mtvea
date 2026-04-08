@@ -54,7 +54,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <p className="text-white/20 text-[10px] mt-3">
-        © 2026 MTVEA National Conference
+        © 2026 MTVEA Diocesan Conference
       </p>
     </footer>
   );
