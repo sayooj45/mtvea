@@ -54,7 +54,7 @@ const BannerSlider = () => {
   };
 
   return (
-    <div className="relative min-h-[calc(100vh-20px)] overflow-hidden">
+    <div className="relative min-h-[calc(100vh-100px)] overflow-hidden">
       {/* Background Slider */}
       {slides.map((img, i) => (
         <div
