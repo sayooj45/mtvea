@@ -258,7 +258,7 @@ const BannerSlider = () => {
                   <img
                     src={speaker1}
                     alt="Rt. Rev. Dr. Abraham Mar Paulos Episcopa"
-                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-2.5 sm:p-3 text-center">
@@ -279,7 +279,7 @@ const BannerSlider = () => {
                   <img
                     src={speaker2}
                     alt="Rev. Mothy Varkey"
-                    className="w-full h-full object-cover  transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-2.5 sm:p-3 text-center">
