@@ -29,13 +29,13 @@ const Navbar = () => {
     <nav className="bg-[#1B2B4B] text-white h-[80px] md:h-[100px] flex items-center justify-between px-6 shadow-md relative z-50">
       {/* Logo */}
       <NavLink to="/">
-        <div className=" mt-[70px]  md:mt-[120px]  bg-white rounded-full md:h-[150px] md:w-[150px] h-[75px] w-[75px] flex items-center justify-center  overflow-visible z-50">
-          <img
-            src="/logo.png"
-            alt="logo"
-            className="md:h-[200px] md:w-[200px] w-[100px] h-[100px] max-w-none object-cover cursor-pointer "
-          />
-        </div>
+        {/* <div className="    md:pr-5 pr-5 bg-white rounded-full md:h-[150px] md:w-[150px] h-[65px] w-[65px] flex items-center justify-center  overflow-visible z-50"> */}
+        <img
+          src="/logo.png"
+          alt="logo"
+          className="mt-[70px] md:mt-[120px] md:h-[220px] md:w-[220px] w-[100px] h-[100px] max-w-none object-cover cursor-pointer "
+        />
+        {/* </div> */}
       </NavLink>
 
       {/* Desktop */}

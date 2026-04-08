@@ -54,7 +54,7 @@ const BannerSlider = () => {
   };
 
   return (
-    <div className="relative min-h-[calc(100vh-20px)] overflow-hidden">
+    <div className="relative h-[100svh] overflow-hidden touch-pan-y">
       {/* Background Slider */}
       {slides.map((img, i) => (
         <div
@@ -80,7 +80,7 @@ const BannerSlider = () => {
         {/* ---------------- SLIDE 1 ---------------- */}
         {slide === 0 && (
           <div
-            className="flex flex-col justify-center items-center text-center 
+            className="flex flex-col justify-center pt-10 items-center text-center 
     min-h-[70vh] md:min-h-[80vh] 
     px-6 md:px-10 
     text-white max-w-3xl mx-auto"
