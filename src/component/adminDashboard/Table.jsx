@@ -9,6 +9,9 @@ import { useNavigate } from "react-router-dom";
 const Table = () => {
   const API_URL = import.meta.env.VITE_API_URL;
 
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+
   const [data, setData] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -32,8 +35,21 @@ const Table = () => {
   const startIndex = (currentPage - 1) * rowsPerPage;
   const currentData = filteredData.slice(startIndex, startIndex + rowsPerPage);
 
+  const dateFilteredData = filteredData.filter((item) => {
+    if (!fromDate && !toDate) return true;
+
+    const created = new Date(item.createdAt);
+    const from = fromDate ? new Date(fromDate) : null;
+    const to = toDate ? new Date(toDate + "T23:59:59") : null;
+
+    if (from && created < from) return false;
+    if (to && created > to) return false;
+
+    return true;
+  });
+
   const downloadExcel = () => {
-    const exportData = filteredData.map((item) => ({
+    const exportData = dateFilteredData.map((item) => ({
       "First Name": item.firstName,
       "Last Name": item.lastName,
       Age: item.age,
@@ -92,7 +108,10 @@ const Table = () => {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
     });
 
-    saveAs(dataFile, "Applications.xlsx");
+    saveAs(
+      dataFile,
+      `Applications_${fromDate || "all"}_to_${toDate || "all"}.xlsx`
+    );
   };
 
   useEffect(() => {
@@ -165,54 +184,88 @@ const Table = () => {
     }
   };
   return (
-    <div className=" min-h-screen p-4 md:p-6 ">
+    <div className="min-h-screen p-4 md:p-6">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 mb-2">
-        {/* LEFT: LOGO + TITLE */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          <img
-            src="/logo.png"
-            alt="logo"
-            className="w-14 sm:w-16 md:w-18 lg:w-18 h-auto object-contain"
-          />
-
-          <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800">
-            Applications
-          </h1>
-        </div>
-
-        {/* RIGHT: ACTIONS */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          {/* Download */}
-          <button
-            onClick={downloadExcel}
-            className="bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium shadow transition whitespace-nowrap"
-          >
-            Download
-          </button>
-
-          {/* Search */}
-          <div className="flex items-center bg-white border border-gray-300 rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 shadow-sm flex-1 min-w-[120px] max-w-[200px]">
-            <CiSearch className="text-gray-400 text-base sm:text-lg mr-1 sm:mr-2" />
-            <input
-              type="text"
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="outline-none text-xs sm:text-sm w-full"
+      <div className="bg-white border border-gray-200 shadow-lg rounded-2xl p-4 md:p-5 mb-4">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+          {/* LEFT */}
+          <div className="flex items-center gap-3">
+            <img
+              src="/logo.png"
+              alt="logo"
+              className="w-14 sm:w-16 h-auto object-contain"
             />
+
+            <div>
+              <h1 className="text-xl md:text-3xl font-bold text-gray-800">
+                Applications
+              </h1>
+              <p className="text-sm text-gray-500">
+                Manage registrations & export reports
+              </p>
+            </div>
           </div>
 
-          {/* Logout */}
-          <button
-            className="text-red-500 text-xl sm:text-2xl hover:scale-110 transition cursor-pointer"
-            onClick={handleLogout}
-          >
-            <IoIosLogOut />
-          </button>
+          {/* RIGHT CONTROLS */}
+          <div className="flex flex-col lg:flex-row lg:items-center gap-3 w-full xl:w-auto">
+            {/* Date Filters */}
+            <div className="flex flex-col sm:flex-row gap-2">
+              <div className="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-xl px-3 py-2">
+                <span className="text-xs font-semibold text-gray-500 whitespace-nowrap">
+                  From
+                </span>
+                <input
+                  type="date"
+                  value={fromDate}
+                  onChange={(e) => setFromDate(e.target.value)}
+                  className="bg-transparent outline-none text-sm"
+                />
+              </div>
+
+              <div className="flex items-center gap-2 bg-gray-50 border border-gray-300 rounded-xl px-3 py-2">
+                <span className="text-xs font-semibold text-gray-500 whitespace-nowrap">
+                  To
+                </span>
+                <input
+                  type="date"
+                  value={toDate}
+                  onChange={(e) => setToDate(e.target.value)}
+                  className="bg-transparent outline-none text-sm"
+                />
+              </div>
+            </div>
+
+            {/* Search */}
+            <div className="flex items-center bg-white border border-gray-300 rounded-xl px-3 py-2 shadow-sm min-w-[220px]">
+              <CiSearch className="text-gray-400 text-lg mr-2" />
+              <input
+                type="text"
+                placeholder="Search name..."
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setCurrentPage(1);
+                }}
+                className="outline-none text-sm w-full"
+              />
+            </div>
+
+            {/* Download */}
+            <button
+              onClick={downloadExcel}
+              className="bg-red-500 hover:bg-red-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold shadow transition"
+            >
+              Download Excel
+            </button>
+
+            {/* Logout */}
+            <button
+              onClick={handleLogout}
+              className="w-11 h-11 rounded-xl border border-red-200 text-red-500 hover:bg-red-50 flex items-center justify-center text-2xl transition"
+            >
+              <IoIosLogOut />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -230,6 +283,7 @@ const Table = () => {
                 <th className="px-4 py-3">Phone</th>
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Address</th>
+                <th className="px-4 py-3">Parish</th>
 
                 {/* <th className="px-4 py-3">Shirt Size</th> */}
                 <th className="px-4 py-3">Dietary Restrictions</th>
@@ -280,6 +334,7 @@ const Table = () => {
                   <td className="px-4 py-3">{item.phone}</td>
                   <td className="px-4 py-3 text-blue-600">{item.email}</td>
                   <td className="px-4 py-3">{item.address}</td>
+                  <td className="px-4 py-3">{item.parish}</td>
 
                   {/* <td className="px-4 py-3">{item.shirtSize}</td> */}
                   <td className="px-4 py-3">{item.dietaryRestrictions}</td>

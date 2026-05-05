@@ -24,8 +24,11 @@ const groupedTeams = [
       {
         title: "Program Committee",
         members: [
-          { role: "Chairman", name: "Rev. Abraham V. Samson" },
-          { role: "Members", name: "Rev. Varghese John, Mr. Sam Alex" },
+          {
+            role: "Chairman",
+            name: "Rev. Abraham V. Samson, Rev. Varghese John",
+          },
+          { role: "Convener", name: "Mr. Sam Alex" },
         ],
       },
       {
@@ -38,7 +41,7 @@ const groupedTeams = [
       {
         title: "Reception Committee",
         members: [
-          { role: "Chairman", name: "Mrs. Sneha Varghese" },
+          { role: "Chairman", name: "Dr. Sneha Robin" },
           { role: "Convener", name: "Mrs. Noel Kovoor" },
         ],
       },
@@ -112,14 +115,28 @@ const groupedTeams = [
       {
         title: "Web & Technical",
         members: [
-          { role: "Chairman", name: "Dr. Shiji Philip" },
-          { role: "Convener", name: "Rev. Abraham V. Samson" },
+          { role: "Chairman", name: "Rev. Abraham . V Samson" },
+          { role: "Convener", name: "Dr. Shiji Philip" },
         ],
       },
     ],
   },
   {
-    group: "Regional Team",
+    group: "MTVEA Southwest Center - A Office Bearers",
+    sections: [
+      {
+        title: "MTVEA Southwest Center - A",
+        members: [
+          { role: "President", name: "Rev. Abraham V. Samson" },
+          { role: "Vice President", name: "Mr. Shaji Ramapuram" },
+          { role: "Secretary", name: "Mr. Philip Mathew" },
+          { role: "Treasurer", name: "Dr. Shiji Philip" },
+        ],
+      },
+    ],
+  },
+  {
+    group: "Regional office bearers",
     sections: [
       {
         title: "MTVEA Southwest Region",
@@ -128,6 +145,23 @@ const groupedTeams = [
           { role: "Vice President", name: "Mr. George Varghese" },
           { role: "Secretary", name: "Mr. Roby Chelagiri" },
           { role: "Treasurer", name: "Mr. Mathew Lukose" },
+        ],
+      },
+    ],
+  },
+  {
+    group: "MTVEA Diocese Office Bearers",
+    sections: [
+      {
+        title: "MTVEA Diocese",
+        members: [
+          {
+            role: "President",
+            name: "Rt. Rev. Dr. Abraham Mar Paulos Episcopa",
+          },
+          { role: "Vice President", name: "Rev. Ashish Thomas" },
+          { role: "Secretary", name: "Mr. George Varghese" },
+          { role: "Treasurer", name: "Mr. Varghese K. Joseph" },
         ],
       },
     ],
@@ -269,7 +303,9 @@ const Team = () => {
                   ))}
                 </div>
               ))
-            ) : group.group === "Regional Team" ? (
+            ) : group.group === "Regional office bearers" ||
+              group.group === "MTVEA Southwest Center - A Office Bearers" ||
+              group.group === "MTVEA Diocese Office Bearers" ? (
               <div className="">
                 {group.sections.map((section, i) => (
                   <RegionalTeamCard key={i} section={section} />

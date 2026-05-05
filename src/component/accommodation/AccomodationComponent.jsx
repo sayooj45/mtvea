@@ -75,7 +75,7 @@ const AccommodationComponent = () => {
           </p>
 
           <p className="text-2xl font-semibold text-[#C49A3C]">
-            $100 + tax / night
+            $109 + tax / night
           </p>
 
           <div className="mt-4 text-sm text-gray-600">Use discount code:</div>

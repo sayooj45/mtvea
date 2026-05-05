@@ -129,12 +129,18 @@ const BannerSlider = () => {
             </p>
 
             {/* Venue */}
-            <p
-              className="text-sm sm:text-base 
-    text-white/80 max-w-xl leading-relaxed mb-8"
-            >
-              Hosted by MTVEA Southwest · Center A <br />
-              The Mar Thoma Church of Dallas, Farmers Branch
+            <p className="text-sm sm:text-base text-white/80 max-w-xl leading-relaxed mb-8">
+              Hosted by{" "}
+              <span className="text-white font-medium">
+                MTVEA Southwest · Center A
+              </span>
+              <br />
+              <span className="block mt-2 text-white/60 text-xs uppercase tracking-wide">
+                Venue
+              </span>
+              <span className="text-white font-medium">
+                The Mar Thoma Church of Dallas, Farmers Branch
+              </span>
             </p>
 
             {/* Buttons */}
@@ -176,10 +182,10 @@ const BannerSlider = () => {
             </p>
 
             {/* Description */}
-            <p className="text-white/80 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-xl leading-relaxed">
+            {/* <p className="text-white/80 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-xl leading-relaxed">
               Open to all members of MTVEA, Sevika Sanghom, and Senior Citizen
               Fellowship
-            </p>
+            </p> */}
 
             {/* Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 w-full max-w-6xl">

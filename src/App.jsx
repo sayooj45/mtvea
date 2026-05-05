@@ -17,6 +17,7 @@ import ProgramInformation from "./page/ProgramInformation";
 import ErrorPage from "./page/ErrorPage";
 import TermsAndConditions from "./page/TermsAndConditions";
 import PrivacyPolicy from "./page/PrivacyPolicy";
+import VerifyPage from "./page/VerifyPage";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/program-Information" element={<ProgramInformation />} />
         <Route path="/terms" element={<TermsAndConditions />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/verify/:id" element={<VerifyPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

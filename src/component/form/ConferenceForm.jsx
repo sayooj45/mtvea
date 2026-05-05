@@ -46,6 +46,8 @@ const ConferenceForm = () => {
 
   const [editIndex, setEditIndex] = useState(null);
 
+  const [useSameAddress, setUseSameAddress] = useState(false);
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -116,18 +118,31 @@ const ConferenceForm = () => {
   const handleAddParticipant = () => {
     if (!formData.firstName || !formData.lastName) return;
 
+    let finalData = { ...formData };
+
+    if (useSameAddress && participants.length > 0) {
+      const primary = participants[0];
+
+      finalData.address = primary.address;
+      finalData.parish = primary.parish;
+    }
+
     if (editIndex !== null) {
-      // UPDATE existing participant
       const updated = [...participants];
-      updated[editIndex] = formData;
+      updated[editIndex] = finalData;
       setParticipants(updated);
       setEditIndex(null);
     } else {
-      // ADD new participant
-      setParticipants((prev) => [...prev, formData]);
+      setParticipants((prev) => [...prev, finalData]);
     }
 
-    setFormData(emptyForm);
+    setFormData({
+      ...emptyForm,
+      address: finalData.address,
+      parish: finalData.parish,
+      phone: finalData.phone,
+      email: finalData.email,
+    });
   };
 
   const handleChange = (e) => {
@@ -453,7 +468,7 @@ const ConferenceForm = () => {
               <strong>Total Participants:</strong> {participants.length}
             </p>
             <p>
-              <strong>Total Fee:</strong> ₹ {getTotalAmount()}
+              <strong>Total Fee:</strong> $ {getTotalAmount()}
             </p>
           </div>
 
@@ -488,7 +503,7 @@ const ConferenceForm = () => {
               <strong>Participants:</strong> {participants.length}
             </p>
             <p>
-              <strong>Total Fee:</strong> ₹ {getTotalAmount()}
+              <strong>Total Fee:</strong> $ {getTotalAmount()}
             </p>
           </div>
 
@@ -666,6 +681,44 @@ const ConferenceForm = () => {
                     required
                   />
 
+                  {participants.length > 0 && (
+                    <div className="flex items-center justify-between mt-4 p-3 border rounded-xl bg-gray-50 hover:shadow-sm transition">
+                      <div>
+                        <p className="text-sm font-medium text-gray-800">
+                          Same as primary participant
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          Auto-fill address
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newValue = !useSameAddress;
+                          setUseSameAddress(newValue);
+
+                          if (newValue) {
+                            const primary = participants[0];
+                            setFormData((prev) => ({
+                              ...prev,
+                              address: primary.address,
+                            }));
+                          }
+                        }}
+                        className={`relative w-12 h-6 rounded-full transition duration-300 ${
+                          useSameAddress ? "bg-[#1B2B4B]" : "bg-gray-300"
+                        }`}
+                      >
+                        <span
+                          className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transform transition ${
+                            useSameAddress ? "translate-x-6" : ""
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  )}
+
                   <input
                     name="address"
                     value={formData.address}
@@ -673,6 +726,7 @@ const ConferenceForm = () => {
                     placeholder="Address"
                     className="md:col-span-2 border p-3 rounded"
                     required
+                    disabled={useSameAddress}
                   />
                 </div>
               </section>
@@ -811,6 +865,7 @@ const ConferenceForm = () => {
                           name="checkInDate"
                           value={formData.checkInDate}
                           onChange={handleChange}
+                          min={new Date().toISOString().split("T")[0]}
                           className={inputClass}
                         />
                       </div>
@@ -825,6 +880,7 @@ const ConferenceForm = () => {
                           name="checkOutDate"
                           value={formData.checkOutDate}
                           onChange={handleChange}
+                          min={new Date().toISOString().split("T")[0]}
                           className={inputClass}
                         />
                       </div>
@@ -884,7 +940,6 @@ const ConferenceForm = () => {
                           checked={formData.needShuttle === option}
                           onChange={handleChange}
                           className="accent-[#1B2B4B] mt-1"
-                          required
                         />
                         <span>{option}</span>
                       </label>
@@ -1286,8 +1341,8 @@ const ConferenceForm = () => {
                       {p.age === "under-10"
                         ? "Free"
                         : p.age === "10-18"
-                        ? "₹100"
-                        : "₹150"}
+                        ? "$100"
+                        : "$150"}
                     </span>
                   </div>
 
@@ -1306,7 +1361,10 @@ const ConferenceForm = () => {
                         <ReviewRow label="Phone" value={p.phone} />
                         <ReviewRow label="Email" value={p.email} />
                         <ReviewRow label="Parish" value={p.parish} />
-                        <ReviewRow label="Address" value={p.address} />
+                        <ReviewRow
+                          label="Address"
+                          value={p.address || participants[0]?.address}
+                        />
                       </div>
                     </div>
 
@@ -1464,8 +1522,8 @@ const ConferenceForm = () => {
                           {p.age === "under-10"
                             ? "Free"
                             : p.age === "10-18"
-                            ? "₹100"
-                            : "₹150"}
+                            ? "$100"
+                            : "$150"}
                         </span> */}
 
                         <button
@@ -1497,7 +1555,7 @@ const ConferenceForm = () => {
 
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total Fee</span>
-                  <span className="text-[#FFD700]">₹ {getTotalAmount()}</span>
+                  <span className="text-[#FFD700]">$ {getTotalAmount()}</span>
                 </div>
               </div>
 
@@ -1564,7 +1622,7 @@ const ConferenceForm = () => {
               </p>
 
               <p className="font-semibold text-[#1B2B4B] text-sm sm:text-base">
-                Total: ₹ {getTotalAmount()}
+                Total: $ {getTotalAmount()}
               </p>
             </div>
 
